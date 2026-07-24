@@ -1,5 +1,10 @@
 #include "ogl.h"
+#include <logging/log-macros.h>
 #include <Windows.h>
+
+#ifdef ERROR
+#undef ERROR
+#endif
 
 static HMODULE s_glLib = NULL;
 
@@ -128,15 +133,20 @@ bool TryLoadOGL()
 	s_glLib = LoadLibrary(L"opengl32.dll");
 
 	if (s_glLib == NULL)
+	{
+		LOG_ERROR("Failed to load opengl32.dll.");
 		return false;
+	}
 
 	if (not TryLoadExtFunctions())
 	{
 		FreeLibrary(s_glLib);
 		s_glLib = NULL;
+		LOG_ERROR("Failed to load required OpenGL/WGL extension functions.");
 		return false;
 	}
 
+	LOG_INFO("OpenGL library and extension functions loaded.");
 	return true;
 }
 
@@ -160,12 +170,14 @@ const void* CreateContext(const void* windowHandle, const void* sharedContext)
 
 	if (wglChoosePixelFormatARB(hdc, pixelFormatAttribs, NULL, 1U, &pixelFormat, &formatsCount) == FALSE)
 	{
+		LOG_ERROR("Failed to choose an OpenGL pixel format.");
 		ReleaseDC((HWND)windowHandle, hdc);
 		return nullptr;
 	}
 
 	if (formatsCount == 0U)
 	{
+		LOG_ERROR("No compatible OpenGL pixel format was found.");
 		ReleaseDC((HWND)windowHandle, hdc);
 		return nullptr;
 	}
@@ -174,6 +186,7 @@ const void* CreateContext(const void* windowHandle, const void* sharedContext)
 	DescribePixelFormat(hdc, pixelFormat, sizeof(pfd), &pfd);
 	if (not SetPixelFormat(hdc, pixelFormat, &pfd))
 	{
+		LOG_ERROR("Failed to set the OpenGL pixel format.");
 		ReleaseDC((HWND)windowHandle, hdc);
 		return nullptr;
 	}
@@ -185,6 +198,10 @@ const void* CreateContext(const void* windowHandle, const void* sharedContext)
 		0
 	};
 	HGLRC hglrc = wglCreateContextAttribsARB(hdc, (HGLRC)sharedContext, contextAttribs);
+	if (hglrc == NULL)
+		LOG_ERROR("Failed to create an OpenGL 4.6 core-profile context.");
+	else
+		LOG_INFO("OpenGL 4.6 core-profile context created.");
 
 	ReleaseDC((HWND)windowHandle, hdc);
 	return hglrc;
@@ -196,6 +213,7 @@ void UnloadOGL()
 	{
 		FreeLibrary(s_glLib);
 		s_glLib = NULL;
+		LOG_INFO("OpenGL library unloaded.");
 	}
 }
 
@@ -215,6 +233,7 @@ static bool TryLoadExtFunctions()
 	wc.lpszClassName = className;
 	if (RegisterClass(&wc) == NULL)
 	{
+		LOG_ERROR("Failed to register the temporary Win32 class used to load OpenGL extensions.");
 		return false;
 	}
 
@@ -231,6 +250,7 @@ static bool TryLoadExtFunctions()
 
 	if (hwnd == NULL)
 	{
+		LOG_ERROR("Failed to create the temporary window used to load OpenGL extensions.");
 		UnregisterClass(className, hInstance);
 		return false;
 	}
@@ -249,6 +269,7 @@ static bool TryLoadExtFunctions()
 	int pixelFormat = ChoosePixelFormat(hdc, &pfd);
 	if (pixelFormat == 0)
 	{
+		LOG_ERROR("Failed to choose a pixel format for the temporary OpenGL context.");
 		ReleaseDC(hwnd, hdc);
 		DestroyWindow(hwnd);
 		UnregisterClass(className, hInstance);
@@ -257,6 +278,7 @@ static bool TryLoadExtFunctions()
 
 	if (not SetPixelFormat(hdc, pixelFormat, &pfd))
 	{
+		LOG_ERROR("Failed to set a pixel format for the temporary OpenGL context.");
 		ReleaseDC(hwnd, hdc);
 		DestroyWindow(hwnd);
 		UnregisterClass(className, hInstance);
@@ -266,6 +288,7 @@ static bool TryLoadExtFunctions()
 	HGLRC hglrc = wglCreateContext(hdc);
 	if (hglrc == NULL)
 	{
+		LOG_ERROR("Failed to create the temporary OpenGL context.");
 		ReleaseDC(hwnd, hdc);
 		DestroyWindow(hwnd);
 		UnregisterClass(className, hInstance);

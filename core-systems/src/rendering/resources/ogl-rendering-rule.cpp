@@ -1,6 +1,7 @@
 #include "ogl-rendering-rule.h"
 #include <ogl.h>
 #include <types/color.h>
+#include <logging/log-macros.h>
 
 OGLRenderingRule::OGLRenderingRule(const char* vertexShaderSource, const char* fragmentShaderSource) :
 	m_program(0U),
@@ -21,6 +22,7 @@ bool OGLRenderingRule::IsValid() const
 
 void OGLRenderingRule::Create()
 {
+	LOG_DEBUG("Creating OpenGL rendering rule.");
 	m_program = glCreateProgram();
 	GLuint vs = glCreateShader(GL_VERTEX_SHADER);
 	GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
@@ -35,10 +37,12 @@ void OGLRenderingRule::Create()
 	glDeleteShader(fs);
 	m_vertexShaderSource = nullptr;
 	m_fragmentShaderSource = nullptr;
+	LOG_DEBUG("OpenGL rendering rule created.");
 }
 
 void OGLRenderingRule::Destroy()
 {
+	LOG_DEBUG("Destroying OpenGL rendering rule.");
 	glDeleteProgram(m_program);
 	m_program = 0U;
 }

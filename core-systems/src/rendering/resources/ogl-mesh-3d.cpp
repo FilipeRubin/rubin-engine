@@ -1,5 +1,6 @@
 #include "ogl-mesh-3d.h"
 #include <ogl.h>
+#include <logging/log-macros.h>
 
 OGLMesh3D::OGLMesh3D(Shared<FixedArray<Vertex3D>> vertices, Shared<FixedArray<unsigned int>> indices) :
 	m_vbo(0U), m_vao(0U), m_ebo(0U), m_indicesCount(unsigned int(indices->GetElementCount())),
@@ -24,6 +25,7 @@ bool OGLMesh3D::IsValid() const
 
 void OGLMesh3D::Create()
 {
+	LOG_DEBUG("Creating OpenGL mesh buffers.");
 	glGenVertexArrays(1, &m_vao);
 	glBindVertexArray(m_vao);
 
@@ -46,10 +48,12 @@ void OGLMesh3D::Create()
 
 	m_vertices.Reset();
 	m_indices.Reset();
+	LOG_DEBUG("OpenGL mesh created.");
 }
 
 void OGLMesh3D::Destroy()
 {
+	LOG_DEBUG("Destroying OpenGL mesh buffers.");
 	glDeleteBuffers(1, &m_vbo);
 	glDeleteVertexArrays(1, &m_vao);
 	glDeleteBuffers(1, &m_ebo);

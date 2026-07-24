@@ -1,6 +1,11 @@
 #include "win32-window.h"
 #include "input/win32-basic-input.h"
+#include <logging/log-macros.h>
 #include <Windows.h>
+
+#ifdef ERROR
+#undef ERROR
+#endif
 
 unsigned int Win32Window::s_instanceCount = 0U;
 Win32WindowClass Win32Window::s_windowClass = Win32WindowClass();
@@ -18,6 +23,7 @@ Win32Window::Win32Window() :
 
 void Win32Window::Finalize()
 {
+    LOG_INFO("Finalizing Win32 window.");
     DestroyWindow((HWND)m_hwnd);
     m_hwnd = nullptr;
     Decrement();
@@ -57,10 +63,12 @@ bool Win32Window::TryInitialize(const WindowParameters& parameters)
     LARGE_INTEGER clockStart;
     if (QueryPerformanceFrequency(&frequency) == FALSE)
     {
+        LOG_ERROR("Failed to query the performance-counter frequency for the window timer.");
         return false;
     }
     if (QueryPerformanceCounter(&clockStart) == FALSE)
     {
+        LOG_ERROR("Failed to query the initial performance-counter value for the window timer.");
         return false;
     }
     m_frequency = frequency.QuadPart;
@@ -68,6 +76,7 @@ bool Win32Window::TryInitialize(const WindowParameters& parameters)
 
     if (not TryIncrement())
     {
+        LOG_ERROR("Failed to prepare the Win32 window class.");
         return false;
     }
     
@@ -97,7 +106,7 @@ bool Win32Window::TryInitialize(const WindowParameters& parameters)
         
     if (m_hwnd == NULL)
     {
-        DWORD err = GetLastError();
+        LOG_ERROR("Failed to create the Win32 window. Error code: " + std::to_string(GetLastError()) + ".");
         Decrement();
         return false;
     }
@@ -107,6 +116,7 @@ bool Win32Window::TryInitialize(const WindowParameters& parameters)
     ShowWindow((HWND)m_hwnd, SW_SHOW);
 
     m_size = Dimensions(parameters.width, parameters.height);
+    LOG_INFO("Win32 window initialized with size " + std::to_string(parameters.width) + "x" + std::to_string(parameters.height) + ".");
 
     return true;
 }

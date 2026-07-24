@@ -1,11 +1,15 @@
 #include "win32-window-class.h"
 #include "win32-window.h"
 #include "input/win32-basic-input.h"
+#include <logging/log-macros.h>
 #include <Windows.h>
+
+#ifdef ERROR
+#undef ERROR
+#endif
 
 static inline LRESULT ProcessMouseButtonMessage(const UINT& msg, const WPARAM& wParam, Win32BasicInput& input);
 
-#include <iostream>
 static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
@@ -14,6 +18,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 	{
 		Win32Window* window = (Win32Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 		window->Close();
+		LOG_DEBUG("Window close requested.");
 		return 0;
 	}
 	case WM_SIZE:
@@ -93,7 +98,10 @@ bool Win32WindowClass::TryRegister(const wchar_t* className)
 {
 	m_hInstance = GetModuleHandle(NULL);
 	if (m_hInstance == NULL)
+	{
+		LOG_ERROR("Failed to get the Win32 module handle while registering the window class.");
 		return false;
+	}
 	HINSTANCE hInstance = (HINSTANCE)m_hInstance;
 	m_className = className;
 
@@ -114,7 +122,12 @@ bool Win32WindowClass::TryRegister(const wchar_t* className)
 
 	ATOM classId = RegisterClassEx(&wc);
 	if (classId == NULL)
+	{
+		LOG_ERROR("Failed to register the Win32 window class.");
 		return false;
+	}
+
+	LOG_INFO("Win32 window class registered.");
 
 	return true;
 }
@@ -122,6 +135,7 @@ bool Win32WindowClass::TryRegister(const wchar_t* className)
 void Win32WindowClass::Unregister()
 {
 	UnregisterClass(m_className, (HINSTANCE)m_hInstance);
+	LOG_INFO("Win32 window class unregistered.");
 	m_hInstance = nullptr;
 	m_className = nullptr;
 }

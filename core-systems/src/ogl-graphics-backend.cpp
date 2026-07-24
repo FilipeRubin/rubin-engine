@@ -2,8 +2,13 @@
 #include "ogl.h"
 #include "rendering/ogl-renderer.h"
 #include "rendering/ogl-renderer-resource-manager.h"
+#include <logging/log-macros.h>
 #ifdef _WIN32
 #include <Windows.h>
+
+#ifdef ERROR
+#undef ERROR
+#endif
 
 unsigned int OGLGraphicsBackend::s_instanceCount = 0U;
 OGLGraphicsBackend* OGLGraphicsBackend::s_current = nullptr;
@@ -25,11 +30,13 @@ bool OGLGraphicsBackend::TryInitialize(IGraphicsBackend* sharedBackend)
 {
 	if (m_oglContext != nullptr)
 	{
+		LOG_WARNING("OpenGL graphics backend initialization was requested more than once.");
 		return true;
 	}
 
 	if (not TryIncrement())
 	{
+		LOG_ERROR("Failed to load OpenGL before initializing the graphics backend.");
 		return false;
 	}
 	
@@ -44,6 +51,7 @@ bool OGLGraphicsBackend::TryInitialize(IGraphicsBackend* sharedBackend)
 	m_oglContext = CreateContext(m_windowHandle, sharedContext);
 	if (m_oglContext == nullptr)
 	{
+		LOG_ERROR("Failed to initialize the OpenGL graphics backend.");
 		Finalize();
 		return false;
 	}
@@ -51,6 +59,7 @@ bool OGLGraphicsBackend::TryInitialize(IGraphicsBackend* sharedBackend)
 	m_renderer = new OGLRenderer(this);
 
 	SetDefaultRendererSettings();
+	LOG_INFO("OpenGL graphics backend initialized.");
 
 	return true;
 }
@@ -70,6 +79,7 @@ void OGLGraphicsBackend::SwapBuffers() const
 
 void OGLGraphicsBackend::Finalize()
 {
+	LOG_INFO("Finalizing OpenGL graphics backend.");
 	delete m_renderer;
 
 	if (wglGetCurrentContext() == m_oglContext)
@@ -99,12 +109,14 @@ bool OGLGraphicsBackend::TryIncrement()
 		}
 	}
 	s_instanceCount++;
+	LOG_DEBUG("OpenGL graphics backend instance count: " + std::to_string(s_instanceCount) + ".");
 	return true;
 }
 
 void OGLGraphicsBackend::Decrement()
 {
 	s_instanceCount--;
+	LOG_DEBUG("OpenGL graphics backend instance count: " + std::to_string(s_instanceCount) + ".");
 	if (s_instanceCount == 0U)
 	{
 		UnloadOGL();

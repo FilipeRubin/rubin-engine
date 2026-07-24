@@ -5,6 +5,11 @@
 #include <data/lambert-shader.h>
 #include <data/unshaded-shader.h>
 #include <containers/source-container.h>
+#include <logging/log-macros.h>
+
+#ifdef ERROR
+#undef ERROR
+#endif
 
 using std::unique_ptr;
 using std::list;
@@ -15,10 +20,12 @@ OGLRendererResourceManager::OGLRendererResourceManager(OGLGraphicsBackend* backe
     m_waitingToDestroy(list<unique_ptr<IRendererManaged>>()),
     m_resources(list<unique_ptr<IRendererManaged>>())
 {
+	LOG_INFO("OpenGL renderer resource manager created.");
 }
 
 OGLRendererResourceManager::~OGLRendererResourceManager()
 {
+	LOG_INFO("Destroying OpenGL renderer resources.");
     OGLGraphicsBackend* currentBackend = OGLGraphicsBackend::GetCurrent();
     
     if (currentBackend != m_backend)
@@ -45,21 +52,30 @@ IRenderingRule* OGLRendererResourceManager::CreateRenderingRule(const IRendering
     switch (generator.GetType())
     {
     case IRenderingRuleGenerator::Type::UNSHADED:
+		LOG_DEBUG("Queuing unshaded rendering rule creation.");
         return CreateResource<OGLRenderingRule>(unshadedVertexShaderSource, unshadedFragmentShaderSource);
     case IRenderingRuleGenerator::Type::LAMBERT:
+		LOG_DEBUG("Queuing Lambert rendering rule creation.");
         return CreateResource<OGLRenderingRule>(lambertVertexShaderSource, lambertFragmentShaderSource);
     case IRenderingRuleGenerator::Type::CUSTOM:
     {
         const SourceContainer* shaderSources = static_cast<const SourceContainer*>(generator.GetCustomData());
         if (shaderSources == nullptr)
+        {
+            LOG_ERROR("Cannot create a custom rendering rule without shader sources.");
             return nullptr;
+        }
         if (shaderSources->GetSourceCount() != 2ULL)
+        {
+            LOG_ERROR("A custom rendering rule requires exactly a vertex and a fragment shader source.");
             return nullptr;
+        }
         const char* vertexShaderSource = shaderSources->GetSource(0U);
         const char* fragmentShaderSource = shaderSources->GetSource(1U);
         return CreateResource<OGLRenderingRule>(vertexShaderSource, fragmentShaderSource);
     }
     default:
+        LOG_ERROR("Cannot create a rendering rule from an unknown generator type.");
         return nullptr;
     }
 }
@@ -67,6 +83,7 @@ IRenderingRule* OGLRendererResourceManager::CreateRenderingRule(const IRendering
 IMesh3D* OGLRendererResourceManager::Create3DMesh(const IMesh3DGenerator& generator)
 {
     const MeshData& data = generator.GenerateMeshData();
+	LOG_DEBUG("Queuing 3D mesh creation with " + std::to_string(data.GetVertices()->GetElementCount()) + " vertices and " + std::to_string(data.GetIndices()->GetElementCount()) + " indices.");
     return CreateResource<OGLMesh3D>(
         data.GetVertices(),
         data.GetIndices()
@@ -76,6 +93,7 @@ IMesh3D* OGLRendererResourceManager::Create3DMesh(const IMesh3DGenerator& genera
 ITexture2D* OGLRendererResourceManager::CreateTexture2D(const ITexture2DGenerator& generator)
 {
     const TextureData& data = generator.GenerateTextureData();
+	LOG_DEBUG("Queuing 2D texture creation with size " + std::to_string(data.GetDimensions().width) + "x" + std::to_string(data.GetDimensions().height) + ".");
     return CreateResource<OGLTexture2D>(
         data.GetData(),
         data.GetDimensions()
@@ -84,6 +102,9 @@ ITexture2D* OGLRendererResourceManager::CreateTexture2D(const ITexture2DGenerato
 
 void OGLRendererResourceManager::Update()
 {
+	if (not m_waitingToCreate.empty() or not m_waitingToDestroy.empty())
+		LOG_DEBUG("Applying queued OpenGL resource changes: " + std::to_string(m_waitingToCreate.size()) + " creation(s), " + std::to_string(m_waitingToDestroy.size()) + " destruction(s).");
+
     for (unique_ptr<IRendererManaged>& managed : m_waitingToCreate)
     {
         managed->Create();
@@ -124,4 +145,8 @@ void OGLRendererResourceManager::DestroyImpl(IRendererResource* resource)
 
         resource = nullptr;
     }
+	else
+	{
+		LOG_WARNING("Attempted to destroy a renderer resource that is not managed by this resource manager.");
+	}
 }

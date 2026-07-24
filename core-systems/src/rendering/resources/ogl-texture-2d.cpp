@@ -1,5 +1,6 @@
 #include "ogl-texture-2d.h"
 #include <ogl.h>
+#include <logging/log-macros.h>
 
 OGLTexture2D::OGLTexture2D(Shared<FixedArray<Color8>> data, const Dimensions& dimensions) :
     m_data(data),
@@ -26,6 +27,7 @@ bool OGLTexture2D::IsValid() const
 
 void OGLTexture2D::Create()
 {
+	LOG_DEBUG("Creating OpenGL texture with size " + std::to_string(m_dimensions.width) + "x" + std::to_string(m_dimensions.height) + ".");
     glGenTextures(1, &m_texture);
     glBindTexture(GL_TEXTURE_2D, m_texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -38,5 +40,6 @@ void OGLTexture2D::Create()
 
 void OGLTexture2D::Destroy()
 {
+	LOG_DEBUG("Destroying OpenGL texture.");
     glDeleteTextures(1, &m_texture);
 }
