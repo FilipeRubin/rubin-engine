@@ -82,6 +82,7 @@ IRenderingRule* OGLRendererResourceManager::CreateRenderingRule(const IRendering
 
 IMesh3D* OGLRendererResourceManager::Create3DMesh(const IMesh3DGenerator& generator)
 {
+    LOG_WARNING("RENAME THIS FUNCTION TO 'CreateMesh3D' AND THEN REMOVE THIS WARNING!");
     const MeshData& data = generator.GenerateMeshData();
 	LOG_DEBUG("Queuing 3D mesh creation with " + std::to_string(data.GetVertices()->GetElementCount()) + " vertices and " + std::to_string(data.GetIndices()->GetElementCount()) + " indices.");
     return CreateResource<OGLMesh3D>(

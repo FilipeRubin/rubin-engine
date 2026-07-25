@@ -10,4 +10,7 @@ public:
 private:
 	Dimensions m_gridSize;
 	Shared<FixedArray<float>> m_heightMapData;
+	float GetPointHeight(int x, int y) const;
+	Vector2 GetPointInclination(int x, int y) const;
+	Vector3 GetPointNormal(int x, int y) const;
 };

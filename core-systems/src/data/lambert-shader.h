@@ -37,7 +37,7 @@ void main()
 {
 	float directionalLightAmount = max(dot(normalize(v_out_nor), normalize(-u_directionalLightDirection)), 0.0);
 	vec3 directionalLightColor = u_directionalLightDiffuse.rgb * directionalLightAmount;
-	vec3 lightColor = max(u_ambientLight.rgb, directionalLightColor);
+	vec3 lightColor = u_ambientLight.rgb + directionalLightColor;
 	f_color = texture(u_texture, v_out_uv) * vec4(lightColor, 1.0);
 }
 )";

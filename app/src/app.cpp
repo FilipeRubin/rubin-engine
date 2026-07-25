@@ -21,8 +21,8 @@ void App::Init(GraphicsWindow& graphicsWindow)
 
 void App::Start()
 {
-	const int terrainX = 10;
-	const int terrainY = 10;
+	const int terrainX = 2000;
+	const int terrainY = 2000;
 
 	Dimensions terrainGrid = { terrainX, terrainY };
 	size_t terrainDataSize = terrainGrid.width * terrainGrid.height;
@@ -44,26 +44,32 @@ void App::Start()
 	unshadedRenderingRule = renderer->GetResourceManager()->CreateRenderingRule(UnshadedRenderingRuleGenerator());
 	terrainMesh = resourceManager->Create3DMesh(TerrainMesh3DGenerator(terrainGrid, terrainData));
 	terrainTexture = resourceManager->CreateTexture2D(RawDataTexture2DGenerator(patTexture, { 16, 16 }));
+	cubeMesh = resourceManager->Create3DMesh(CubeMesh3DGenerator(Vector3(3.0f, 3.0f, 3.0f)));
 
 	cameraParameter = renderer->GetParameterManager()->CreateCamera3D();
 	lightParameter = renderer->GetParameterManager()->CreateDirectionalLight();
 	transformParameter = renderer->GetParameterManager()->CreateTransform3D();
+	cubeTransformParameter = renderer->GetParameterManager()->CreateTransform3D();
 
 	cameraParameter->Camera().aspectRatio = window->GetAspectRatio();
 	cameraParameter->Camera().vFOV = 3.1415f / 2.0f;
 	cameraParameter->Camera().zNear = 0.1f;
-	cameraParameter->Camera().zFar = 100.0f;
+	cameraParameter->Camera().zFar = 1000.0f;
 	cameraParameter->Camera().position = Vector3(0.0f, -5.0f, 0.0f);
 
-	lightParameter->Light().ambient = Color(0.05f, 0.05f, 0.2f);
-	lightParameter->Light().diffuse = Color(1.0f, 0.85f, 0.7f);
+	lightParameter->Light().ambient = Color(0.0f, 0.0f, 0.0f);
+	lightParameter->Light().diffuse = Color(1.0f, 1.0f, 1.0f);
+	lightParameter->Light().direction = Vector3(1.0f, 0.0f, 0.0f);
 
-	transformParameter->Transform().scale = {100.0f, 1.0f, 100.0f};
+	transformParameter->Transform().scale = { 200.0f, 1.0f, 200.0f };
 	transformParameter->Transform().position = {
 		-transformParameter->Transform().scale.x / 2.0f,
 		0.0f,
 		-transformParameter->Transform().scale.z / 2.0f 
 	};
+
+	cubeTransformParameter->Transform().position = {0.0f, 5.0f, 0.0f};
+	cubeTransformParameter->Transform().scale = {1.0f, 1.0f, 14.0f};
 }
 
 void App::Update()
@@ -89,10 +95,11 @@ void App::Update()
 		};
 		pos += Vector3(
 			dir.x * -cosf(rot.y) + dir.y * -sinf(rot.y),
-			0.0f,
+			float(input->IsKeyDown(KeyboardKey::Q)) - float(input->IsKeyDown(KeyboardKey::E)),
 			dir.y * cosf(rot.y) + dir.x * -sinf(rot.y)
 		) * deltaTime * 15.0f;
 	}
+	cubeTransformParameter->Transform().rotation.z += deltaTime;
 
 	// Rule binding
 	if (useLambertRenderingRule and lambertRenderingRule != nullptr)
@@ -118,10 +125,17 @@ void App::Update()
 	transformParameter->Bind(currentRenderingRule);
 	terrainTexture->Bind();
 	terrainMesh->Draw();
-	
+	cubeTransformParameter->Bind(currentRenderingRule);
+	cubeMesh->Draw();
 }
 
 void ProcessHeight(int x, int y, const int maxX, const int maxY, float& height)
 {
-	height = 0.0f;
+	const float nx = static_cast<float>(x) / maxX;
+	const float ny = static_cast<float>(y) / maxY;
+
+	height =
+		std::sin(nx * 3.14159f * 2.0f) * 5.0f +
+		std::cos(ny * 3.14159f * 2.5f) * 3.0f +
+		std::sin((nx + ny) * 3.14159f * 3.0f) * 2.0f;
 }

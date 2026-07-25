@@ -1,4 +1,6 @@
 #include <rendering/data-generation/mesh-3d/terrain-mesh-3d-generator.h>
+#include <logging/log-macros.h>
+#include <cmath>
 
 TerrainMesh3DGenerator::TerrainMesh3DGenerator(const Dimensions& gridSize, Shared<FixedArray<float>> heightMapData) :
     m_gridSize(gridSize),
@@ -9,22 +11,24 @@ TerrainMesh3DGenerator::TerrainMesh3DGenerator(const Dimensions& gridSize, Share
 MeshData TerrainMesh3DGenerator::GenerateMeshData() const
 {
     MeshData result;
-    size_t verticesCount = (size_t)m_gridSize.width * (size_t)m_gridSize.height;
+    size_t vertexCount = (size_t)m_gridSize.width * (size_t)m_gridSize.height;
+    if (vertexCount > INT_MAX)
+    {
+        LOG_ERROR("Tried to generate terrain with 'vertexCount > INT_MAX'.");
+        return {};
+    }
 
-    Shared<FixedArray<Vertex3D>> vertices = Shared<FixedArray<Vertex3D>>(new FixedArray<Vertex3D>(verticesCount));
-    for (size_t i = 0ULL; i < verticesCount; i++)
+    Shared<FixedArray<Vertex3D>> vertices = Shared<FixedArray<Vertex3D>>(new FixedArray<Vertex3D>(vertexCount));
+    for (size_t i = 0ULL; i < vertexCount; i++)
     {
         int x = i % m_gridSize.width;
-        int y = i / m_gridSize.width;
+        int y = (int)i / m_gridSize.width;
 
         (*vertices)[i].position.x = (float)x / (float)(m_gridSize.width - 1);
         (*vertices)[i].position.y = (*m_heightMapData)[i];
         (*vertices)[i].position.z = (float)y / (float)(m_gridSize.height - 1);
 
-        // It's a fixed value for now. Will change later.
-        (*vertices)[i].normal.x = 0.0f;
-        (*vertices)[i].normal.y = 1.0f;
-        (*vertices)[i].normal.z = 0.0f;
+        (*vertices)[i].normal = GetPointNormal(x, y);
 
         (*vertices)[i].uv.x = (float)x;
         (*vertices)[i].uv.y = float(m_gridSize.height - y);
@@ -70,4 +74,64 @@ MeshData TerrainMesh3DGenerator::GenerateMeshData() const
     result.SetIndices(indices);
 
     return result;
+}
+
+float TerrainMesh3DGenerator::GetPointHeight(int x, int y) const
+{
+    return (*m_heightMapData)[x + (size_t)y * m_gridSize.width];
+}
+
+Vector2 TerrainMesh3DGenerator::GetPointInclination(int x, int y) const
+{
+    //
+    // Top-view:
+    // 
+    //     U
+    //     |
+    //     |
+    // L---P---R
+    //     |
+    //     |
+    //     D
+    //
+
+    float p = GetPointHeight(x, y);
+    float l = x == 0                     ? NAN : GetPointHeight(x - 1, y);
+    float r = x == m_gridSize.width  - 1 ? NAN : GetPointHeight(x + 1, y);
+    float u = y == 0                     ? NAN : GetPointHeight(x, y - 1);
+    float d = y == m_gridSize.height - 1 ? NAN : GetPointHeight(x, y + 1);
+
+    float spacingX = 1.0f / (m_gridSize.width - 1);
+    float spacingY = 1.0f / (m_gridSize.height - 1);
+
+    float horizontal = 0.0f;
+    if (isnan(l) and not isnan(r))
+        horizontal = r - p;
+    else if (not isnan(l) and isnan(r))
+        horizontal = p - l;
+    else if (not isnan(l) and not isnan(r))
+        horizontal = (r - l) / (2.0f * spacingX);
+
+    float vertical = 0.0f;
+    if (isnan(u) and not isnan(d))
+        vertical = d - p;
+    else if (not isnan(u) and isnan(d))
+        vertical = p - u;
+    else if (not isnan(u) and not isnan(d))
+        vertical = (d - u) / (2.0f * spacingY);
+
+    return Vector2(horizontal, vertical);
+}
+
+Vector3 TerrainMesh3DGenerator::GetPointNormal(int x, int y) const
+{
+    Vector2 inclination = GetPointInclination(x, y);
+
+    Vector3 normal = {
+        -inclination.x,
+        1.0f,
+        -inclination.y
+    };
+
+    return normal.Normalized();
 }
