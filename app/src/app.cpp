@@ -42,9 +42,9 @@ void App::Start()
 
 	lambertRenderingRule = renderer->GetResourceManager()->CreateRenderingRule(LambertRenderingRuleGenerator());
 	unshadedRenderingRule = renderer->GetResourceManager()->CreateRenderingRule(UnshadedRenderingRuleGenerator());
-	terrainMesh = resourceManager->Create3DMesh(TerrainMesh3DGenerator(terrainGrid, terrainData));
+	terrainMesh = resourceManager->CreateMesh3D(TerrainMesh3DGenerator(terrainGrid, terrainData));
 	terrainTexture = resourceManager->CreateTexture2D(RawDataTexture2DGenerator(patTexture, { 16, 16 }));
-	cubeMesh = resourceManager->Create3DMesh(CubeMesh3DGenerator(Vector3(3.0f, 3.0f, 3.0f)));
+	cubeMesh = resourceManager->CreateMesh3D(CubeMesh3DGenerator(Vector3(3.0f, 3.0f, 3.0f)));
 
 	cameraParameter = renderer->GetParameterManager()->CreateCamera3D();
 	lightParameter = renderer->GetParameterManager()->CreateDirectionalLight();

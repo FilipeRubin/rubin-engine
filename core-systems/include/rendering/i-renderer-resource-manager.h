@@ -13,7 +13,7 @@ class IRendererResourceManager
 public:
 	virtual ~IRendererResourceManager() = default;
 	virtual IRenderingRule* CreateRenderingRule(const IRenderingRuleGenerator& generator) = 0;
-	virtual IMesh3D* Create3DMesh(const IMesh3DGenerator& generator) = 0;
+	virtual IMesh3D* CreateMesh3D(const IMesh3DGenerator& generator) = 0;
 	virtual ITexture2D* CreateTexture2D(const ITexture2DGenerator& generator) = 0;
 	template<typename T>
 	void Destroy(T*& resource)
