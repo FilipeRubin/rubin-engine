@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 
 struct Vector3
 {
@@ -70,5 +71,25 @@ struct Vector3
 		y -= other.y;
 		z -= other.z;
 		return *this;
+	}
+
+	inline Vector3 Normalized() const noexcept
+	{
+		const float l = Length();
+		return l == 0.0f ? Vector3() : Vector3(
+			x / l,
+			y / l,
+			z / l
+		);
+	}
+
+	inline float Length() const noexcept
+	{
+		return std::sqrtf(LengthSquared());
+	}
+
+	inline constexpr float LengthSquared() const noexcept
+	{
+		return x * x + y * y + z * z;
 	}
 };
