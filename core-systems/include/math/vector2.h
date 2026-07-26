@@ -66,4 +66,9 @@ struct Vector2
 		y -= other.y;
 		return *this;
 	}
+
+	inline constexpr Vector2 operator-() const noexcept
+	{
+		return Vector2(-x, -y);
+	}
 };

@@ -57,6 +57,11 @@ struct Vector3
 		return Vector3(x / value, y / value, z / value);
 	}
 
+	inline constexpr Vector3 operator-() const noexcept
+	{
+		return Vector3(-x, -y, -z);
+	}
+
 	inline constexpr Vector3& operator+=(const Vector3& other) noexcept
 	{
 		x += other.x;
