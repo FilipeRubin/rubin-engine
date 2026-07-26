@@ -1,6 +1,7 @@
 #pragma once
 #include "i-mesh-3d-generator.h"
 #include <types/dimensions.h>
+#include <types/point-2d.h>
 
 class TerrainMesh3DGenerator : public IMesh3DGenerator
 {
@@ -10,7 +11,7 @@ public:
 private:
 	Dimensions m_gridSize;
 	Shared<FixedArray<float>> m_heightMapData;
-	float GetPointHeight(int x, int y) const;
-	Vector2 GetPointInclination(int x, int y) const;
-	Vector3 GetPointNormal(int x, int y) const;
+	float GetPointHeight(const Point2D point) const;
+	Vector2 GetPointInclination(const Point2D point) const;
+	Vector3 GetPointNormal(const Point2D point) const;
 };

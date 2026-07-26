@@ -28,7 +28,7 @@ MeshData TerrainMesh3DGenerator::GenerateMeshData() const
         (*vertices)[i].position.y = (*m_heightMapData)[i];
         (*vertices)[i].position.z = (float)y / (float)(m_gridSize.height - 1);
 
-        (*vertices)[i].normal = GetPointNormal(x, y);
+        (*vertices)[i].normal = GetPointNormal({x, y});
 
         (*vertices)[i].uv.x = (float)x;
         (*vertices)[i].uv.y = float(m_gridSize.height - y);
@@ -76,12 +76,12 @@ MeshData TerrainMesh3DGenerator::GenerateMeshData() const
     return result;
 }
 
-float TerrainMesh3DGenerator::GetPointHeight(int x, int y) const
+float TerrainMesh3DGenerator::GetPointHeight(const Point2D point) const
 {
-    return (*m_heightMapData)[x + (size_t)y * m_gridSize.width];
+    return (*m_heightMapData)[point.x + (size_t)point.y * m_gridSize.width];
 }
 
-Vector2 TerrainMesh3DGenerator::GetPointInclination(int x, int y) const
+Vector2 TerrainMesh3DGenerator::GetPointInclination(const Point2D point) const
 {
     //
     // Top-view:
@@ -95,11 +95,11 @@ Vector2 TerrainMesh3DGenerator::GetPointInclination(int x, int y) const
     //     D
     //
 
-    float p = GetPointHeight(x, y);
-    float l = x == 0                     ? NAN : GetPointHeight(x - 1, y);
-    float r = x == m_gridSize.width  - 1 ? NAN : GetPointHeight(x + 1, y);
-    float u = y == 0                     ? NAN : GetPointHeight(x, y - 1);
-    float d = y == m_gridSize.height - 1 ? NAN : GetPointHeight(x, y + 1);
+    float p = GetPointHeight(point);
+    float l = point.x == 0 ? NAN : GetPointHeight({ point.x - 1, point.y });
+    float r = point.x == m_gridSize.width - 1 ? NAN : GetPointHeight({ point.x + 1, point.y });
+    float u = point.y == 0 ? NAN : GetPointHeight({ point.x, point.y - 1 });
+    float d = point.y == m_gridSize.height - 1 ? NAN : GetPointHeight({ point.x, point.y + 1 });
 
     float spacingX = 1.0f / (m_gridSize.width - 1);
     float spacingY = 1.0f / (m_gridSize.height - 1);
@@ -123,9 +123,9 @@ Vector2 TerrainMesh3DGenerator::GetPointInclination(int x, int y) const
     return Vector2(horizontal, vertical);
 }
 
-Vector3 TerrainMesh3DGenerator::GetPointNormal(int x, int y) const
+Vector3 TerrainMesh3DGenerator::GetPointNormal(const Point2D point) const
 {
-    Vector2 inclination = GetPointInclination(x, y);
+    Vector2 inclination = GetPointInclination(point);
 
     Vector3 normal = {
         -inclination.x,

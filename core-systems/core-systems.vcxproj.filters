@@ -225,6 +225,9 @@
     <ClInclude Include="include\logging\log-macros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\types\point-2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core-systems.cpp">
