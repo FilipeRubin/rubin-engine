@@ -19,6 +19,7 @@ private:
 	IMesh3D* terrainMesh = nullptr;
 	IMesh3D* cubeMesh = nullptr;
 	ITexture2D* terrainTexture = nullptr;
+	ITexture2D* cubeTexture = nullptr;
 
 	ICamera3DParameter* cameraParameter = nullptr;
 	IDirectionalLightParameter* lightParameter = nullptr;

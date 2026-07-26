@@ -21,8 +21,8 @@ void App::Init(GraphicsWindow& graphicsWindow)
 
 void App::Start()
 {
-	const int terrainX = 2000;
-	const int terrainY = 2000;
+	const int terrainX = 30;
+	const int terrainY = 30;
 
 	Dimensions terrainGrid = { terrainX, terrainY };
 	size_t terrainDataSize = terrainGrid.width * terrainGrid.height;
@@ -43,7 +43,8 @@ void App::Start()
 	lambertRenderingRule = renderer->GetResourceManager()->CreateRenderingRule(LambertRenderingRuleGenerator());
 	unshadedRenderingRule = renderer->GetResourceManager()->CreateRenderingRule(UnshadedRenderingRuleGenerator());
 	terrainMesh = resourceManager->CreateMesh3D(TerrainMesh3DGenerator(terrainGrid, terrainData));
-	terrainTexture = resourceManager->CreateTexture2D(RawDataTexture2DGenerator(patTexture, { 16, 16 }));
+	terrainTexture = resourceManager->CreateTexture2D(CheckerboardTexture2DGenerator({ 2, 2 }, Color(0.85f, 0.85f, 0.80f), Color(0.15f, 0.15f, 0.2f)));
+	cubeTexture = resourceManager->CreateTexture2D(RawDataTexture2DGenerator(patTexture, { 16, 16 }));
 	cubeMesh = resourceManager->CreateMesh3D(CubeMesh3DGenerator(Vector3(3.0f, 3.0f, 3.0f)));
 
 	cameraParameter = renderer->GetParameterManager()->CreateCamera3D();
@@ -57,9 +58,9 @@ void App::Start()
 	cameraParameter->Camera().zFar = 1000.0f;
 	cameraParameter->Camera().position = Vector3(0.0f, -5.0f, 0.0f);
 
-	lightParameter->Light().ambient = Color(0.0f, 0.0f, 0.0f);
+	lightParameter->Light().ambient = Color(0.12f, 0.12f, 0.12f);
 	lightParameter->Light().diffuse = Color(1.0f, 1.0f, 1.0f);
-	lightParameter->Light().direction = Vector3(1.0f, 0.0f, 0.0f);
+	lightParameter->Light().direction = Vector3(1.0f, -1.0f, 0.3f).Normalized();
 
 	transformParameter->Transform().scale = { 200.0f, 1.0f, 200.0f };
 	transformParameter->Transform().position = {
@@ -69,7 +70,7 @@ void App::Start()
 	};
 
 	cubeTransformParameter->Transform().position = {0.0f, 5.0f, 0.0f};
-	cubeTransformParameter->Transform().scale = {1.0f, 1.0f, 14.0f};
+	cubeTransformParameter->Transform().scale = {3.0f, 5.0f, 8.0f};
 }
 
 void App::Update()
@@ -126,6 +127,7 @@ void App::Update()
 	terrainTexture->Bind();
 	terrainMesh->Draw();
 	cubeTransformParameter->Bind(currentRenderingRule);
+	cubeTexture->Bind();
 	cubeMesh->Draw();
 }
 
