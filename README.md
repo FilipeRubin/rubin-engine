@@ -15,6 +15,7 @@ While powerful game engines do exist, they usually lack the simplicity that made
 
 ## Planned features
 - [ ] High-level interface with automatic entity and scene management systems
+- [ ] Multithreading
 - [ ] Modern PBR materials
 - [ ] Text rendering
 - [ ] File I/O
