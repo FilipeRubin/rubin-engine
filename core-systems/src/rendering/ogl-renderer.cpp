@@ -5,8 +5,11 @@
 #include <logging/log-macros.h>
 
 OGLRenderer::OGLRenderer(OGLGraphicsBackend* backend) :
-	m_parameterManager(new OGLRendererParameterManager()),
-	m_resourceManager(new OGLRendererResourceManager(backend))
+	m_currentRenderingRule(nullptr),
+	m_parametersState(OGLRenderParametersState()),
+	m_shaderCache(*this),
+	m_parameterManager(new OGLRendererParameterManager(*this)),
+	m_resourceManager(new OGLRendererResourceManager(backend, *this))
 {
 	LOG_INFO("OpenGL renderer created.");
 }
@@ -41,4 +44,24 @@ IRendererParameterManager* OGLRenderer::GetParameterManager() const
 IRendererResourceManager* OGLRenderer::GetResourceManager() const
 {
 	return m_resourceManager;
+}
+
+OGLRenderingRule* OGLRenderer::GetCurrentRenderingRule() const
+{
+	return m_currentRenderingRule;
+}
+
+void OGLRenderer::SetCurrentRenderingRule(OGLRenderingRule* renderingRule)
+{
+	m_currentRenderingRule = renderingRule;
+}
+
+OGLRenderParametersState& OGLRenderer::RenderParametersState()
+{
+	return m_parametersState;
+}
+
+OGLShaderProgramCache& OGLRenderer::ShaderCache()
+{
+	return m_shaderCache;
 }

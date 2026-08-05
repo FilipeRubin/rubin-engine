@@ -1,4 +1,5 @@
 #pragma once
+#include "ogl-renderer-user.h"
 #include <rendering/i-renderer-resource-manager.h>
 #include <rendering/i-renderer-managed.h>
 #include <ogl-graphics-backend.h>
@@ -6,10 +7,10 @@
 #include <memory>
 #include <utility>
 
-class OGLRendererResourceManager : public IRendererResourceManager
+class OGLRendererResourceManager final : public IRendererResourceManager, public OGLRendererUser
 {
 public:
-	OGLRendererResourceManager(OGLGraphicsBackend* backend);
+	OGLRendererResourceManager(OGLGraphicsBackend* backend, OGLRenderer& renderer);
 	~OGLRendererResourceManager();
 	IRenderingRule* CreateRenderingRule(const IRenderingRuleGenerator& generator) override;
 	IMesh3D* CreateMesh3D(const IMesh3DGenerator& generator) override;
@@ -26,7 +27,7 @@ private:
 	{
 		bool isCurrentBackend = OGLGraphicsBackend::GetCurrent() == m_backend;
 		std::list<std::unique_ptr<IRendererManaged>>& container = isCurrentBackend ? m_resources : m_waitingToCreate;
-		std::unique_ptr<T> resource = std::make_unique<T>(std::forward<Args>(args)...);
+		std::unique_ptr<T> resource = std::make_unique<T>(GetRenderer(), std::forward<Args>(args)...);
 		if (isCurrentBackend)
 		{
 			resource->Create();

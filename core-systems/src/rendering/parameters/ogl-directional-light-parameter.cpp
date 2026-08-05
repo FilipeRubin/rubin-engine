@@ -1,11 +1,13 @@
 #include "ogl-directional-light-parameter.h"
+#include <rendering/ogl-renderer.h>
 
-void OGLDirectionalLightParameter::Bind(IRenderingRule* renderingRule)
+OGLDirectionalLightParameter::OGLDirectionalLightParameter(OGLRenderer& renderer) :
+    OGLRendererUser(renderer)
+{}
+
+void OGLDirectionalLightParameter::Bind()
 {
-    OGLRenderingRule* oglRenderingRule = dynamic_cast<OGLRenderingRule*>(renderingRule);
-    oglRenderingRule->SetUniform("u_ambientLight", m_light.ambient);
-    oglRenderingRule->SetUniform("u_directionalLightDiffuse", m_light.diffuse);
-    oglRenderingRule->SetUniform("u_directionalLightDirection", m_light.direction);
+    GetRenderer().RenderParametersState().directionalLight = this;
 }
 
 DirectionalLight& OGLDirectionalLightParameter::Light()

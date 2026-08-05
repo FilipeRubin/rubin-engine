@@ -1,8 +1,10 @@
 #include "ogl-mesh-3d.h"
-#include <ogl.h>
+#include <rendering/ogl-renderer.h>
 #include <logging/log-macros.h>
+#include <ogl.h>
 
-OGLMesh3D::OGLMesh3D(Shared<FixedArray<Vertex3D>> vertices, Shared<FixedArray<unsigned int>> indices) :
+OGLMesh3D::OGLMesh3D(OGLRenderer& renderer, Shared<FixedArray<Vertex3D>> vertices, Shared<FixedArray<unsigned int>> indices) :
+	OGLRendererUser(renderer),
 	m_vbo(0U), m_vao(0U), m_ebo(0U), m_indicesCount(unsigned int(indices->GetElementCount())),
 	m_vertices(vertices),
 	m_indices(indices)
@@ -11,8 +13,19 @@ OGLMesh3D::OGLMesh3D(Shared<FixedArray<Vertex3D>> vertices, Shared<FixedArray<un
 
 void OGLMesh3D::Draw()
 {
+	OGLRenderingRule* renderingRule = GetRenderer().GetCurrentRenderingRule();
+	MeshType meshType = GetMeshType();
+	GetRenderer().ShaderCache().BindOrCreate(*renderingRule, meshType);
+
+	GetRenderer().ShaderCache().SetUniforms(*renderingRule);
+
 	glBindVertexArray(m_vao);
 	glDrawElements(GL_TRIANGLES, m_indicesCount, GL_UNSIGNED_INT, NULL);
+}
+
+MeshType OGLMesh3D::GetMeshType() const
+{
+	return MeshType::STATIC_3D;
 }
 
 bool OGLMesh3D::IsValid() const

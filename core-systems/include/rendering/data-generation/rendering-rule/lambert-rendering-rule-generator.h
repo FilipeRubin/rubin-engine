@@ -1,8 +1,8 @@
 #pragma once
 #include "i-rendering-rule-generator.h"
 
-class LambertRenderingRuleGenerator : public IRenderingRuleGenerator
+class LambertRenderingRuleGenerator final : public IRenderingRuleGenerator
 {
 public:
-	Type GetType() const override;
+	RenderingRuleDescriptor GenerateDescriptor() const override;
 };

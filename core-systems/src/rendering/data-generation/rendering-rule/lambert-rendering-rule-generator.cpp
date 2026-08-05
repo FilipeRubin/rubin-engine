@@ -1,6 +1,12 @@
 #include <rendering/data-generation/rendering-rule/lambert-rendering-rule-generator.h>
 
-IRenderingRuleGenerator::Type LambertRenderingRuleGenerator::GetType() const
+RenderingRuleDescriptor LambertRenderingRuleGenerator::GenerateDescriptor() const
 {
-    return Type::LAMBERT;
+    RenderingRuleDescriptor result{};
+
+    result.useDirectionalLight = true;
+    result.useCamera3D = true;
+    result.useTransform3D = true;
+
+    return result;
 }

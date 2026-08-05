@@ -119,14 +119,14 @@ void App::Update()
 	cameraParameter->Camera().aspectRatio = window->GetAspectRatio();
 
 	// State binding
-	cameraParameter->Bind(currentRenderingRule);
-	lightParameter->Bind(currentRenderingRule);
+	cameraParameter->Bind();
+	lightParameter->Bind();
 
 	// Drawing
-	transformParameter->Bind(currentRenderingRule);
+	transformParameter->Bind();
 	terrainTexture->Bind();
 	terrainMesh->Draw();
-	cubeTransformParameter->Bind(currentRenderingRule);
+	cubeTransformParameter->Bind();
 	cubeTexture->Bind();
 	cubeMesh->Draw();
 }

@@ -1,6 +1,12 @@
 #include <rendering/data-generation/rendering-rule/unshaded-rendering-rule-generator.h>
 
-IRenderingRuleGenerator::Type UnshadedRenderingRuleGenerator::GetType() const
+RenderingRuleDescriptor UnshadedRenderingRuleGenerator::GenerateDescriptor() const
 {
-    return Type::UNSHADED;
+    RenderingRuleDescriptor result{};
+
+    result.useDirectionalLight = false;
+    result.useCamera3D = true;
+    result.useTransform3D = true;
+
+    return result;
 }

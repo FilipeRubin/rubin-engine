@@ -5,5 +5,5 @@ class IRenderParameter
 {
 public:
 	virtual ~IRenderParameter() = default;
-	virtual void Bind(IRenderingRule* renderingRule) = 0;
+	virtual void Bind() = 0;
 };

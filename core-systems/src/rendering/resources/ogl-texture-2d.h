@@ -5,11 +5,12 @@
 #include <types/color8.h>
 #include <rendering/resources/i-texture-2d.h>
 #include <rendering/i-renderer-managed.h>
+#include <rendering/ogl-renderer-user.h>
 
-class OGLTexture2D : public ITexture2D, public IRendererManaged
+class OGLTexture2D : public ITexture2D, public IRendererManaged, public OGLRendererUser
 {
 public:
-	OGLTexture2D(Shared<FixedArray<Color8>> data, const Dimensions& dimensions);
+	OGLTexture2D(OGLRenderer& renderer, Shared<FixedArray<Color8>> data, const Dimensions& dimensions);
 	OGLTexture2D(const OGLTexture2D& other) = delete;
 	OGLTexture2D(OGLTexture2D&& other) noexcept = delete;
 	OGLTexture2D& operator=(const OGLTexture2D& other) = delete;

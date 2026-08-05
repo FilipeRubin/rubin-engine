@@ -1,4 +1,5 @@
 #include "ogl-renderer-resource-manager.h"
+#include "ogl-renderer.h"
 #include "resources/ogl-rendering-rule.h"
 #include "resources/ogl-mesh-3d.h"
 #include "resources/ogl-texture-2d.h"
@@ -14,7 +15,8 @@
 using std::unique_ptr;
 using std::list;
 
-OGLRendererResourceManager::OGLRendererResourceManager(OGLGraphicsBackend* backend) :
+OGLRendererResourceManager::OGLRendererResourceManager(OGLGraphicsBackend* backend, OGLRenderer& renderer) :
+    OGLRendererUser(renderer),
     m_backend(backend),
     m_waitingToCreate(list<unique_ptr<IRendererManaged>>()),
     m_waitingToDestroy(list<unique_ptr<IRendererManaged>>()),
@@ -49,35 +51,7 @@ OGLRendererResourceManager::~OGLRendererResourceManager()
 
 IRenderingRule* OGLRendererResourceManager::CreateRenderingRule(const IRenderingRuleGenerator& generator)
 {
-    switch (generator.GetType())
-    {
-    case IRenderingRuleGenerator::Type::UNSHADED:
-		LOG_DEBUG("Queuing unshaded rendering rule creation.");
-        return CreateResource<OGLRenderingRule>(unshadedVertexShaderSource, unshadedFragmentShaderSource);
-    case IRenderingRuleGenerator::Type::LAMBERT:
-		LOG_DEBUG("Queuing Lambert rendering rule creation.");
-        return CreateResource<OGLRenderingRule>(lambertVertexShaderSource, lambertFragmentShaderSource);
-    case IRenderingRuleGenerator::Type::CUSTOM:
-    {
-        const SourceContainer* shaderSources = static_cast<const SourceContainer*>(generator.GetCustomData());
-        if (shaderSources == nullptr)
-        {
-            LOG_ERROR("Cannot create a custom rendering rule without shader sources.");
-            return nullptr;
-        }
-        if (shaderSources->GetSourceCount() != 2ULL)
-        {
-            LOG_ERROR("A custom rendering rule requires exactly a vertex and a fragment shader source.");
-            return nullptr;
-        }
-        const char* vertexShaderSource = shaderSources->GetSource(0U);
-        const char* fragmentShaderSource = shaderSources->GetSource(1U);
-        return CreateResource<OGLRenderingRule>(vertexShaderSource, fragmentShaderSource);
-    }
-    default:
-        LOG_ERROR("Cannot create a rendering rule from an unknown generator type.");
-        return nullptr;
-    }
+    return CreateResource<OGLRenderingRule>(generator.GenerateDescriptor());
 }
 
 IMesh3D* OGLRendererResourceManager::CreateMesh3D(const IMesh3DGenerator& generator)

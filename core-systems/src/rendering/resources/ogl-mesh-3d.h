@@ -4,12 +4,14 @@
 #include <rendering/i-renderer-managed.h>
 #include <types/vertex-3d.h>
 #include <utils/shared.h>
+#include <rendering/ogl-renderer-user.h>
 
-class OGLMesh3D : public IMesh3D, public IRendererManaged
+class OGLMesh3D : public IMesh3D, public IRendererManaged, public OGLRendererUser
 {
 public:
-	OGLMesh3D(Shared<FixedArray<Vertex3D>> vertices, Shared<FixedArray<unsigned int>> indices);
+	OGLMesh3D(OGLRenderer& renderer, Shared<FixedArray<Vertex3D>> vertices, Shared<FixedArray<unsigned int>> indices);
 	void Draw() override;
+	MeshType GetMeshType() const override;
 	bool IsValid() const override;
 	void Create() override;
 	void Destroy() override;

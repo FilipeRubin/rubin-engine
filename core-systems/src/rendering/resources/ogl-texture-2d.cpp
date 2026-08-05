@@ -2,7 +2,8 @@
 #include <ogl.h>
 #include <logging/log-macros.h>
 
-OGLTexture2D::OGLTexture2D(Shared<FixedArray<Color8>> data, const Dimensions& dimensions) :
+OGLTexture2D::OGLTexture2D(OGLRenderer& renderer, Shared<FixedArray<Color8>> data, const Dimensions& dimensions) :
+    OGLRendererUser(renderer),
     m_data(data),
     m_dimensions(dimensions),
     m_texture(0U)
