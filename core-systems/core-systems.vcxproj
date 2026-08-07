@@ -229,6 +229,7 @@
     <ClInclude Include="src\rendering\ogl-render-parameters-state.h" />
     <ClInclude Include="src\rendering\ogl-renderer-parameter-manager.h" />
     <ClInclude Include="src\rendering\ogl-shader-key.h" />
+    <ClInclude Include="src\rendering\ogl-shader-constants.h" />
     <ClInclude Include="src\rendering\ogl-shader-program-cache.h" />
     <ClInclude Include="src\rendering\ogl-shader-program.h" />
     <ClInclude Include="src\rendering\parameters\ogl-camera-3d-parameter.h" />
