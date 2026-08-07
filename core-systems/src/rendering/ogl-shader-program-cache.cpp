@@ -60,10 +60,10 @@ void OGLShaderProgramCache::SetUniforms(const OGLRenderingRule& renderingRule)
 		const Camera3D& c = s.camera->Camera();
 
 		Matrix4x4 view = (
-			Matrix4x4::RotationX(c.rotation.x) *
-			Matrix4x4::RotationY(c.rotation.y) *
-			Matrix4x4::RotationZ(c.rotation.z) *
-			Matrix4x4::Translation(c.position)
+			Matrix4x4::RotationX(-c.rotation.x) *
+			Matrix4x4::RotationY(-c.rotation.y) *
+			Matrix4x4::RotationZ(-c.rotation.z) *
+			Matrix4x4::Translation(-c.position)
 		);
 		Matrix4x4 projection = Matrix4x4::Perspective(
 			c.aspectRatio,

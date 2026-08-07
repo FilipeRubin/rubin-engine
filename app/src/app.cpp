@@ -56,7 +56,7 @@ void App::Start()
 	cameraParameter->Camera().vFOV = 3.1415f / 2.0f;
 	cameraParameter->Camera().zNear = 0.1f;
 	cameraParameter->Camera().zFar = 1000.0f;
-	cameraParameter->Camera().position = Vector3(0.0f, -5.0f, 0.0f);
+	cameraParameter->Camera().position = Vector3(0.0f, 5.0f, 0.0f);
 
 	lightParameter->Light().ambient = Color(0.12f, 0.12f, 0.12f);
 	lightParameter->Light().diffuse = Color(1.0f, 1.0f, 1.0f);
@@ -84,20 +84,20 @@ void App::Update()
 	if (input->IsMouseButtonDown(MouseButton::LEFT))
 	{
 		Vector2 mouseMovement = input->GetMouseMovement();
-		cameraParameter->Camera().rotation.y += mouseMovement.x * 0.01f;
-		cameraParameter->Camera().rotation.x += mouseMovement.y * 0.01f;
+		cameraParameter->Camera().rotation.y -= mouseMovement.x * 0.01f;
+		cameraParameter->Camera().rotation.x -= mouseMovement.y * 0.01f;
 	}
 	{
 		Vector3& pos = cameraParameter->Camera().position;
 		Vector3& rot = cameraParameter->Camera().rotation;
 		Vector2 dir = {
-			float(input->IsKeyDown(KeyboardKey::D) - input->IsKeyDown(KeyboardKey::A)),
-			float(input->IsKeyDown(KeyboardKey::W) - input->IsKeyDown(KeyboardKey::S))
+			float(input->IsKeyDown(KeyboardKey::A) - input->IsKeyDown(KeyboardKey::D)),
+			float(input->IsKeyDown(KeyboardKey::S) - input->IsKeyDown(KeyboardKey::W))
 		};
 		pos += Vector3(
-			dir.x * -cosf(rot.y) + dir.y * -sinf(rot.y),
-			float(input->IsKeyDown(KeyboardKey::Q)) - float(input->IsKeyDown(KeyboardKey::E)),
-			dir.y * cosf(rot.y) + dir.x * -sinf(rot.y)
+			dir.x * -cosf(rot.y) + dir.y * sinf(rot.y),
+			float(input->IsKeyDown(KeyboardKey::E)) - float(input->IsKeyDown(KeyboardKey::Q)),
+			dir.y * cosf(rot.y) + dir.x * sinf(rot.y)
 		) * deltaTime * 15.0f;
 	}
 	cubeTransformParameter->Transform().rotation.z += deltaTime;
