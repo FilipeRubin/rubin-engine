@@ -4,6 +4,8 @@
 #include <types/mesh-type.h>
 #include <unordered_map>
 
+class OGLShaderProgram;
+
 class OGLShaderProgramCache final : public OGLRendererUser
 {
 public:
@@ -12,7 +14,7 @@ public:
 	void BindOrCreate(const OGLRenderingRule& renderingRule, MeshType meshType);
 	void SetUniforms(const OGLRenderingRule& renderingRule);
 private:
-	unsigned int m_currentProgram;
-	std::unordered_map<OGLShaderKey, unsigned int, OGLShaderKey::Hash> m_cache;
-	unsigned int CreateProgram(const OGLShaderKey& key);
+	OGLShaderProgram* m_currentProgram;
+	std::unordered_map<OGLShaderKey, OGLShaderProgram*, OGLShaderKey::Hash> m_cache;
+	OGLShaderProgram* CreateProgram(const OGLShaderKey& key);
 };

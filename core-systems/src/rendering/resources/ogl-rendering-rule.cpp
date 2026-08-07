@@ -25,7 +25,7 @@ bool OGLRenderingRule::IsValid() const
 
 void OGLRenderingRule::Create()
 {
-	LOG_WARNING("Maybe make \"rendering rule\" not a resource OR delete this warning.");
+	// Renderer rule is a logical resource, even though it doesn`t allocate anything on the GPU directly
 }
 
 void OGLRenderingRule::Destroy()

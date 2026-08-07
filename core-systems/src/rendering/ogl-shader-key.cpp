@@ -7,3 +7,13 @@ OGLShaderKey::OGLShaderKey(const RenderingRuleDescriptor& descriptor, MeshType m
 {
 	// LOG_WARNING("Needs to be optimized. Do not store the entire RenderingRuleDescriptor object inside this.");
 }
+
+const RenderingRuleDescriptor& OGLShaderKey::GetDescriptor() const
+{
+	return m_descriptor;
+}
+
+MeshType OGLShaderKey::GetMeshType() const
+{
+	return m_meshType;
+}

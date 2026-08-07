@@ -7,8 +7,9 @@ class OGLShaderKey final
 {
 public:
 	OGLShaderKey(const RenderingRuleDescriptor& descriptor, MeshType meshType);
+	const RenderingRuleDescriptor& GetDescriptor() const;
+	MeshType GetMeshType() const;
 	bool operator==(const OGLShaderKey& other) const = default;
-
 	struct Hash
 	{
 		std::size_t operator()(const OGLShaderKey& key) const noexcept
