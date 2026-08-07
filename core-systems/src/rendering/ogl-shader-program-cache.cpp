@@ -51,14 +51,9 @@ void OGLShaderProgramCache::SetUniforms(const OGLRenderingRule& renderingRule)
 	if (d.useDirectionalLight)
 	{
 		const DirectionalLight& dl = s.directionalLight->Light();
-
-		GLint location;
-		location = glGetUniformLocation(m_currentProgram->GetProgram(), "u_ambientLight");
-		glUniform4fv(location, 1, reinterpret_cast<const GLfloat*>(&dl.ambient));
-		location = glGetUniformLocation(m_currentProgram->GetProgram(), "u_directionalLightDiffuse");
-		glUniform4fv(location, 1, reinterpret_cast<const GLfloat*>(&dl.diffuse));
-		location = glGetUniformLocation(m_currentProgram->GetProgram(), "u_directionalLightDirection");
-		glUniform3fv(location, 1, reinterpret_cast<const GLfloat*>(&dl.direction));
+		m_currentProgram->SetUniform("u_ambientLight", dl.ambient);
+		m_currentProgram->SetUniform("u_directionalLightDiffuse", dl.diffuse);
+		m_currentProgram->SetUniform("u_directionalLightDirection", dl.direction);
 	}
 	if (d.useCamera3D)
 	{
@@ -77,11 +72,8 @@ void OGLShaderProgramCache::SetUniforms(const OGLRenderingRule& renderingRule)
 			c.zFar
 		);
 
-		GLint location;
-		location = glGetUniformLocation(m_currentProgram->GetProgram(), "u_view");
-		glUniformMatrix4fv(location, 1, GL_FALSE, reinterpret_cast<const GLfloat*>(&view));
-		location = glGetUniformLocation(m_currentProgram->GetProgram(), "u_projection");
-		glUniformMatrix4fv(location, 1, GL_FALSE, reinterpret_cast<const GLfloat*>(&projection));
+		m_currentProgram->SetUniform("u_view", view);
+		m_currentProgram->SetUniform("u_projection", projection);
 	}
 	if (d.useTransform3D)
 	{
@@ -95,9 +87,7 @@ void OGLShaderProgramCache::SetUniforms(const OGLRenderingRule& renderingRule)
 			Matrix4x4::Scaling(t.scale)
 			);
 
-		GLint location;
-		location = glGetUniformLocation(m_currentProgram->GetProgram(), "u_model");
-		glUniformMatrix4fv(location, 1, GL_FALSE, reinterpret_cast<const GLfloat*>(&model));
+		m_currentProgram->SetUniform("u_model", model);
 	}
 }
 

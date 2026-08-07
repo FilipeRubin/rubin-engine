@@ -54,6 +54,46 @@ void OGLShaderProgram::Use() const
     glUseProgram(m_program);
 }
 
+void OGLShaderProgram::SetUniform(const char* name, const Vector3 value) const
+{
+	GLint loc = glGetUniformLocation(m_program, name);
+	if (loc == -1)
+	{
+		LOG_ERROR(std::string("Tried to set unexisting uniform: ") + name);
+	}
+	glUniform3fv(loc, 1, reinterpret_cast<const GLfloat*>(&value));
+}
+
+void OGLShaderProgram::SetUniform(const char* name, const Vector4 value) const
+{
+	GLint loc = glGetUniformLocation(m_program, name);
+	if (loc == -1)
+	{
+		LOG_ERROR(std::string("Tried to set unexisting uniform: ") + name);
+	}
+	glUniform4fv(loc, 1, reinterpret_cast<const GLfloat*>(&value));
+}
+
+void OGLShaderProgram::SetUniform(const char* name, const Color value) const
+{
+	GLint loc = glGetUniformLocation(m_program, name);
+	if (loc == -1)
+	{
+		LOG_ERROR(std::string("Tried to set unexisting uniform: ") + name);
+	}
+	glUniform4fv(loc, 1, reinterpret_cast<const GLfloat*>(&value));
+}
+
+void OGLShaderProgram::SetUniform(const char* name, const Matrix4x4 & value) const
+{
+	GLint loc = glGetUniformLocation(m_program, name);
+	if (loc == -1)
+	{
+		LOG_ERROR(std::string("Tried to set unexisting uniform: ") + name);
+	}
+	glUniformMatrix4fv(loc, 1, GL_FALSE, reinterpret_cast<const GLfloat*>(&value));
+}
+
 bool OGLShaderProgram::TryCompileShader(unsigned int shaderType, const char* source, unsigned int& out_shader) const
 {
 	out_shader = glCreateShader(shaderType);

@@ -2,7 +2,7 @@
 
 struct Color8;
 
-struct Color
+struct alignas(16) Color
 {
 	float r, g, b, a;
 
