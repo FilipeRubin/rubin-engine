@@ -58,35 +58,15 @@ void OGLShaderProgramCache::SetUniforms(const OGLRenderingRule& renderingRule)
 	if (d.useCamera3D)
 	{
 		const Camera3D& c = s.camera->Camera();
-
-		Matrix4x4 view = (
-			Matrix4x4::RotationX(-c.rotation.x) *
-			Matrix4x4::RotationY(-c.rotation.y) *
-			Matrix4x4::RotationZ(-c.rotation.z) *
-			Matrix4x4::Translation(-c.position)
-			);
-		Matrix4x4 projection = Matrix4x4::Perspective(
-			c.aspectRatio,
-			c.vFOV,
-			c.zNear,
-			c.zFar
-		);
-
+		Matrix4x4 view = Matrix4x4::View(-c.position, -c.rotation);
+		Matrix4x4 projection = Matrix4x4::Perspective(c.aspectRatio, c.vFOV, c.zNear, c.zFar);
 		m_currentProgram->SetUniform("u_view", view);
 		m_currentProgram->SetUniform("u_projection", projection);
 	}
 	if (d.useTransform3D)
 	{
 		const Transform3D& t = s.transform->Transform();
-
-		Matrix4x4 model = (
-			Matrix4x4::Translation(t.position) *
-			Matrix4x4::RotationZ(t.rotation.z) *
-			Matrix4x4::RotationY(t.rotation.y) *
-			Matrix4x4::RotationX(t.rotation.x) *
-			Matrix4x4::Scaling(t.scale)
-			);
-
+		Matrix4x4 model = Matrix4x4::Model(t.position, t.rotation, t.scale);
 		m_currentProgram->SetUniform("u_model", model);
 	}
 }

@@ -18,6 +18,27 @@ struct alignas(16) Matrix4x4
 		};
 	}
 
+	static inline Matrix4x4 Model(const Vector3 position, const Vector3 rotation, const Vector3 scale) noexcept
+	{
+		return (
+			Matrix4x4::Translation(position) *
+			Matrix4x4::RotationZ(rotation.z) *
+			Matrix4x4::RotationY(rotation.y) *
+			Matrix4x4::RotationX(rotation.x) *
+			Matrix4x4::Scaling(scale)
+		);
+	}
+
+	static inline Matrix4x4 View(const Vector3 position, const Vector3 rotation) noexcept
+	{
+		return (
+			Matrix4x4::RotationX(rotation.x) *
+			Matrix4x4::RotationY(rotation.y) *
+			Matrix4x4::RotationZ(rotation.z) *
+			Matrix4x4::Translation(position)
+		);
+	}
+
 	static inline Matrix4x4 Perspective(float aspectRatio, float vFOV, float zNear, float zFar) noexcept
 	{
 		const float& ar = aspectRatio;
