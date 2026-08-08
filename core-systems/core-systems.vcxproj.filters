@@ -111,12 +111,6 @@
     <ClInclude Include="include\types\camera-3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\data\lambert-shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\data\unshaded-shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\rendering\state\i-render-state.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -165,7 +159,7 @@
     <ClInclude Include="include\rendering\data-generation\rendering-rule\i-rendering-rule-generator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\rendering\data-generation\rendering-rule\unshaded-rendering-rule-generator.h">
+    <ClInclude Include="include\rendering\data-generation\rendering-rule\unlit-rendering-rule-generator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\containers\source-collection.h">

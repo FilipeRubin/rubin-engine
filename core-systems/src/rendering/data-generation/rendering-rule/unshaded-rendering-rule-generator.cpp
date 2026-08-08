@@ -1,6 +1,6 @@
-#include <rendering/data-generation/rendering-rule/unshaded-rendering-rule-generator.h>
+#include <rendering/data-generation/rendering-rule/unlit-rendering-rule-generator.h>
 
-RenderingRuleDescriptor UnshadedRenderingRuleGenerator::GenerateDescriptor() const
+RenderingRuleDescriptor UnlitRenderingRuleGenerator::GenerateDescriptor() const
 {
     RenderingRuleDescriptor result{};
 

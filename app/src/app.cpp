@@ -3,7 +3,7 @@
 #include <rendering/data-generation/mesh-3d/plane-mesh-3d-generator.h>
 #include <rendering/data-generation/mesh-3d/cube-mesh-3d-generator.h>
 #include <rendering/data-generation/mesh-3d/terrain-mesh-3d-generator.h>
-#include <rendering/data-generation/rendering-rule/unshaded-rendering-rule-generator.h>
+#include <rendering/data-generation/rendering-rule/unlit-rendering-rule-generator.h>
 #include <rendering/data-generation/rendering-rule/lambert-rendering-rule-generator.h>
 #include <rendering/data-generation/texture-2d/raw-data-texture-2d-generator.h>
 #include <rendering/data-generation/texture-2d/checkerboard-texture-2d-generator.h>
@@ -41,7 +41,7 @@ void App::Start()
 	Shared<FixedArray<Color8>> patTexture = GeneratePatternTexture(resourceManager, 16, 16);
 
 	lambertRenderingRule = renderer->GetResourceManager()->CreateRenderingRule(LambertRenderingRuleGenerator());
-	unshadedRenderingRule = renderer->GetResourceManager()->CreateRenderingRule(UnshadedRenderingRuleGenerator());
+	unlitRenderingRule = renderer->GetResourceManager()->CreateRenderingRule(UnlitRenderingRuleGenerator());
 	terrainMesh = resourceManager->CreateMesh3D(TerrainMesh3DGenerator(terrainGrid, terrainData));
 	terrainTexture = resourceManager->CreateTexture2D(CheckerboardTexture2DGenerator({ 2, 2 }, Color(0.85f, 0.85f, 0.80f), Color(0.15f, 0.15f, 0.2f)));
 	cubeTexture = resourceManager->CreateTexture2D(RawDataTexture2DGenerator(patTexture, { 16, 16 }));
@@ -110,7 +110,7 @@ void App::Update()
 	}
 	else
 	{
-		currentRenderingRule = unshadedRenderingRule;
+		currentRenderingRule = unlitRenderingRule;
 		renderer->SetClearColor({ 0.1f, 0.2f, 0.4f });
 	}
 	currentRenderingRule->Bind();

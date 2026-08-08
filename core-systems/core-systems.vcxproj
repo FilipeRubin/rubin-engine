@@ -180,7 +180,7 @@
     <ClInclude Include="include\rendering\data-generation\rendering-rule\i-rendering-rule-generator.h" />
     <ClInclude Include="include\rendering\data-generation\mesh-3d\plane-mesh-3d-generator.h" />
     <ClInclude Include="include\rendering\data-generation\rendering-rule\lambert-rendering-rule-generator.h" />
-    <ClInclude Include="include\rendering\data-generation\rendering-rule\unshaded-rendering-rule-generator.h" />
+    <ClInclude Include="include\rendering\data-generation\rendering-rule\unlit-rendering-rule-generator.h" />
     <ClInclude Include="include\rendering\data-generation\texture-2d\checkerboard-texture-2d-generator.h" />
     <ClInclude Include="include\rendering\data-generation\texture-2d\i-texture-2d-generator.h" />
     <ClInclude Include="include\rendering\data-generation\texture-2d\raw-data-texture-2d-generator.h" />
@@ -214,8 +214,6 @@
     <ClInclude Include="include\rendering\resources\i-mesh-3d.h" />
     <ClInclude Include="include\rendering\i-drawable.h" />
     <ClInclude Include="include\utils\shared.h" />
-    <ClInclude Include="src\data\lambert-shader.h" />
-    <ClInclude Include="src\data\unshaded-shader.h" />
     <ClInclude Include="src\input\win32-basic-input.h" />
     <ClInclude Include="include\rendering\data-generation\mesh-3d\cube-mesh-3d-generator.h" />
     <ClInclude Include="include\rendering\data-generation\mesh-3d\i-mesh-3d-generator.h" />

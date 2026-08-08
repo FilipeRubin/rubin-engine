@@ -3,8 +3,6 @@
 #include "resources/ogl-rendering-rule.h"
 #include "resources/ogl-mesh-3d.h"
 #include "resources/ogl-texture-2d.h"
-#include <data/lambert-shader.h>
-#include <data/unshaded-shader.h>
 #include <containers/source-container.h>
 #include <logging/log-macros.h>
 

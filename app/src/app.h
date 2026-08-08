@@ -14,7 +14,7 @@ private:
 	IBasicInput* input = nullptr;
 
 	IRenderingRule* lambertRenderingRule = nullptr;
-	IRenderingRule* unshadedRenderingRule = nullptr;
+	IRenderingRule* unlitRenderingRule = nullptr;
 	IRenderingRule* currentRenderingRule = nullptr;
 	IMesh3D* terrainMesh = nullptr;
 	IMesh3D* cubeMesh = nullptr;
