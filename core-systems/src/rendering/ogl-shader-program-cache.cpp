@@ -1,6 +1,7 @@
 #include "ogl-shader-program-cache.h"
 #include "ogl-shader-program.h"
 #include "ogl-shader-constants.h"
+#include "ogl-shader-source-builder.h"
 #include <rendering/ogl-renderer.h>
 #include <math/matrix4x4.h>
 #include <logging/log-macros.h>
@@ -46,7 +47,7 @@ void OGLShaderProgramCache::BindOrCreate(const OGLRenderingRule& renderingRule, 
 
 void OGLShaderProgramCache::SetUniforms(const OGLRenderingRule& renderingRule)
 {
-	using namespace OGLShaderConstants;
+	using namespace OGLShaderConstants::Uniform;
 	const RenderingRuleDescriptor& d = renderingRule.GetDescriptor();
 	const OGLRenderParametersState& s = GetRenderer().RenderParametersState();
 
@@ -75,24 +76,16 @@ void OGLShaderProgramCache::SetUniforms(const OGLRenderingRule& renderingRule)
 
 OGLShaderProgram* OGLShaderProgramCache::CreateProgram(const OGLShaderKey& key)
 {
-	LOG_WARNING("Implement custom shaders.");
 	OGLShaderProgram* program = new OGLShaderProgram();
-#include <data/unshaded-shader.h>
-#include <data/lambert-shader.h>
+	OGLShaderSourceBuilder builder = OGLShaderSourceBuilder(key);
+	std::string vss = builder.GenerateVertexSource();
+	std::string fss = builder.GenerateFragmentSource();
 
-	const char*& vss =
-		key.GetDescriptor().useDirectionalLight ?
-		lambertVertexShaderSource :
-		unshadedVertexShaderSource;
-	const char*& fss =
-		key.GetDescriptor().useDirectionalLight ?
-		lambertFragmentShaderSource :
-		unshadedFragmentShaderSource;
-
-	if (program->TryCompile(vss, fss))
+	if (program->TryCompile(vss.c_str(), fss.c_str()))
 	{
 		LOG_DEBUG("OpenGL shader program compiled and linked.");
 		return program;
 	}
+	delete program;
 	return nullptr;
 }

@@ -26,7 +26,7 @@ private:
 	ITransform3DParameter* transformParameter = nullptr;
 	ITransform3DParameter* cubeTransformParameter = nullptr;
 
-	bool useLambertRenderingRule = true;
+	bool useLambertRenderingRule = false;
 
 	float lightRotation = 0.0f;
 	float cubeHeightOffset = 0.0f;

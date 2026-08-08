@@ -232,6 +232,7 @@
     <ClInclude Include="src\rendering\ogl-shader-constants.h" />
     <ClInclude Include="src\rendering\ogl-shader-program-cache.h" />
     <ClInclude Include="src\rendering\ogl-shader-program.h" />
+    <ClInclude Include="src\rendering\ogl-shader-source-builder.h" />
     <ClInclude Include="src\rendering\parameters\ogl-camera-3d-parameter.h" />
     <ClInclude Include="src\rendering\parameters\ogl-directional-light-parameter.h" />
     <ClInclude Include="src\rendering\parameters\ogl-transform-3d-parameter.h" />
@@ -261,6 +262,7 @@
     <ClCompile Include="src\rendering\ogl-shader-key.cpp" />
     <ClCompile Include="src\rendering\ogl-shader-program-cache.cpp" />
     <ClCompile Include="src\rendering\ogl-shader-program.cpp" />
+    <ClCompile Include="src\rendering\ogl-shader-source-builder.cpp" />
     <ClCompile Include="src\types\color.cpp" />
     <ClCompile Include="src\types\color8.cpp" />
     <ClCompile Include="src\core-systems.cpp" />

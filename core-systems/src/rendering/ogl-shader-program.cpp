@@ -1,6 +1,7 @@
 #include "ogl-shader-program.h"
 #include <ogl.h>
 #include <logging/log-macros.h>
+#include <format>
 
 OGLShaderProgram::OGLShaderProgram() :
     m_program(0U)
@@ -9,6 +10,7 @@ OGLShaderProgram::OGLShaderProgram() :
 void OGLShaderProgram::Delete()
 {
 	glDeleteProgram(m_program);
+	LOG_INFO(std::format("Shader program {:d} deleted", m_program));
 	m_program = 0U;
 }
 
@@ -162,6 +164,8 @@ bool OGLShaderProgram::TryLink(const unsigned int vertexShader, const unsigned i
 		m_program = 0U;
 		return false;
 	}
+
+	LOG_INFO(std::format("Shader program {:d} created", m_program));
 
 	return true;
 }
