@@ -63,7 +63,7 @@ void OGLShaderProgramCache::SetUniforms(const OGLRenderingRule& renderingRule)
 		m_currentProgram->SetUniform(DIR_LIGHT_DIFFUSE, dl.diffuse);
 		m_currentProgram->SetUniform(DIR_LIGHT_DIRECTION, dl.direction);
 	}
-	if (d.useViewProjection)
+	if (d.useProjectionView)
 	{
 		const Camera3D& c = s.camera->Camera();
 		Matrix4x4 projection = Matrix4x4::Perspective(c.aspectRatio, c.vFOV, c.zNear, c.zFar);

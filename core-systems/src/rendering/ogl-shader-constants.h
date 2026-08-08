@@ -14,7 +14,7 @@ namespace OGLShaderConstants
     namespace Define
     {
         constexpr const char* USE_DIRECTIONAL_LIGHT = "USE_DIRECTIONAL_LIGHT";
-        constexpr const char* USE_VIEW_PROJECTION = "USE_PROJECTION_VIEW";
+        constexpr const char* USE_PROJECTION_VIEW = "USE_PROJECTION_VIEW";
         constexpr const char* USE_MODEL_MATRIX = "USE_MODEL_MATRIX";
     }
 }

@@ -3,7 +3,7 @@
 struct RenderingRuleDescriptor
 {
 	bool useDirectionalLight;
-	bool useViewProjection;
+	bool useProjectionView;
 	bool useModelMatrix;
 
 	bool operator==(const RenderingRuleDescriptor& other) const = default;

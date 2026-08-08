@@ -83,7 +83,7 @@ std::string OGLShaderSourceBuilder::GenerateDefines() const
     const RenderingRuleDescriptor& d = m_key.GetDescriptor();
     return
         std::format("#define {} {:d}\n", USE_DIRECTIONAL_LIGHT, d.useDirectionalLight) +
-        std::format("#define {} {:d}\n", USE_VIEW_PROJECTION, d.useViewProjection) +
+        std::format("#define {} {:d}\n", USE_PROJECTION_VIEW, d.useProjectionView) +
         std::format("#define {} {:d}\n", USE_MODEL_MATRIX, d.useModelMatrix);
 }
 
