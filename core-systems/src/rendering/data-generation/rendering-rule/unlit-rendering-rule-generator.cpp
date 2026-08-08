@@ -5,8 +5,8 @@ RenderingRuleDescriptor UnlitRenderingRuleGenerator::GenerateDescriptor() const
     RenderingRuleDescriptor result{};
 
     result.useDirectionalLight = false;
-    result.useCamera3D = true;
-    result.useTransform3D = true;
+    result.useViewProjection = true;
+    result.useModelMatrix = true;
 
     return result;
 }

@@ -5,8 +5,8 @@ RenderingRuleDescriptor LambertRenderingRuleGenerator::GenerateDescriptor() cons
     RenderingRuleDescriptor result{};
 
     result.useDirectionalLight = true;
-    result.useCamera3D = true;
-    result.useTransform3D = true;
+    result.useViewProjection = true;
+    result.useModelMatrix = true;
 
     return result;
 }

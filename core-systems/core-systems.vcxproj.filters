@@ -314,7 +314,7 @@
     <ClCompile Include="src\rendering\data-generation\mesh-3d\plane-mesh-3d-generator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\data-generation\rendering-rule\unshaded-rendering-rule-generator.cpp">
+    <ClCompile Include="src\rendering\data-generation\rendering-rule\unlit-rendering-rule-generator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\containers\source-container.cpp">

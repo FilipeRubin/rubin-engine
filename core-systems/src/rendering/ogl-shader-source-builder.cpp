@@ -24,17 +24,16 @@ out vec3 v_out_nor;
 void main()
 {
 	gl_Position =
-#if USE_CAMERA_3D
-        u_projection *
-        u_view *
+#if USE_PROJECTION_VIEW
+        u_projectionView *
 #endif
-#if USE_TRANSFORM_3D
+#if USE_MODEL_MATRIX
         u_model *
 #endif
         vec4(v_in_pos, 1.0);
 	v_out_uv = v_in_uv;
 	v_out_nor =
-#if USE_TRANSFORM_3D
+#if USE_MODEL_MATRIX
         mat3(transpose(inverse(u_model))) *
 #endif
         v_in_nor;
@@ -84,8 +83,8 @@ std::string OGLShaderSourceBuilder::GenerateDefines() const
     const RenderingRuleDescriptor& d = m_key.GetDescriptor();
     return
         std::format("#define {} {:d}\n", USE_DIRECTIONAL_LIGHT, d.useDirectionalLight) +
-        std::format("#define {} {:d}\n", USE_CAMERA_3D, d.useCamera3D) +
-        std::format("#define {} {:d}\n", USE_TRANSFORM_3D, d.useTransform3D);
+        std::format("#define {} {:d}\n", USE_VIEW_PROJECTION, d.useViewProjection) +
+        std::format("#define {} {:d}\n", USE_MODEL_MATRIX, d.useModelMatrix);
 }
 
 std::string OGLShaderSourceBuilder::GenerateUniforms() const
@@ -93,8 +92,7 @@ std::string OGLShaderSourceBuilder::GenerateUniforms() const
     using namespace OGLShaderConstants::Uniform;
     return
         std::format("uniform mat4 {};\n", MODEL) +
-        std::format("uniform mat4 {};\n", VIEW) +
-        std::format("uniform mat4 {};\n", PROJECTION) +
+        std::format("uniform mat4 {};\n", PROJECTION_VIEW) +
         std::format("uniform sampler2D {};\n", TEXTURE) +
         std::format("uniform vec4 {};\n", DIR_LIGHT_AMBIENT) +
         std::format("uniform vec4 {};\n", DIR_LIGHT_DIFFUSE) +

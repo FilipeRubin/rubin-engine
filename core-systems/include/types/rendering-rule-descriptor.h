@@ -3,8 +3,8 @@
 struct RenderingRuleDescriptor
 {
 	bool useDirectionalLight;
-	bool useCamera3D;
-	bool useTransform3D;
+	bool useViewProjection;
+	bool useModelMatrix;
 
 	bool operator==(const RenderingRuleDescriptor& other) const = default;
 };
