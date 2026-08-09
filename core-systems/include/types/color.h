@@ -21,5 +21,10 @@ struct alignas(16) Color
 	{
 	}
 
+	inline constexpr Color operator*(const float& value) const noexcept
+	{
+		return Color(r * value, g * value, b * value, a * value);
+	}
+
 	explicit operator Color8() const noexcept;
 };
