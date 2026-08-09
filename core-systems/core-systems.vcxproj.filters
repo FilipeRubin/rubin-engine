@@ -123,7 +123,7 @@
     <ClInclude Include="include\rendering\i-renderer-parameter-manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\rendering\parameters\i-directional-light-parameter.h">
+    <ClInclude Include="include\rendering\parameters\i-scene-lighting-parameter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\rendering\ogl-renderer-parameter-manager.h">
@@ -132,7 +132,7 @@
     <ClInclude Include="src\rendering\parameters\ogl-camera-3d-parameter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\rendering\parameters\ogl-directional-light-parameter.h">
+    <ClInclude Include="src\rendering\parameters\ogl-scene-lighting-parameter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\rendering\parameters\i-transform-3d-parameter.h">
@@ -252,6 +252,9 @@
     <ClInclude Include="src\rendering\ogl-shader-source-builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\types\scene-lighting-descriptor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core-systems.cpp">
@@ -299,7 +302,7 @@
     <ClCompile Include="src\rendering\parameters\ogl-camera-3d-parameter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\parameters\ogl-directional-light-parameter.cpp">
+    <ClCompile Include="src\rendering\parameters\ogl-scene-lighting-parameter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\rendering\parameters\ogl-transform-3d-parameter.cpp">

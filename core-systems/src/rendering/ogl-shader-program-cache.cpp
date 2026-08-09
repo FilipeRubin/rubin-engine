@@ -6,6 +6,7 @@
 #include <math/matrix4x4.h>
 #include <logging/log-macros.h>
 #include <ogl.h>
+#include <format>
 
 OGLShaderProgramCache::OGLShaderProgramCache(OGLRenderer& renderer) :
 	OGLRendererUser(renderer),
@@ -56,12 +57,25 @@ void OGLShaderProgramCache::SetUniforms(const OGLRenderingRule& renderingRule)
 	const RenderingRuleDescriptor& d = renderingRule.GetDescriptor();
 	const OGLRenderParametersState& s = GetRenderer().RenderParametersState();
 
-	if (d.useDirectionalLight)
+	if (d.sceneLighting != nullptr)
 	{
-		const DirectionalLight& dl = s.directionalLight->Light();
-		m_currentProgram->SetUniform(DIR_LIGHT_AMBIENT, dl.ambient);
-		m_currentProgram->SetUniform(DIR_LIGHT_DIFFUSE, dl.diffuse);
-		m_currentProgram->SetUniform(DIR_LIGHT_DIRECTION, dl.direction);
+		m_currentProgram->SetUniform(LIGHTING_AMBIENT, s.sceneLighting->AmbientLight());
+		const FixedArray<DirectionalLight>& dl = s.sceneLighting->DirectionalLights();
+		for (size_t i = 0U; i < dl.GetElementCount(); i++)
+		{
+			std::string direction = std::format(
+				"{}[{}].direction",
+				LIGHTING_DIRECTIONAL_ARRAY,
+				i
+			);
+			std::string diffuse = std::format(
+				"{}[{}].diffuse",
+				LIGHTING_DIRECTIONAL_ARRAY,
+				i
+			);
+			m_currentProgram->SetUniform(direction.c_str(), dl[i].direction);
+			m_currentProgram->SetUniform(diffuse.c_str(), dl[i].diffuse * dl[i].intensity);
+		}
 	}
 	if (d.useProjectionView)
 	{

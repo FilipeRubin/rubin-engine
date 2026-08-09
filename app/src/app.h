@@ -22,11 +22,11 @@ private:
 	ITexture2D* cubeTexture = nullptr;
 
 	ICamera3DParameter* cameraParameter = nullptr;
-	IDirectionalLightParameter* lightParameter = nullptr;
+	ISceneLightingParameter* lightParameter = nullptr;
 	ITransform3DParameter* transformParameter = nullptr;
 	ITransform3DParameter* cubeTransformParameter = nullptr;
 
-	bool useLambertRenderingRule = false;
+	bool useLambertRenderingRule = true;
 
 	float lightRotation = 0.0f;
 	float cubeHeightOffset = 0.0f;

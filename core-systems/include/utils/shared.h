@@ -4,7 +4,7 @@ template<typename T>
 class Shared
 {
 public:
-	Shared(T* reference) :
+	Shared(T* reference = nullptr) :
 		m_reference(reference),
 		m_referenceCount(nullptr)
 	{
@@ -88,9 +88,19 @@ public:
 		return m_reference == pointer;
 	}
 
+	bool operator==(const Shared<T>& other) const
+	{
+		return m_reference == other.m_reference;
+	}
+
 	bool operator!=(T* pointer) const
 	{
 		return m_reference != pointer;
+	}
+
+	bool operator!=(const Shared<T>& other) const
+	{
+		return m_reference != other.m_reference;
 	}
 
 	void Reset()

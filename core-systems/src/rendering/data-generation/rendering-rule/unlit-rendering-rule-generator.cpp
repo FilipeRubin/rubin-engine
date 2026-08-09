@@ -4,7 +4,7 @@ RenderingRuleDescriptor UnlitRenderingRuleGenerator::GenerateDescriptor() const
 {
     RenderingRuleDescriptor result{};
 
-    result.useDirectionalLight = false;
+    result.sceneLighting = nullptr;
     result.useProjectionView = true;
     result.useModelMatrix = true;
 

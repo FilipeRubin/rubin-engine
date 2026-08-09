@@ -48,7 +48,7 @@ void App::Start()
 	cubeMesh = resourceManager->CreateMesh3D(CubeMesh3DGenerator(Vector3(3.0f, 3.0f, 3.0f)));
 
 	cameraParameter = renderer->GetParameterManager()->CreateCamera3D();
-	lightParameter = renderer->GetParameterManager()->CreateDirectionalLight();
+	lightParameter = renderer->GetParameterManager()->CreateSceneLighting();
 	transformParameter = renderer->GetParameterManager()->CreateTransform3D();
 	cubeTransformParameter = renderer->GetParameterManager()->CreateTransform3D();
 
@@ -58,9 +58,13 @@ void App::Start()
 	cameraParameter->Camera().zFar = 1000.0f;
 	cameraParameter->Camera().position = Vector3(0.0f, 5.0f, 0.0f);
 
-	lightParameter->Light().ambient = Color(0.12f, 0.12f, 0.12f);
-	lightParameter->Light().diffuse = Color(1.0f, 1.0f, 1.0f);
-	lightParameter->Light().direction = Vector3(1.0f, -1.0f, 0.3f).Normalized();
+	lightParameter->AmbientLight() = Color(0.25f, 0.28f, 0.25f);
+	lightParameter->DirectionalLights()[0U].diffuse = Color(1.0f, 1.0f, 1.0f);
+	lightParameter->DirectionalLights()[0U].direction = Vector3(-1.0f, -0.9f, 0.5f).Normalized();
+	lightParameter->DirectionalLights()[0U].intensity = 3.0f;
+	lightParameter->DirectionalLights()[1U].diffuse = Color(0.25f, 0.4f, 0.65f);
+	lightParameter->DirectionalLights()[1U].direction = Vector3(-0.8f, -0.5f, -0.3f).Normalized();
+	lightParameter->DirectionalLights()[1U].intensity = 1.0f;
 
 	transformParameter->Transform().scale = { 200.0f, 1.0f, 200.0f };
 	transformParameter->Transform().position = {
@@ -69,7 +73,7 @@ void App::Start()
 		-transformParameter->Transform().scale.z / 2.0f 
 	};
 
-	cubeTransformParameter->Transform().position = {0.0f, 5.0f, 0.0f};
+	cubeTransformParameter->Transform().position = {25.0f, 10.0f, -40.0f};
 	cubeTransformParameter->Transform().scale = {3.0f, 5.0f, 8.0f};
 }
 
@@ -101,6 +105,7 @@ void App::Update()
 		) * deltaTime * 15.0f;
 	}
 	cubeTransformParameter->Transform().rotation.z += deltaTime;
+	cubeTransformParameter->Transform().rotation.x += deltaTime * 0.025f;
 
 	// Rule binding
 	if (useLambertRenderingRule and lambertRenderingRule != nullptr)

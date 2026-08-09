@@ -12,5 +12,11 @@ private:
 	OGLShaderKey m_key;
 	std::string GenerateVersion() const;
 	std::string GenerateDefines() const;
-	std::string GenerateUniforms() const;
+	std::string GenerateVertexLayout() const;
+	std::string GenerateVertexOutput() const;
+	std::string GenerateVertexUniforms() const;
+	std::string GenerateFragmentStructs() const;
+	std::string GenerateFragmentInput() const;
+	std::string GenerateFragmentOutput() const;
+	std::string GenerateFragmentUniforms() const;
 };

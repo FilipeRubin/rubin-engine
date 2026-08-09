@@ -186,10 +186,11 @@
     <ClInclude Include="include\rendering\data-generation\texture-2d\raw-data-texture-2d-generator.h" />
     <ClInclude Include="include\rendering\i-mesh.h" />
     <ClInclude Include="include\types\rendering-rule-descriptor.h" />
+    <ClInclude Include="include\types\scene-lighting-descriptor.h" />
     <ClInclude Include="src\rendering\ogl-renderer-user.h" />
     <ClInclude Include="include\rendering\parameters\i-camera-3d-parameter.h" />
     <ClInclude Include="include\rendering\i-renderer-parameter-manager.h" />
-    <ClInclude Include="include\rendering\parameters\i-directional-light-parameter.h" />
+    <ClInclude Include="include\rendering\parameters\i-scene-lighting-parameter.h" />
     <ClInclude Include="include\rendering\parameters\i-render-parameter.h" />
     <ClInclude Include="include\rendering\parameters\i-transform-3d-parameter.h" />
     <ClInclude Include="include\rendering\resources\i-renderer-resource.h" />
@@ -232,7 +233,7 @@
     <ClInclude Include="src\rendering\ogl-shader-program.h" />
     <ClInclude Include="src\rendering\ogl-shader-source-builder.h" />
     <ClInclude Include="src\rendering\parameters\ogl-camera-3d-parameter.h" />
-    <ClInclude Include="src\rendering\parameters\ogl-directional-light-parameter.h" />
+    <ClInclude Include="src\rendering\parameters\ogl-scene-lighting-parameter.h" />
     <ClInclude Include="src\rendering\parameters\ogl-transform-3d-parameter.h" />
     <ClInclude Include="src\rendering\resources\ogl-mesh-3d.h" />
     <ClInclude Include="src\rendering\resources\ogl-rendering-rule.h" />
@@ -268,7 +269,7 @@
     <ClCompile Include="src\ogl-graphics-backend.cpp" />
     <ClCompile Include="src\rendering\ogl-renderer-parameter-manager.cpp" />
     <ClCompile Include="src\rendering\parameters\ogl-camera-3d-parameter.cpp" />
-    <ClCompile Include="src\rendering\parameters\ogl-directional-light-parameter.cpp" />
+    <ClCompile Include="src\rendering\parameters\ogl-scene-lighting-parameter.cpp" />
     <ClCompile Include="src\rendering\parameters\ogl-transform-3d-parameter.cpp" />
     <ClCompile Include="src\rendering\resources\ogl-mesh-3d.cpp" />
     <ClCompile Include="src\rendering\resources\ogl-rendering-rule.cpp" />
