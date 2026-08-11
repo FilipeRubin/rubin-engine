@@ -3,6 +3,8 @@
 #include <logging/log-macros.h>
 #include <format>
 
+unsigned int OGLShaderProgram::s_currentProgram = 0U;
+
 OGLShaderProgram::OGLShaderProgram() :
     m_program(0U)
 {}
@@ -53,46 +55,35 @@ void OGLShaderProgram::Use() const
 	{
 		LOG_WARNING("Trying to use invalid shader program.");
 	}
+	if (m_program == s_currentProgram)
+	{
+		return;
+	}
     glUseProgram(m_program);
+	s_currentProgram = m_program;
 }
 
 void OGLShaderProgram::SetUniform(const char* name, const Vector3 value) const
 {
-	GLint loc = glGetUniformLocation(m_program, name);
-	if (loc == -1)
-	{
-		LOG_ERROR(std::string("Tried to set unexisting uniform: ") + name);
-	}
+	GLint loc = GetUniform(name);
 	glUniform3fv(loc, 1, reinterpret_cast<const GLfloat*>(&value));
 }
 
 void OGLShaderProgram::SetUniform(const char* name, const Vector4 value) const
 {
-	GLint loc = glGetUniformLocation(m_program, name);
-	if (loc == -1)
-	{
-		LOG_ERROR(std::string("Tried to set unexisting uniform: ") + name);
-	}
+	GLint loc = GetUniform(name);
 	glUniform4fv(loc, 1, reinterpret_cast<const GLfloat*>(&value));
 }
 
 void OGLShaderProgram::SetUniform(const char* name, const Color value) const
 {
-	GLint loc = glGetUniformLocation(m_program, name);
-	if (loc == -1)
-	{
-		LOG_ERROR(std::string("Tried to set unexisting uniform: ") + name);
-	}
+	GLint loc = GetUniform(name);
 	glUniform4fv(loc, 1, reinterpret_cast<const GLfloat*>(&value));
 }
 
 void OGLShaderProgram::SetUniform(const char* name, const Matrix4x4 & value) const
 {
-	GLint loc = glGetUniformLocation(m_program, name);
-	if (loc == -1)
-	{
-		LOG_ERROR(std::string("Tried to set unexisting uniform: ") + name);
-	}
+	GLint loc = GetUniform(name);
 	glUniformMatrix4fv(loc, 1, GL_FALSE, reinterpret_cast<const GLfloat*>(&value));
 }
 
@@ -168,4 +159,27 @@ bool OGLShaderProgram::TryLink(const unsigned int vertexShader, const unsigned i
 	LOG_INFO(std::format("Shader program {:d} created", m_program));
 
 	return true;
+}
+
+int OGLShaderProgram::GetUniform(const char* const name) const
+{
+	GLint loc;
+	if (not m_cachedUniforms.contains(name))
+	{
+		if (s_currentProgram != s_currentProgram)
+		{
+			LOG_ERROR("Trying to get uniform from wrong program.");
+		}
+		loc = glGetUniformLocation(m_program, name);
+		m_cachedUniforms[name] = loc;
+	}
+	else
+	{
+		loc = m_cachedUniforms[name];
+	}
+	if (loc == -1)
+	{
+		LOG_ERROR(std::string("Tried to set unexisting uniform: ") + name);
+	}
+	return loc;
 }
