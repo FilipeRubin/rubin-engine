@@ -61,10 +61,11 @@ void main()
 {
 	f_color =
 #if USE_LIGHTING
-        u_ambientLight *
+        (u_ambientLight
     #if NUM_DIRECTIONAL_LIGHTS != 0
-        calculatetDirectionalLightsColor() *
+        + calculatetDirectionalLightsColor()
     #endif
+        ) *
 #endif
         texture(u_texture, v_out_uv);
 }

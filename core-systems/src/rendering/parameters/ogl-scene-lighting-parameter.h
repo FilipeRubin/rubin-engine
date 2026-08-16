@@ -6,7 +6,7 @@
 class OGLSceneLightingParameter : public ISceneLightingParameter, public OGLRendererUser
 {
 public:
-	OGLSceneLightingParameter(OGLRenderer& renderer, size_t directionalLightCount);
+	OGLSceneLightingParameter(OGLRenderer& renderer, const SceneLightingDescriptor& lightingDescriptor);
 	void Bind() override;
 	Color& AmbientLight() override;
 	FixedArray<DirectionalLight>& DirectionalLights() override;

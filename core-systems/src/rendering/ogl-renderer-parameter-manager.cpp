@@ -13,9 +13,9 @@ ICamera3DParameter* OGLRendererParameterManager::CreateCamera3D()
     return CreateParameter<OGLCamera3DParameter>();
 }
 
-ISceneLightingParameter* OGLRendererParameterManager::CreateSceneLighting()
+ISceneLightingParameter* OGLRendererParameterManager::CreateSceneLighting(const SceneLightingDescriptor& lightingDescriptor)
 {
-    return CreateParameter<OGLSceneLightingParameter>(2U);
+    return CreateParameter<OGLSceneLightingParameter>(lightingDescriptor);
 }
 
 ITransform3DParameter* OGLRendererParameterManager::CreateTransform3D()

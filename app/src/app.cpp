@@ -40,7 +40,12 @@ void App::Start()
 
 	Shared<FixedArray<Color8>> patTexture = GeneratePatternTexture(resourceManager, 16, 16);
 
-	lambertRenderingRule = renderer->GetResourceManager()->CreateRenderingRule(LambertRenderingRuleGenerator());
+	SceneLightingDescriptor sceneLightingDescriptor
+	{
+		.directionalLightCount = 2U
+	};
+
+	lambertRenderingRule = renderer->GetResourceManager()->CreateRenderingRule(LambertRenderingRuleGenerator(sceneLightingDescriptor));
 	unlitRenderingRule = renderer->GetResourceManager()->CreateRenderingRule(UnlitRenderingRuleGenerator());
 	terrainMesh = resourceManager->CreateMesh3D(TerrainMesh3DGenerator(terrainGrid, terrainData));
 	terrainTexture = resourceManager->CreateTexture2D(CheckerboardTexture2DGenerator({ 2, 2 }, Color(0.85f, 0.85f, 0.80f), Color(0.15f, 0.15f, 0.2f)));
@@ -48,7 +53,7 @@ void App::Start()
 	cubeMesh = resourceManager->CreateMesh3D(CubeMesh3DGenerator(Vector3(3.0f, 3.0f, 3.0f)));
 
 	cameraParameter = renderer->GetParameterManager()->CreateCamera3D();
-	lightParameter = renderer->GetParameterManager()->CreateSceneLighting();
+	lightParameter = renderer->GetParameterManager()->CreateSceneLighting(sceneLightingDescriptor);
 	transformParameter = renderer->GetParameterManager()->CreateTransform3D();
 	cubeTransformParameter = renderer->GetParameterManager()->CreateTransform3D();
 
@@ -58,13 +63,13 @@ void App::Start()
 	cameraParameter->Camera().zFar = 1000.0f;
 	cameraParameter->Camera().position = Vector3(0.0f, 5.0f, 0.0f);
 
-	lightParameter->AmbientLight() = Color(0.25f, 0.28f, 0.25f);
-	lightParameter->DirectionalLights()[0U].diffuse = Color(1.0f, 1.0f, 1.0f);
+	lightParameter->AmbientLight() = Color(0.15f, 0.27f, 0.15f);
+	lightParameter->DirectionalLights()[0U].diffuse = Color(0.8f, 0.8f, 1.0f);
 	lightParameter->DirectionalLights()[0U].direction = Vector3(-1.0f, -0.9f, 0.5f).Normalized();
-	lightParameter->DirectionalLights()[0U].intensity = 3.0f;
-	lightParameter->DirectionalLights()[1U].diffuse = Color(0.25f, 0.4f, 0.65f);
-	lightParameter->DirectionalLights()[1U].direction = Vector3(-0.8f, -0.5f, -0.3f).Normalized();
-	lightParameter->DirectionalLights()[1U].intensity = 1.0f;
+	lightParameter->DirectionalLights()[0U].intensity = 1.0f;
+	lightParameter->DirectionalLights()[1U].diffuse = Color(0.85f, 0.3f, 0.1f);
+	lightParameter->DirectionalLights()[1U].direction = Vector3(-1.0f, -0.15f, 0.05f).Normalized();
+	lightParameter->DirectionalLights()[1U].intensity = 1.2f;
 
 	transformParameter->Transform().scale = { 200.0f, 1.0f, 200.0f };
 	transformParameter->Transform().position = {
