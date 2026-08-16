@@ -82,7 +82,7 @@ std::string OGLShaderSourceBuilder::GenerateDefines() const
     using namespace OGLShaderConstants::Define;
     const RenderingRuleDescriptor& d = m_key.GetDescriptor();
     size_t numDirectionalLights = 0U;
-    if (d.sceneLighting != nullptr) numDirectionalLights = d.sceneLighting->m_directionalLightCount;
+    if (d.sceneLighting != nullptr) numDirectionalLights = d.sceneLighting->directionalLightCount;
     return
         std::format("#define {} {:d}\n", USE_LIGHTING, (d.sceneLighting != nullptr)) +
         std::format("#define {} {:d}\n", USE_PROJECTION_VIEW, d.useProjectionView) +
@@ -150,7 +150,7 @@ std::string OGLShaderSourceBuilder::GenerateFragmentUniforms() const
         std::format("uniform vec4 {};\n", LIGHTING_AMBIENT);
     if (m_key.GetDescriptor().sceneLighting != nullptr)
     {
-        if (m_key.GetDescriptor().sceneLighting->m_directionalLightCount > 0U)
+        if (m_key.GetDescriptor().sceneLighting->directionalLightCount > 0U)
         {
             result += std::format("uniform DirectionalLight {}[NUM_DIRECTIONAL_LIGHTS];\n", LIGHTING_DIRECTIONAL_ARRAY);
         }

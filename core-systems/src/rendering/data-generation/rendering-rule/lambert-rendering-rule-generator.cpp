@@ -7,7 +7,7 @@ RenderingRuleDescriptor LambertRenderingRuleGenerator::GenerateDescriptor() cons
 
     result.sceneLighting = Shared<SceneLightingDescriptor>(new SceneLightingDescriptor());
     LOG_WARNING("Remove magic number after testing.");
-    result.sceneLighting->m_directionalLightCount = 2U;
+    result.sceneLighting->directionalLightCount = 2U;
     result.useProjectionView = true;
     result.useModelMatrix = true;
 

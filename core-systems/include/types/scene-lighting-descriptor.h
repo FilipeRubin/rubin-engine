@@ -1,9 +1,8 @@
 #pragma once
-#include <functional>
 
 struct SceneLightingDescriptor
 {
-	size_t m_directionalLightCount;
+	size_t directionalLightCount;
 
 	bool operator==(const SceneLightingDescriptor& other) const = default;
 };
