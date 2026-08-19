@@ -5,7 +5,7 @@ OGLRendererUser::OGLRendererUser(OGLRenderer& renderer) :
 	m_renderer(renderer)
 {}
 
-OGLRenderer& OGLRendererUser::GetRenderer()
+OGLRenderer& OGLRendererUser::Renderer()
 {
 	return m_renderer;
 }

@@ -12,7 +12,7 @@ public:
 	bool ShouldClose() const override;
 	bool IsInitialized() const override;
 	bool TryInitialize(const WindowParameters& parameters) override;
-	IBasicInput* GetBasicInput() override;
+	IBasicInput& BasicInput() override;
 	Dimensions GetSize() const override;
 	float GetAspectRatio() const override;
 	float GetTime() const override;

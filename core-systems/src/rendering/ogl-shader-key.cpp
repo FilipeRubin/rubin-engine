@@ -5,7 +5,6 @@ OGLShaderKey::OGLShaderKey(const RenderingRuleDescriptor& descriptor, MeshType m
 	m_descriptor(descriptor),
 	m_meshType(meshType)
 {
-	// LOG_WARNING("Needs to be optimized. Do not store the entire RenderingRuleDescriptor object inside this.");
 }
 
 const RenderingRuleDescriptor& OGLShaderKey::GetDescriptor() const

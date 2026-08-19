@@ -55,7 +55,7 @@ void OGLShaderProgramCache::SetUniforms(const OGLRenderingRule& renderingRule)
 
 	using namespace OGLShaderConstants::Uniform;
 	const RenderingRuleDescriptor& d = renderingRule.GetDescriptor();
-	const OGLRenderParametersState& s = GetRenderer().RenderParametersState();
+	const OGLRenderParametersState& s = Renderer().RenderParametersState();
 
 	if (d.sceneLighting != nullptr)
 	{

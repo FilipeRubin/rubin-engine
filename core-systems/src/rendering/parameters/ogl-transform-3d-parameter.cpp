@@ -8,7 +8,7 @@ OGLTransform3DParameter::OGLTransform3DParameter(OGLRenderer& renderer) :
 
 void OGLTransform3DParameter::Bind()
 {
-	GetRenderer().RenderParametersState().transform = this;
+	Renderer().RenderParametersState().transform = this;
 }
 
 Transform3D& OGLTransform3DParameter::Transform()

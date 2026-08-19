@@ -12,10 +12,10 @@ void ProcessHeight(int x, int y, const int maxX, const int maxY, float& height);
 
 void App::Init(GraphicsWindow& graphicsWindow)
 {
-	renderer = graphicsWindow.GetGraphicsBackend()->GetRenderer();
-	resourceManager = renderer->GetResourceManager();
-	window = graphicsWindow.GetWindow();
-	input = window->GetBasicInput();
+	renderer = &graphicsWindow.GraphicsBackend().Renderer();
+	resourceManager = &renderer->ResourceManager();
+	window = &graphicsWindow.Window();
+	input = &window->BasicInput();
 	lastTime = window->GetTime();
 }
 
@@ -45,17 +45,17 @@ void App::Start()
 		.directionalLightCount = 2U
 	};
 
-	lambertRenderingRule = renderer->GetResourceManager()->CreateRenderingRule(LambertRenderingRuleGenerator(sceneLightingDescriptor));
-	unlitRenderingRule = renderer->GetResourceManager()->CreateRenderingRule(UnlitRenderingRuleGenerator());
+	lambertRenderingRule = renderer->ResourceManager().CreateRenderingRule(LambertRenderingRuleGenerator(sceneLightingDescriptor));
+	unlitRenderingRule = renderer->ResourceManager().CreateRenderingRule(UnlitRenderingRuleGenerator());
 	terrainMesh = resourceManager->CreateMesh3D(TerrainMesh3DGenerator(terrainGrid, terrainData));
 	terrainTexture = resourceManager->CreateTexture2D(CheckerboardTexture2DGenerator({ 2, 2 }, Color(0.85f, 0.85f, 0.80f), Color(0.15f, 0.15f, 0.2f)));
 	cubeTexture = resourceManager->CreateTexture2D(RawDataTexture2DGenerator(patTexture, { 16, 16 }));
 	cubeMesh = resourceManager->CreateMesh3D(CubeMesh3DGenerator(Vector3(3.0f, 3.0f, 3.0f)));
 
-	cameraParameter = renderer->GetParameterManager()->CreateCamera3D();
-	lightParameter = renderer->GetParameterManager()->CreateSceneLighting(sceneLightingDescriptor);
-	transformParameter = renderer->GetParameterManager()->CreateTransform3D();
-	cubeTransformParameter = renderer->GetParameterManager()->CreateTransform3D();
+	cameraParameter = renderer->ParameterManager().CreateCamera3D();
+	lightParameter = renderer->ParameterManager().CreateSceneLighting(sceneLightingDescriptor);
+	transformParameter = renderer->ParameterManager().CreateTransform3D();
+	cubeTransformParameter = renderer->ParameterManager().CreateTransform3D();
 
 	cameraParameter->Camera().aspectRatio = window->GetAspectRatio();
 	cameraParameter->Camera().vFOV = 3.1415f / 2.0f;

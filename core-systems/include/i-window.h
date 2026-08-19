@@ -15,7 +15,7 @@ public:
 	virtual bool ShouldClose() const = 0;
 	virtual bool IsInitialized() const = 0;
 	virtual bool TryInitialize(const WindowParameters& parameters = {}) = 0;
-	virtual IBasicInput* GetBasicInput() = 0;
+	virtual IBasicInput& BasicInput() = 0;
 	virtual Dimensions GetSize() const = 0;
 	virtual float GetAspectRatio() const = 0;
 	virtual float GetTime() const = 0;

@@ -36,14 +36,14 @@ void OGLRenderer::SetViewportSize(const Dimensions& size)
 	glViewport(0, 0, size.width, size.height);
 }
 
-IRendererParameterManager* OGLRenderer::GetParameterManager() const
+IRendererParameterManager& OGLRenderer::ParameterManager() const
 {
-	return m_parameterManager;
+	return *m_parameterManager;
 }
 
-IRendererResourceManager* OGLRenderer::GetResourceManager() const
+IRendererResourceManager& OGLRenderer::ResourceManager() const
 {
-	return m_resourceManager;
+	return *m_resourceManager;
 }
 
 OGLRenderingRule* OGLRenderer::GetCurrentRenderingRule() const

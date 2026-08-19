@@ -10,7 +10,7 @@ OGLRenderingRule::OGLRenderingRule(OGLRenderer& renderer, RenderingRuleDescripto
 
 void OGLRenderingRule::Bind()
 {
-	GetRenderer().SetCurrentRenderingRule(this);
+	Renderer().SetCurrentRenderingRule(this);
 }
 
 const RenderingRuleDescriptor& OGLRenderingRule::GetDescriptor() const

@@ -27,7 +27,7 @@ int main()
 
 	for (int i = 0; i < WINDOWS_COUNT; i++)
 	{
-		graphicsWindows[i].GetGraphicsBackend()->MakeCurrent();
+		graphicsWindows[i].GraphicsBackend().MakeCurrent();
 		apps[i].Start();
 	}
 

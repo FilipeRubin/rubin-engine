@@ -9,6 +9,6 @@ public:
 	virtual void ClearScreen() const = 0;
 	virtual void SetClearColor(const Color& color) = 0;
 	virtual void SetViewportSize(const Dimensions& size) = 0;
-	virtual IRendererParameterManager* GetParameterManager() const = 0;
-	virtual IRendererResourceManager* GetResourceManager() const = 0;
+	virtual IRendererParameterManager& ParameterManager() const = 0;
+	virtual IRendererResourceManager& ResourceManager() const = 0;
 };

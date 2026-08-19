@@ -9,7 +9,7 @@ OGLSceneLightingParameter::OGLSceneLightingParameter(OGLRenderer& renderer, cons
 
 void OGLSceneLightingParameter::Bind()
 {
-    GetRenderer().RenderParametersState().sceneLighting = this;
+    Renderer().RenderParametersState().sceneLighting = this;
 }
 
 Color& OGLSceneLightingParameter::AmbientLight()

@@ -16,8 +16,8 @@ public:
 	void EndDraw() const;
 	bool IsInitialized() const;
 	void Finalize();
-	IWindow* GetWindow() const;
-	IGraphicsBackend* GetGraphicsBackend() const;
+	IWindow& Window() const;
+	IGraphicsBackend& GraphicsBackend() const;
 private:
 	static vector<GraphicsWindow*> s_instances;
 	unique_ptr<IWindow> m_window;

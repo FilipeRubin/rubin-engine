@@ -9,5 +9,5 @@ public:
 	virtual void MakeCurrent() const = 0;
 	virtual void SwapBuffers() const = 0;
 	virtual void Finalize() = 0;
-	virtual IRenderer* GetRenderer() const = 0;
+	virtual IRenderer& Renderer() const = 0;
 };

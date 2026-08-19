@@ -45,7 +45,7 @@ bool OGLGraphicsBackend::TryInitialize(IGraphicsBackend* sharedBackend)
 	HGLRC sharedContext = nullptr;
 	if (sharedBackend)
 	{
-		sharedContext = (HGLRC)dynamic_cast<OGLGraphicsBackend*>(sharedBackend)->m_oglContext;
+		sharedContext = (HGLRC)static_cast<OGLGraphicsBackend*>(sharedBackend)->m_oglContext;
 	}
 
 	m_oglContext = CreateContext(m_windowHandle, sharedContext);
@@ -68,8 +68,8 @@ void OGLGraphicsBackend::MakeCurrent() const
 {
 	wglMakeCurrent((HDC)m_hdc, (HGLRC)m_oglContext);
 	s_current = const_cast<OGLGraphicsBackend*>(this);
-	OGLRendererResourceManager* rm = dynamic_cast<OGLRendererResourceManager*>(GetRenderer()->GetResourceManager());
-	rm->Update();
+	OGLRendererResourceManager& rm = static_cast<OGLRendererResourceManager&>(Renderer().ResourceManager());
+	rm.Update();
 }
 
 void OGLGraphicsBackend::SwapBuffers() const
@@ -94,9 +94,9 @@ void OGLGraphicsBackend::Finalize()
 	Decrement();
 }
 
-IRenderer* OGLGraphicsBackend::GetRenderer() const
+IRenderer& OGLGraphicsBackend::Renderer() const
 {
-	return m_renderer;
+	return *m_renderer;
 }
 
 bool OGLGraphicsBackend::TryIncrement()

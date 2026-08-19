@@ -31,8 +31,8 @@ bool GraphicsWindow::TryInitialize(const WindowParameters& params, IGraphicsBack
 		return false;
 	}
 
-	IRenderer* const & renderer = this->m_graphics->GetRenderer();
-	m_window->SetWindowSizeCallback([renderer](const Dimensions& size) {renderer->SetViewportSize({ size.width, size.height }); });
+	IRenderer& renderer = this->m_graphics->Renderer();
+	m_window->SetWindowSizeCallback([&renderer](const Dimensions& size) {renderer.SetViewportSize({ size.width, size.height }); });
 
 	s_instances.emplace_back(this);
 
@@ -47,7 +47,7 @@ bool GraphicsWindow::ShouldClose() const
 void GraphicsWindow::BeginDraw() const
 {
 	m_graphics->MakeCurrent();
-	m_graphics->GetRenderer()->ClearScreen();
+	m_graphics->Renderer().ClearScreen();
 }
 
 void GraphicsWindow::EndDraw() const
@@ -75,12 +75,12 @@ void GraphicsWindow::Finalize()
 	s_instances.erase(remove(s_instances.begin(), s_instances.end(), this), s_instances.end());
 }
 
-IWindow* GraphicsWindow::GetWindow() const
+IWindow& GraphicsWindow::Window() const
 {
-	return m_window.get();
+	return *m_window.get();
 }
 
-IGraphicsBackend* GraphicsWindow::GetGraphicsBackend() const
+IGraphicsBackend& GraphicsWindow::GraphicsBackend() const
 {
-	return m_graphics.get();
+	return *m_graphics.get();
 }

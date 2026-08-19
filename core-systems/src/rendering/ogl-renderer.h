@@ -12,8 +12,8 @@ public:
 	void ClearScreen() const override;
 	void SetClearColor(const Color& color) override;
 	void SetViewportSize(const Dimensions& size) override;
-	IRendererParameterManager* GetParameterManager() const override;
-	IRendererResourceManager* GetResourceManager() const override;
+	IRendererParameterManager& ParameterManager() const override;
+	IRendererResourceManager& ResourceManager() const override;
 	OGLRenderingRule* GetCurrentRenderingRule() const;
 	void SetCurrentRenderingRule(OGLRenderingRule* renderingRule);
 	OGLRenderParametersState& RenderParametersState();

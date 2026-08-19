@@ -7,7 +7,7 @@ OGLCamera3DParameter::OGLCamera3DParameter(OGLRenderer& renderer) :
 
 void OGLCamera3DParameter::Bind()
 {
-	GetRenderer().RenderParametersState().camera = this;
+	Renderer().RenderParametersState().camera = this;
 }
 
 Camera3D& OGLCamera3DParameter::Camera()

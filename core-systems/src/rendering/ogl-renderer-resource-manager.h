@@ -5,7 +5,7 @@
 #include <ogl-graphics-backend.h>
 #include <list>
 #include <memory>
-#include <utility>
+#include <type_traits>
 
 class OGLRendererResourceManager final : public IRendererResourceManager, public OGLRendererUser
 {
@@ -27,7 +27,7 @@ private:
 	{
 		bool isCurrentBackend = OGLGraphicsBackend::GetCurrent() == m_backend;
 		std::list<std::unique_ptr<IRendererManaged>>& container = isCurrentBackend ? m_resources : m_waitingToCreate;
-		std::unique_ptr<T> resource = std::make_unique<T>(GetRenderer(), std::forward<Args>(args)...);
+		std::unique_ptr<T> resource = std::make_unique<T>(Renderer(), std::forward<Args>(args)...);
 		if (isCurrentBackend)
 		{
 			resource->Create();

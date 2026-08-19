@@ -34,21 +34,21 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 	case WM_KEYDOWN:
 	{
 		Win32Window* window = (Win32Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-		Win32BasicInput* basicInput = (Win32BasicInput*)window->GetBasicInput();
+		Win32BasicInput& basicInput = static_cast<Win32BasicInput&>(window->BasicInput());
 		unsigned char key = unsigned char(wParam);
 		bool repeating = (lParam & (1 << 30)) != 0;
 		if (not repeating)
 		{
-			basicInput->SetKeyState(key, true);
+			basicInput.SetKeyState(key, true);
 		}
 		return 0;
 	}
 	case WM_KEYUP:
 	{
 		Win32Window* window = (Win32Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-		Win32BasicInput* basicInput = (Win32BasicInput*)window->GetBasicInput();
+		Win32BasicInput& basicInput = static_cast<Win32BasicInput&>(window->BasicInput());
 		unsigned char key = unsigned char(wParam);
-		basicInput->SetKeyState(key, false);
+		basicInput.SetKeyState(key, false);
 		return 0;
 	}
 	case WM_LBUTTONDOWN:
@@ -62,16 +62,16 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 	case WM_MOUSEWHEEL:
 	{
 		Win32Window* window = (Win32Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-		Win32BasicInput* basicInput = (Win32BasicInput*)window->GetBasicInput();
-		return ProcessMouseButtonMessage(msg, wParam, *basicInput);
+		Win32BasicInput& basicInput = static_cast<Win32BasicInput&>(window->BasicInput());
+		return ProcessMouseButtonMessage(msg, wParam, basicInput);
 	}
 	case WM_MOUSEMOVE:
 	{
 		WORD x = LOWORD(lParam);
 		WORD y = HIWORD(lParam);
 		Win32Window* window = (Win32Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-		Win32BasicInput* basicInput = (Win32BasicInput*)window->GetBasicInput();
-		basicInput->UpdateMousePosition({ (float)x, (float)y });
+		Win32BasicInput& basicInput = static_cast<Win32BasicInput&>(window->BasicInput());
+		basicInput.UpdateMousePosition({ (float)x, (float)y });
 		return 0;
 	}
 	default:

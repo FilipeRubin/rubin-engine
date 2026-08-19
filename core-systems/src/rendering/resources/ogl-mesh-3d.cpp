@@ -13,11 +13,11 @@ OGLMesh3D::OGLMesh3D(OGLRenderer& renderer, Shared<FixedArray<Vertex3D>> vertice
 
 void OGLMesh3D::Draw()
 {
-	OGLRenderingRule* renderingRule = GetRenderer().GetCurrentRenderingRule();
+	OGLRenderingRule* renderingRule = Renderer().GetCurrentRenderingRule();
 	MeshType meshType = GetMeshType();
-	GetRenderer().ShaderCache().BindOrCreate(*renderingRule, meshType);
+	Renderer().ShaderCache().BindOrCreate(*renderingRule, meshType);
 
-	GetRenderer().ShaderCache().SetUniforms(*renderingRule);
+	Renderer().ShaderCache().SetUniforms(*renderingRule);
 
 	glBindVertexArray(m_vao);
 	glDrawElements(GL_TRIANGLES, m_indicesCount, GL_UNSIGNED_INT, NULL);

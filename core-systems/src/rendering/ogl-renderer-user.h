@@ -8,7 +8,7 @@ public:
 	OGLRendererUser(OGLRenderer& renderer);
 	virtual ~OGLRendererUser() = default;
 protected:
-	OGLRenderer& GetRenderer();
+	OGLRenderer& Renderer();
 private:
 	OGLRenderer& m_renderer;
 };

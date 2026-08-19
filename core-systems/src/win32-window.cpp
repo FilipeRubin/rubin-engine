@@ -121,9 +121,9 @@ bool Win32Window::TryInitialize(const WindowParameters& parameters)
     return true;
 }
 
-IBasicInput* Win32Window::GetBasicInput()
+IBasicInput& Win32Window::BasicInput()
 {
-    return dynamic_cast<IBasicInput*>(&m_basicInput);
+    return static_cast<IBasicInput&>(m_basicInput);
 }
 
 Dimensions Win32Window::GetSize() const
