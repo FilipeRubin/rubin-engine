@@ -17,6 +17,16 @@ struct Vector3
 	{
 	}
 
+	inline constexpr float& operator[](size_t index) noexcept
+	{
+		return static_cast<float*>(&x)[index];
+	}
+
+	inline constexpr const float& operator[](size_t index) const noexcept
+	{
+		return static_cast<const float*>(&x)[index];
+	}
+
 	inline constexpr Vector3 operator+(const Vector3& other) const noexcept
 	{
 		return Vector3(x + other.x, y + other.y, z + other.z);

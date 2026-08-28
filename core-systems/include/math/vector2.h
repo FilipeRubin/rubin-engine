@@ -1,4 +1,5 @@
 #pragma once
+#include <types/dimensions.h>
 
 struct Vector2
 {
@@ -12,6 +13,11 @@ struct Vector2
 	inline constexpr Vector2(float x, float y) noexcept :
 		x(x), y(y)
 	{}
+
+	explicit inline constexpr Vector2(const Dimensions& dimensions) noexcept :
+		x(dimensions.width), y(dimensions.height)
+	{
+	}
 
 	inline constexpr Vector2 operator+(const Vector2& other) const noexcept
 	{
