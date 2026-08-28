@@ -15,11 +15,12 @@ public:
 		std::size_t operator()(const OGLShaderKey& key) const noexcept
 		{
 			std::size_t h1 = std::hash<bool>{}(key.m_descriptor.sceneLighting != nullptr);
-			std::size_t h2 = std::hash<bool>{}(key.m_descriptor.useProjectionView);
-			std::size_t h3 = std::hash<bool>{}(key.m_descriptor.useModelMatrix);
-			std::size_t h4 = std::hash<MeshType>{}(key.m_meshType);
+			std::size_t h2 = std::hash<bool>{}(key.m_descriptor.useProjection);
+			std::size_t h3 = std::hash<bool>{}(key.m_descriptor.useProjectionView);
+			std::size_t h4 = std::hash<bool>{}(key.m_descriptor.useModelMatrix);
+			std::size_t h5 = std::hash<MeshType>{}(key.m_meshType);
 
-			return h1 ^ (h2 << 1) ^ (h3 << 2) ^ (h4 << 3);
+			return h1 ^ (h2 << 1) ^ (h3 << 2) ^ (h4 << 3) ^ (h5 << 4);
 		}
 	};
 private:

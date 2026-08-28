@@ -4,6 +4,7 @@
 
 struct RenderingRuleDescriptor
 {
+	bool useProjection;
 	bool useProjectionView;
 	bool useModelMatrix;
 	Shared<SceneLightingDescriptor> sceneLighting;

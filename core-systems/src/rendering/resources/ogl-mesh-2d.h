@@ -1,15 +1,15 @@
 #pragma once
 #include <containers/fixed-array.h>
-#include <rendering/resources/i-mesh-3d.h>
+#include <rendering/resources/i-mesh-2d.h>
 #include <rendering/i-renderer-managed.h>
 #include <rendering/ogl-renderer-user.h>
-#include <types/vertex-3d.h>
+#include <types/vertex-2d.h>
 #include <utils/shared.h>
 
-class OGLMesh3D : public IMesh3D, public IRendererManaged, public OGLRendererUser
+class OGLMesh2D : public IMesh2D, public IRendererManaged, public OGLRendererUser
 {
 public:
-	OGLMesh3D(OGLRenderer& renderer, Shared<FixedArray<Vertex3D>> vertices, Shared<FixedArray<unsigned int>> indices);
+	OGLMesh2D(OGLRenderer& renderer, Shared<FixedArray<Vertex2D>> vertices, Shared<FixedArray<unsigned int>> indices);
 	bool IsValid() const override;
 	void Draw() override;
 	MeshType GetMeshType() const override;
@@ -21,6 +21,6 @@ private:
 	unsigned int m_ebo;
 	unsigned int m_indicesCount;
 
-	Shared<FixedArray<Vertex3D>> m_cachedVertices;
+	Shared<FixedArray<Vertex2D>> m_cachedVertices;
 	Shared<FixedArray<unsigned int>> m_cachedIndices;
 };

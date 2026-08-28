@@ -15,8 +15,10 @@ private:
 	std::string GenerateVertexLayout() const;
 	std::string GenerateVertexOutput() const;
 	std::string GenerateVertexUniforms() const;
+	std::string GenerateVertexLogic() const;
 	std::string GenerateFragmentStructs() const;
 	std::string GenerateFragmentInput() const;
 	std::string GenerateFragmentOutput() const;
 	std::string GenerateFragmentUniforms() const;
+	std::string GenerateFragmentLogic() const;
 };

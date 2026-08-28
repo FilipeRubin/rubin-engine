@@ -185,8 +185,10 @@
     <ClInclude Include="include\rendering\data-generation\texture-2d\i-texture-2d-generator.h" />
     <ClInclude Include="include\rendering\data-generation\texture-2d\raw-data-texture-2d-generator.h" />
     <ClInclude Include="include\rendering\i-mesh.h" />
+    <ClInclude Include="include\rendering\resources\i-mesh-2d.h" />
     <ClInclude Include="include\types\rendering-rule-descriptor.h" />
     <ClInclude Include="include\types\scene-lighting-descriptor.h" />
+    <ClInclude Include="include\types\vertex-2d.h" />
     <ClInclude Include="src\rendering\ogl-renderer-user.h" />
     <ClInclude Include="include\rendering\parameters\i-camera-3d-parameter.h" />
     <ClInclude Include="include\rendering\i-renderer-parameter-manager.h" />
@@ -235,6 +237,7 @@
     <ClInclude Include="src\rendering\parameters\ogl-camera-3d-parameter.h" />
     <ClInclude Include="src\rendering\parameters\ogl-scene-lighting-parameter.h" />
     <ClInclude Include="src\rendering\parameters\ogl-transform-3d-parameter.h" />
+    <ClInclude Include="src\rendering\resources\ogl-mesh-2d.h" />
     <ClInclude Include="src\rendering\resources\ogl-mesh-3d.h" />
     <ClInclude Include="src\rendering\resources\ogl-rendering-rule.h" />
     <ClInclude Include="src\rendering\ogl-renderer-resource-manager.h" />
@@ -262,6 +265,7 @@
     <ClCompile Include="src\rendering\ogl-shader-program-cache.cpp" />
     <ClCompile Include="src\rendering\ogl-shader-program.cpp" />
     <ClCompile Include="src\rendering\ogl-shader-source-builder.cpp" />
+    <ClCompile Include="src\rendering\resources\ogl-mesh-2d.cpp" />
     <ClCompile Include="src\types\color.cpp" />
     <ClCompile Include="src\types\color8.cpp" />
     <ClCompile Include="src\core-systems.cpp" />
