@@ -15,7 +15,7 @@ struct Vector2
 	{}
 
 	explicit inline constexpr Vector2(const Dimensions& dimensions) noexcept :
-		x(dimensions.width), y(dimensions.height)
+		x(static_cast<float>(dimensions.width)), y(static_cast<float>(dimensions.height))
 	{
 	}
 

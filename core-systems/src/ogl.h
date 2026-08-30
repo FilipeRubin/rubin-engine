@@ -245,6 +245,7 @@ extern void          (*glTexParameteri)(GLenum target, GLenum pname, GLint param
 extern void          (*glUseProgram)(GLuint program);
 extern void          (*glUniform3fv)(GLint location, GLsizei count, const GLfloat* value);
 extern void          (*glUniform4fv)(GLint location, GLsizei count, const GLfloat* value);
+extern void          (*glUniformMatrix3fv)(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
 extern void          (*glUniformMatrix4fv)(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
 extern void          (*glVertexAttribPointer)(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid* pointer);
 extern void          (*glViewport)(GLint x, GLint y, GLsizei width, GLsizei height);

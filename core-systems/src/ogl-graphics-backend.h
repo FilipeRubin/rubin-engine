@@ -5,7 +5,7 @@ class OGLGraphicsBackend : public IGraphicsBackend
 {
 public:
 	static OGLGraphicsBackend* GetCurrent();
-	OGLGraphicsBackend(const void* windowHandle);
+	OGLGraphicsBackend(const void* windowHandle, Dimensions viewportSize);
 	bool TryInitialize(IGraphicsBackend* sharedBackend = nullptr) override;
 	void MakeCurrent() const override;
 	void SwapBuffers() const override;
@@ -20,5 +20,6 @@ private:
 	const void* m_oglContext;
 	void* m_hdc;
 	IRenderer* m_renderer;
+	Dimensions m_cachedStartingViewportSize;
 	void SetDefaultRendererSettings();
 };

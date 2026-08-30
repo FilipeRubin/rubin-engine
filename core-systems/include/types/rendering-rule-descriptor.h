@@ -4,9 +4,10 @@
 
 struct RenderingRuleDescriptor
 {
-	bool useProjection;
-	bool useProjectionView;
-	bool useModelMatrix;
+	bool useProjection2D;
+	bool useProjectionView3D;
+	bool useModel2D;
+	bool useModel3D;
 	Shared<SceneLightingDescriptor> sceneLighting;
 
 	bool operator==(const RenderingRuleDescriptor& other) const = default;

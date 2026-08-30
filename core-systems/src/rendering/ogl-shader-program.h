@@ -1,6 +1,7 @@
 #pragma once
 #include <math/vector3.h>
 #include <math/vector4.h>
+#include <math/matrix3x3.h>
 #include <math/matrix4x4.h>
 #include <types/color.h>
 #include <unordered_map>
@@ -17,6 +18,7 @@ public:
 	void SetUniform(const char* name, const Vector3 value) const;
 	void SetUniform(const char* name, const Vector4 value) const;
 	void SetUniform(const char* name, const Color value) const;
+	void SetUniform(const char* name, const Matrix3x3& value) const;
 	void SetUniform(const char* name, const Matrix4x4& value) const;
 private:
 	static unsigned int s_currentProgram;

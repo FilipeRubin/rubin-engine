@@ -75,6 +75,7 @@ typedef void          (*PFNGLTEXIMAGE2DPROC)(GLenum target, GLint level, GLint i
 typedef void          (*PFNGLTEXPARAMETERIPROC)(GLenum target, GLenum pname, GLint param);
 typedef void          (*PFNGLUNIFORM3FVPROC)(GLint location, GLsizei count, const GLfloat* value);
 typedef void          (*PFNGLUNIFORM4FVPROC)(GLint location, GLsizei count, const GLfloat* value);
+typedef void          (*PFNGLUNIFORMMATRIX3FVPROC)(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
 typedef void          (*PFNGLUNIFORMMATRIX4FVPROC)(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
 typedef void          (*PFNGLUSEPROGRAMPROC)(GLuint program);
 typedef void          (*PFNGLVERTEXATTRIBPOINTERPROC)(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid* pointer);
@@ -122,6 +123,7 @@ void          (*glTexParameteri)(GLenum target, GLenum pname, GLint param);
 void          (*glUseProgram)(GLuint program);
 void          (*glUniform3fv)(GLint location, GLsizei count, const GLfloat* value);
 void          (*glUniform4fv)(GLint location, GLsizei count, const GLfloat* value);
+void          (*glUniformMatrix3fv)(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
 void          (*glUniformMatrix4fv)(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
 void          (*glVertexAttribPointer)(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid* pointer);
 void          (*glViewport)(GLint x, GLint y, GLsizei width, GLsizei height);
@@ -358,6 +360,7 @@ static void LoadOGLFuncs()
 	glUseProgram = (PFNGLUSEPROGRAMPROC)wglGetProcAddress("glUseProgram");
 	glUniform3fv = (PFNGLUNIFORM3FVPROC)wglGetProcAddress("glUniform3fv");
 	glUniform4fv = (PFNGLUNIFORM4FVPROC)wglGetProcAddress("glUniform4fv");
+	glUniformMatrix3fv = (PFNGLUNIFORMMATRIX3FVPROC)wglGetProcAddress("glUniformMatrix3fv");
 	glUniformMatrix4fv = (PFNGLUNIFORMMATRIX4FVPROC)wglGetProcAddress("glUniformMatrix4fv");
 	glVertexAttribPointer = (PFNGLVERTEXATTRIBPOINTERPROC)wglGetProcAddress("glVertexAttribPointer");
 	glViewport = (PFNGLVIEWPORTPROC)GetProcAddress(s_glLib, "glViewport");

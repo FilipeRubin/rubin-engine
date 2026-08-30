@@ -17,19 +17,56 @@ struct alignas(4) Matrix3x3
 		};
 	}
 
+	static inline constexpr Matrix3x3 Model(const Vector2 position, const float rotation, const Vector2 scale) noexcept
+	{
+		return (
+			Translation(position) *
+			Rotation(rotation) *
+			Scaling(scale)
+		);
+	}
+
 	static inline constexpr Matrix3x3 Viewport(const Vector2& size) noexcept
 	{
 		return Matrix3x3
 		{
-			{ size.x * 0.5f,           0.0f, 0.0f },
-			{          0.0f, -size.y * 0.5f, 0.0f },
-			{ size.x * 0.5f,  size.y * 0.5f, 1.0f }
+			{ 2.0f / size.x, 0.0f,           0.0f },
+			{ 0.0f,          -2.0f / size.y, 0.0f },
+			{ -1.0f,          1.0f,           1.0f }
 		};
 	}
 
-	inline constexpr const float* Data() const noexcept
+	static inline constexpr Matrix3x3 Translation(const Vector2& t) noexcept
 	{
-		return static_cast<const float*>(static_cast<const void*>(columns));
+		return Matrix3x3
+		{
+			{ 1.0f, 0.0f, 0.0f },
+			{ 0.0f, 1.0f, 0.0f },
+			{  t.x,  t.y, 1.0f }
+		};
+	}
+
+	static inline Matrix3x3 Rotation(float angle) noexcept
+	{
+		const float c = std::cos(angle);
+		const float s = std::sin(angle);
+
+		return Matrix3x3
+		{
+			{    c,    s, 0.0f },
+			{   -s,    c, 0.0f },
+			{ 0.0f, 0.0f, 1.0f }
+		};
+	}
+
+	static inline constexpr Matrix3x3 Scaling(const Vector2& s) noexcept
+	{
+		return Matrix3x3
+		{
+			{  s.x, 0.0f, 0.0f },
+			{ 0.0f,  s.y, 0.0f },
+			{ 0.0f, 0.0f, 1.0f }
+		};
 	}
 
 	inline constexpr Matrix3x3() noexcept :
@@ -40,6 +77,11 @@ struct alignas(4) Matrix3x3
 	inline constexpr Matrix3x3(const Vector3& column0, const Vector3& column1, const Vector3& column2) noexcept :
 		columns{ column0, column1, column2 }
 	{
+	}
+
+	inline constexpr const float* Data() const noexcept
+	{
+		return static_cast<const float*>(static_cast<const void*>(columns));
 	}
 
 	inline constexpr Vector3& operator[](size_t index) noexcept

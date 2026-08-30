@@ -30,6 +30,8 @@ void OGLMesh2D::Draw()
     Renderer().ShaderCache().SetUniforms(*renderingRule);
 
     glBindVertexArray(m_vao);
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_CULL_FACE);
     glDrawElements(GL_TRIANGLES, m_indicesCount, GL_UNSIGNED_INT, NULL);
 }
 

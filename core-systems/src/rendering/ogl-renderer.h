@@ -7,9 +7,10 @@
 class OGLRenderer final : public IRenderer
 {
 public:
-	OGLRenderer(OGLGraphicsBackend* backend);
+	OGLRenderer(OGLGraphicsBackend* backend, Dimensions viewportSize);
 	~OGLRenderer();
 	void ClearScreen() const override;
+	Dimensions GetViewportSize() const override;
 	void SetClearColor(const Color& color) override;
 	void SetViewportSize(const Dimensions& size) override;
 	IRendererParameterManager& ParameterManager() const override;
@@ -24,4 +25,5 @@ private:
 	OGLShaderProgramCache m_shaderCache;
 	IRendererParameterManager* m_parameterManager;
 	IRendererResourceManager* m_resourceManager;
+	Dimensions m_cachedViewportSize;
 };

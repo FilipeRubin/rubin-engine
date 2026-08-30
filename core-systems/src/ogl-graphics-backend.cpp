@@ -18,11 +18,12 @@ OGLGraphicsBackend* OGLGraphicsBackend::GetCurrent()
 	return s_current;
 }
 
-OGLGraphicsBackend::OGLGraphicsBackend(const void* windowHandle) :
+OGLGraphicsBackend::OGLGraphicsBackend(const void* windowHandle, Dimensions viewortSize) :
 	m_windowHandle(windowHandle),
 	m_oglContext(nullptr),
 	m_hdc(nullptr),
-	m_renderer(nullptr)
+	m_renderer(nullptr),
+	m_cachedStartingViewportSize(viewortSize)
 {
 }
 
@@ -56,7 +57,7 @@ bool OGLGraphicsBackend::TryInitialize(IGraphicsBackend* sharedBackend)
 		return false;
 	}
 
-	m_renderer = new OGLRenderer(this);
+	m_renderer = new OGLRenderer(this, m_cachedStartingViewportSize);
 
 	SetDefaultRendererSettings();
 	LOG_INFO("OpenGL graphics backend initialized.");
@@ -130,6 +131,8 @@ void OGLGraphicsBackend::SetDefaultRendererSettings()
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
+
+	LOG_WARNING("Reconsider the useness of this method and remove this warning.");
 
 	wglMakeCurrent((HDC)m_hdc, previousContext);
 }

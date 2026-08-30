@@ -5,7 +5,7 @@ class CubeMesh3DGenerator : public IMesh3DGenerator
 {
 public:
 	CubeMesh3DGenerator(const Vector3& dimensions);
-	MeshData GenerateMeshData() const override;
+	MeshData3D GenerateMeshData() const override;
 private:
 	Vector3 m_dimensions;
 };

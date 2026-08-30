@@ -15,9 +15,11 @@ private:
 
 	IRenderingRule* lambertRenderingRule = nullptr;
 	IRenderingRule* unlitRenderingRule = nullptr;
+	IRenderingRule* canvasRenderingRule = nullptr;
 	IRenderingRule* currentRenderingRule = nullptr;
 	IMesh3D* terrainMesh = nullptr;
 	IMesh3D* cubeMesh = nullptr;
+	IMesh2D* quadMesh2D = nullptr;
 	ITexture2D* terrainTexture = nullptr;
 	ITexture2D* cubeTexture = nullptr;
 
@@ -25,6 +27,7 @@ private:
 	ISceneLightingParameter* lightParameter = nullptr;
 	ITransform3DParameter* transformParameter = nullptr;
 	ITransform3DParameter* cubeTransformParameter = nullptr;
+	ITransform2DParameter* transform2DParameter = nullptr;
 
 	bool useLambertRenderingRule = true;
 

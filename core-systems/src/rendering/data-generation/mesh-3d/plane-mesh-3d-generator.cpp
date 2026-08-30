@@ -5,7 +5,7 @@ PlaneMesh3DGenerator::PlaneMesh3DGenerator(Vector2 dimensions) :
 {
 }
 
-MeshData PlaneMesh3DGenerator::GenerateMeshData() const
+MeshData3D PlaneMesh3DGenerator::GenerateMeshData() const
 {
 	Vertex3D rawVertices[]
 	{
@@ -27,7 +27,7 @@ MeshData PlaneMesh3DGenerator::GenerateMeshData() const
 	std::copy(rawVertices, rawVertices + 4ULL, vertices->GetData());
 	std::copy(rawIndices, rawIndices + 6ULL, indices->GetData());
 
-	MeshData data;
+	MeshData3D data;
 	data.SetVertices(vertices);
 	data.SetIndices(indices);
 	return data;

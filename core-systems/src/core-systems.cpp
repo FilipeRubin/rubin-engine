@@ -13,5 +13,5 @@ IGraphicsBackend* CoreSystems::CreateGraphicsBackend(IWindow* window)
 {
 	LOG_DEBUG("Creating OpenGL graphics backend.");
 	Win32Window* win32Window = static_cast<Win32Window*>(window);
-	return new OGLGraphicsBackend(win32Window->GetHandle());
+	return new OGLGraphicsBackend(win32Window->GetHandle(), window->GetSize());
 }

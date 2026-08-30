@@ -49,9 +49,9 @@ std::string OGLShaderSourceBuilder::GenerateDefines() const
     if (d.sceneLighting != nullptr) numDirectionalLights = d.sceneLighting->directionalLightCount;
     return
         std::format("#define {} {:d}\n", USE_LIGHTING, d.sceneLighting != nullptr) +
-        std::format("#define {} {:d}\n", USE_PROJECTION, d.useProjection) +
-        std::format("#define {} {:d}\n", USE_PROJECTION_VIEW, d.useProjectionView) +
-        std::format("#define {} {:d}\n", USE_MODEL_MATRIX, d.useModelMatrix) +
+        std::format("#define {} {:d}\n", USE_PROJECTION, d.useProjection2D) +
+        std::format("#define {} {:d}\n", USE_PROJECTION_VIEW, d.useProjectionView3D) +
+        std::format("#define {} {:d}\n", USE_MODEL_MATRIX, d.useModel3D or d.useModel2D) +
         std::format("#define {} {:d}\n", USE_3D_VERTEX, use3D) +
         std::format("#define {} {:d}\n", NUM_DIRECTIONAL_LIGHTS, numDirectionalLights);
 }
@@ -126,7 +126,7 @@ void main()
 #if USE_PROJECTION_VIEW
         u_projectionView *
 #elif USE_PROJECTION
-        u_projection *
+        vec4(u_projection *
 #endif
 #if USE_MODEL_MATRIX
         u_model *
@@ -134,7 +134,7 @@ void main()
 #if USE_3D_VERTEX
         vec4(v_in_pos, 1.0);
 #else
-        vec4(v_in_pos, 0.0, 1.0);
+        vec3(v_in_pos, 1.0), 1.0);
 #endif
 	v_out_uv = v_in_uv;
 #if USE_3D_VERTEX
@@ -213,7 +213,7 @@ std::string OGLShaderSourceBuilder::GenerateFragmentLogic() const
 #if NUM_DIRECTIONAL_LIGHTS != 0
 vec4 calculatetDirectionalLightsColor()
 {
-    vec4 result;
+    vec4 result = vec4(0.0);
     for (int i = 0; i < NUM_DIRECTIONAL_LIGHTS; i++)
     {
         float directionalLightAmount = max(dot(normalize(v_out_nor), normalize(-u_directionalLights[i].direction)), 0.0);

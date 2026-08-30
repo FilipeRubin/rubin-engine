@@ -13,6 +13,7 @@ public:
 	OGLRendererResourceManager(OGLGraphicsBackend* backend, OGLRenderer& renderer);
 	~OGLRendererResourceManager();
 	IRenderingRule* CreateRenderingRule(const IRenderingRuleGenerator& generator) override;
+	IMesh2D* CreateMesh2D(const IMesh2DGenerator& generator) override;
 	IMesh3D* CreateMesh3D(const IMesh3DGenerator& generator) override;
 	ITexture2D* CreateTexture2D(const ITexture2DGenerator& generator) override;
 	void Update();

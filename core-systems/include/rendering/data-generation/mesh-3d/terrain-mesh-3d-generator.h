@@ -7,7 +7,7 @@ class TerrainMesh3DGenerator : public IMesh3DGenerator
 {
 public:
 	TerrainMesh3DGenerator(const Dimensions& gridSize, Shared<FixedArray<float>> heightMapData);
-	MeshData GenerateMeshData() const override;
+	MeshData3D GenerateMeshData() const override;
 private:
 	Dimensions m_gridSize;
 	Shared<FixedArray<float>> m_heightMapData;

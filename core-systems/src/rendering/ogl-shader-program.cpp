@@ -81,6 +81,12 @@ void OGLShaderProgram::SetUniform(const char* name, const Color value) const
 	glUniform4fv(loc, 1, reinterpret_cast<const GLfloat*>(&value));
 }
 
+void OGLShaderProgram::SetUniform(const char* name, const Matrix3x3& value) const
+{
+	GLint loc = GetUniform(name);
+	glUniformMatrix3fv(loc, 1, GL_FALSE, reinterpret_cast<const GLfloat*>(&value));
+}
+
 void OGLShaderProgram::SetUniform(const char* name, const Matrix4x4 & value) const
 {
 	GLint loc = GetUniform(name);

@@ -3,14 +3,14 @@
 #include <types/vertex-3d.h>
 #include <utils/shared.h>
 
-class MeshData final
+class MeshData3D final
 {
 public:
-	MeshData();
-	MeshData(const MeshData& other) = delete;
-	MeshData(MeshData&& other) noexcept;
-	MeshData& operator=(const MeshData& other) = delete;
-	MeshData& operator=(MeshData&& other) noexcept;
+	MeshData3D();
+	MeshData3D(const MeshData3D& other) = delete;
+	MeshData3D(MeshData3D&& other) noexcept;
+	MeshData3D& operator=(const MeshData3D& other) = delete;
+	MeshData3D& operator=(MeshData3D&& other) noexcept;
 	void SetVertices(Shared<FixedArray<Vertex3D>> vertices);
 	void SetIndices(Shared<FixedArray<unsigned int>> indices);
 	Shared<FixedArray<Vertex3D>> GetVertices() const;

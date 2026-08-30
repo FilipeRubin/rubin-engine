@@ -5,8 +5,8 @@ RenderingRuleDescriptor UnlitRenderingRuleGenerator::GenerateDescriptor() const
     RenderingRuleDescriptor result{};
 
     result.sceneLighting = nullptr;
-    result.useProjectionView = true;
-    result.useModelMatrix = true;
+    result.useProjectionView3D = true;
+    result.useModel3D = true;
 
     return result;
 }

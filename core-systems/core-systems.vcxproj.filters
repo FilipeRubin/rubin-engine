@@ -150,7 +150,7 @@
     <ClInclude Include="include\rendering\data-generation\mesh-3d\cube-mesh-3d-generator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\containers\mesh-data.h">
+    <ClInclude Include="include\containers\mesh-data-3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\rendering\data-generation\mesh-3d\plane-mesh-3d-generator.h">
@@ -267,6 +267,27 @@
     <ClInclude Include="include\math\matrix3x3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\types\transform-2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rendering\parameters\i-transform-2d-parameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rendering\parameters\ogl-transform-2d-parameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rendering\data-generation\mesh-2d\i-mesh-2d-generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\containers\mesh-data-2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rendering\data-generation\mesh-2d\quad-mesh-2d-generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rendering\data-generation\rendering-rule\canvas-rendering-rule-generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core-systems.cpp">
@@ -323,7 +344,7 @@
     <ClCompile Include="src\rendering\data-generation\mesh-3d\cube-mesh-3d-generator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\containers\mesh-data.cpp">
+    <ClCompile Include="src\containers\mesh-data-3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\rendering\data-generation\mesh-3d\plane-mesh-3d-generator.cpp">
@@ -372,6 +393,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\rendering\resources\ogl-mesh-2d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\parameters\ogl-transform-2d-parameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\containers\mesh-data-2d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\data-generation\mesh-2d\quad-mesh-2d-generator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\data-generation\rendering-rule\canvas-rendering-rule-generator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

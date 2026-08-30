@@ -1,9 +1,9 @@
 #pragma once
-#include <containers/mesh-data.h>
+#include <containers/mesh-data-3d.h>
 
 class IMesh3DGenerator
 {
 public:
 	virtual ~IMesh3DGenerator() = default;
-	virtual MeshData GenerateMeshData() const = 0;
+	virtual MeshData3D GenerateMeshData() const = 0;
 };

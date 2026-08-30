@@ -29,6 +29,8 @@ void OGLMesh3D::Draw()
 	Renderer().ShaderCache().SetUniforms(*renderingRule);
 
 	glBindVertexArray(m_vao);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
 	glDrawElements(GL_TRIANGLES, m_indicesCount, GL_UNSIGNED_INT, NULL);
 }
 

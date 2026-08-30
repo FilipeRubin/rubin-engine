@@ -1,6 +1,7 @@
 #include "ogl-renderer-resource-manager.h"
 #include "ogl-renderer.h"
 #include "resources/ogl-rendering-rule.h"
+#include "resources/ogl-mesh-2d.h"
 #include "resources/ogl-mesh-3d.h"
 #include "resources/ogl-texture-2d.h"
 #include <containers/source-container.h>
@@ -52,9 +53,19 @@ IRenderingRule* OGLRendererResourceManager::CreateRenderingRule(const IRendering
     return CreateResource<OGLRenderingRule>(generator.GenerateDescriptor());
 }
 
+IMesh2D* OGLRendererResourceManager::CreateMesh2D(const IMesh2DGenerator& generator)
+{
+    const MeshData2D& data = generator.GenerateMeshData();
+    LOG_DEBUG("Queuing 2D mesh creation with " + std::to_string(data.GetVertices()->GetElementCount()) + " vertices and " + std::to_string(data.GetIndices()->GetElementCount()) + " indices.");
+    return CreateResource<OGLMesh2D>(
+        data.GetVertices(),
+        data.GetIndices()
+    );
+}
+
 IMesh3D* OGLRendererResourceManager::CreateMesh3D(const IMesh3DGenerator& generator)
 {
-    const MeshData& data = generator.GenerateMeshData();
+    const MeshData3D& data = generator.GenerateMeshData();
 	LOG_DEBUG("Queuing 3D mesh creation with " + std::to_string(data.GetVertices()->GetElementCount()) + " vertices and " + std::to_string(data.GetIndices()->GetElementCount()) + " indices.");
     return CreateResource<OGLMesh3D>(
         data.GetVertices(),

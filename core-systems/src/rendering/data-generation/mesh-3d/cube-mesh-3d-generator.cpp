@@ -5,7 +5,7 @@ CubeMesh3DGenerator::CubeMesh3DGenerator(const Vector3& dimensions) :
 {
 }
 
-MeshData CubeMesh3DGenerator::GenerateMeshData() const
+MeshData3D CubeMesh3DGenerator::GenerateMeshData() const
 {
 	Vertex3D rawVertices[]
 	{
@@ -79,7 +79,7 @@ MeshData CubeMesh3DGenerator::GenerateMeshData() const
 	std::copy(rawVertices, rawVertices + 24ULL, vertices->GetData());
 	std::copy(rawIndices, rawIndices + 36ULL, indices->GetData());
 
-	MeshData data;
+	MeshData3D data;
 	data.SetVertices(vertices);
 	data.SetIndices(indices);
 	return data;

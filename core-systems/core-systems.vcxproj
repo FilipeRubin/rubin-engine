@@ -163,6 +163,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\containers\mesh-data-2d.h" />
     <ClInclude Include="include\containers\source-collection.h" />
     <ClInclude Include="include\containers\source-container.h" />
     <ClInclude Include="include\containers\fixed-array.h" />
@@ -177,7 +178,10 @@
     <ClInclude Include="include\logging\log-level.h" />
     <ClInclude Include="include\logging\log-message.h" />
     <ClInclude Include="include\math\matrix3x3.h" />
+    <ClInclude Include="include\rendering\data-generation\mesh-2d\i-mesh-2d-generator.h" />
+    <ClInclude Include="include\rendering\data-generation\mesh-2d\quad-mesh-2d-generator.h" />
     <ClInclude Include="include\rendering\data-generation\mesh-3d\terrain-mesh-3d-generator.h" />
+    <ClInclude Include="include\rendering\data-generation\rendering-rule\canvas-rendering-rule-generator.h" />
     <ClInclude Include="include\rendering\data-generation\rendering-rule\i-rendering-rule-generator.h" />
     <ClInclude Include="include\rendering\data-generation\mesh-3d\plane-mesh-3d-generator.h" />
     <ClInclude Include="include\rendering\data-generation\rendering-rule\lambert-rendering-rule-generator.h" />
@@ -186,9 +190,11 @@
     <ClInclude Include="include\rendering\data-generation\texture-2d\i-texture-2d-generator.h" />
     <ClInclude Include="include\rendering\data-generation\texture-2d\raw-data-texture-2d-generator.h" />
     <ClInclude Include="include\rendering\i-mesh.h" />
+    <ClInclude Include="include\rendering\parameters\i-transform-2d-parameter.h" />
     <ClInclude Include="include\rendering\resources\i-mesh-2d.h" />
     <ClInclude Include="include\types\rendering-rule-descriptor.h" />
     <ClInclude Include="include\types\scene-lighting-descriptor.h" />
+    <ClInclude Include="include\types\transform-2d.h" />
     <ClInclude Include="include\types\vertex-2d.h" />
     <ClInclude Include="src\rendering\ogl-renderer-user.h" />
     <ClInclude Include="include\rendering\parameters\i-camera-3d-parameter.h" />
@@ -204,7 +210,7 @@
     <ClInclude Include="include\types\dimensions.h" />
     <ClInclude Include="include\rendering\resources\i-texture-2d.h" />
     <ClInclude Include="include\types\directional-light.h" />
-    <ClInclude Include="include\containers\mesh-data.h" />
+    <ClInclude Include="include\containers\mesh-data-3d.h" />
     <ClInclude Include="include\types\mesh-type.h" />
     <ClInclude Include="include\types\point-2d.h" />
     <ClInclude Include="include\types\transform-3d.h" />
@@ -237,6 +243,7 @@
     <ClInclude Include="src\rendering\ogl-shader-source-builder.h" />
     <ClInclude Include="src\rendering\parameters\ogl-camera-3d-parameter.h" />
     <ClInclude Include="src\rendering\parameters\ogl-scene-lighting-parameter.h" />
+    <ClInclude Include="src\rendering\parameters\ogl-transform-2d-parameter.h" />
     <ClInclude Include="src\rendering\parameters\ogl-transform-3d-parameter.h" />
     <ClInclude Include="src\rendering\resources\ogl-mesh-2d.h" />
     <ClInclude Include="src\rendering\resources\ogl-mesh-3d.h" />
@@ -249,6 +256,9 @@
     <ClInclude Include="src\win32-window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\rendering\data-generation\rendering-rule\canvas-rendering-rule-generator.cpp" />
+    <ClCompile Include="src\rendering\data-generation\mesh-2d\quad-mesh-2d-generator.cpp" />
+    <ClCompile Include="src\containers\mesh-data-2d.cpp" />
     <ClCompile Include="src\logging\logger.cpp" />
     <ClCompile Include="src\logging\sink\console-logger-sink.cpp" />
     <ClCompile Include="src\rendering\data-generation\mesh-3d\terrain-mesh-3d-generator.cpp" />
@@ -259,13 +269,14 @@
     <ClCompile Include="src\containers\source-container.cpp" />
     <ClCompile Include="src\rendering\data-generation\rendering-rule\unlit-rendering-rule-generator.cpp" />
     <ClCompile Include="src\rendering\data-generation\mesh-3d\plane-mesh-3d-generator.cpp" />
-    <ClCompile Include="src\containers\mesh-data.cpp" />
+    <ClCompile Include="src\containers\mesh-data-3d.cpp" />
     <ClCompile Include="src\rendering\data-generation\mesh-3d\cube-mesh-3d-generator.cpp" />
     <ClCompile Include="src\rendering\ogl-renderer-user.cpp" />
     <ClCompile Include="src\rendering\ogl-shader-key.cpp" />
     <ClCompile Include="src\rendering\ogl-shader-program-cache.cpp" />
     <ClCompile Include="src\rendering\ogl-shader-program.cpp" />
     <ClCompile Include="src\rendering\ogl-shader-source-builder.cpp" />
+    <ClCompile Include="src\rendering\parameters\ogl-transform-2d-parameter.cpp" />
     <ClCompile Include="src\rendering\resources\ogl-mesh-2d.cpp" />
     <ClCompile Include="src\types\color.cpp" />
     <ClCompile Include="src\types\color8.cpp" />

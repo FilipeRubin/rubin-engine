@@ -12,6 +12,7 @@ public:
 	OGLRendererParameterManager(OGLRenderer& renderer);
 	ICamera3DParameter* CreateCamera3D() override;
 	ISceneLightingParameter* CreateSceneLighting(const SceneLightingDescriptor& lightingDescriptor) override;
+	ITransform2DParameter* CreateTransform2D() override;
 	ITransform3DParameter* CreateTransform3D() override;
 private:
 	std::list<std::unique_ptr<IRenderParameter>> m_parameters;

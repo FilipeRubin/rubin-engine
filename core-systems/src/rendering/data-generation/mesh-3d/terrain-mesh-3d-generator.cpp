@@ -8,9 +8,9 @@ TerrainMesh3DGenerator::TerrainMesh3DGenerator(const Dimensions& gridSize, Share
 {
 }
 
-MeshData TerrainMesh3DGenerator::GenerateMeshData() const
+MeshData3D TerrainMesh3DGenerator::GenerateMeshData() const
 {
-    MeshData result;
+    MeshData3D result;
     size_t vertexCount = (size_t)m_gridSize.width * (size_t)m_gridSize.height;
     if (vertexCount > INT_MAX)
     {

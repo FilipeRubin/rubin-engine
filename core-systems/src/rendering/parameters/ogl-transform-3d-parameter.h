@@ -2,7 +2,7 @@
 #include <rendering/parameters/i-transform-3d-parameter.h>
 #include <rendering/ogl-renderer-user.h>
 
-class OGLTransform3DParameter : public ITransform3DParameter, public OGLRendererUser
+class OGLTransform3DParameter final : public ITransform3DParameter, public OGLRendererUser
 {
 public:
 	OGLTransform3DParameter(OGLRenderer& renderer);
