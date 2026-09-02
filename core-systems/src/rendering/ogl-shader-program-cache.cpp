@@ -79,7 +79,7 @@ void OGLShaderProgramCache::SetUniforms(const OGLRenderingRule& renderingRule)
 	}
 	if (d.useProjection2D)
 	{
-		Matrix3x3 projection = Matrix3x3::Viewport((Vector2)Renderer().GetViewportSize());
+		Matrix3x3 projection = Matrix3x3::ScreenToNDC((Vector2)Renderer().GetViewportSize());
 		m_currentProgram->SetUniform(PROJECTION, projection);
 	}
 	if (d.useProjectionView3D)

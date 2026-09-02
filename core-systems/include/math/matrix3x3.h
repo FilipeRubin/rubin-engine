@@ -26,13 +26,13 @@ struct alignas(4) Matrix3x3
 		);
 	}
 
-	static inline constexpr Matrix3x3 Viewport(const Vector2& size) noexcept
+	static inline constexpr Matrix3x3 ScreenToNDC(const Vector2& size) noexcept
 	{
 		return Matrix3x3
 		{
-			{ 2.0f / size.x, 0.0f,           0.0f },
-			{ 0.0f,          -2.0f / size.y, 0.0f },
-			{ -1.0f,          1.0f,           1.0f }
+			{  2.0f / size.x,           0.0f, 0.0f },
+			{  0.0f         , -2.0f / size.y, 0.0f },
+			{ -1.0f         ,           1.0f, 1.0f }
 		};
 	}
 
