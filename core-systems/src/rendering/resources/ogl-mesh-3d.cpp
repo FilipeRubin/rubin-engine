@@ -1,5 +1,6 @@
 #include "ogl-mesh-3d.h"
 #include <rendering/ogl-renderer.h>
+#include <rendering/ogl-attribute-location-constants.h>
 #include <logging/log-macros.h>
 #include <ogl.h>
 
@@ -50,12 +51,14 @@ void OGLMesh3D::Create()
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 	glBufferData(GL_ARRAY_BUFFER, verticesSize, m_cachedVertices->GetData(), GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0U, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)0);
-	glVertexAttribPointer(1U, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)12);
-	glVertexAttribPointer(2U, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)24);
-	glEnableVertexAttribArray(0U);
-	glEnableVertexAttribArray(1U);
-	glEnableVertexAttribArray(2U);
+	using namespace OGLAttributeLocationConstants;
+
+	glVertexAttribPointer(POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)0);
+	glVertexAttribPointer(NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)12);
+	glVertexAttribPointer(UV, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)24);
+	glEnableVertexAttribArray(POSITION);
+	glEnableVertexAttribArray(NORMAL);
+	glEnableVertexAttribArray(UV);
 
 	GLsizeiptr indicesSize = m_cachedIndices->GetElementCount() * sizeof(unsigned int);
 	glGenBuffers(1, &m_ebo);

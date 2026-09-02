@@ -1,6 +1,7 @@
 #include "ogl-mesh-2d.h"
 #include <rendering/resources/ogl-rendering-rule.h>
 #include <rendering/ogl-renderer.h>
+#include <rendering/ogl-attribute-location-constants.h>
 #include <logging/log-macros.h>
 #include <ogl.h>
 
@@ -51,10 +52,12 @@ void OGLMesh2D::Create()
     glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
     glBufferData(GL_ARRAY_BUFFER, verticesSize, m_cachedVertices->GetData(), GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0U, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (void*)0);
-    glVertexAttribPointer(1U, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (void*)8);
-    glEnableVertexAttribArray(0U);
-    glEnableVertexAttribArray(1U);
+    using namespace OGLAttributeLocationConstants;
+
+    glVertexAttribPointer(POSITION, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (void*)0);
+    glVertexAttribPointer(UV, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (void*)8);
+    glEnableVertexAttribArray(POSITION);
+    glEnableVertexAttribArray(UV);
 
     GLsizeiptr indicesSize = m_cachedIndices->GetElementCount() * sizeof(unsigned int);
     glGenBuffers(1, &m_ebo);
