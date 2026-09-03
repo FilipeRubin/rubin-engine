@@ -27,7 +27,8 @@ void OGLMesh3D::Draw()
 	MeshType meshType = GetMeshType();
 	Renderer().ShaderCache().BindOrCreate(*renderingRule, meshType);
 
-	Renderer().ShaderCache().SetUniforms(*renderingRule);
+	const RenderingRuleDescriptor& descriptor = renderingRule->GetDescriptor();
+	Renderer().ShaderCache().SetUniforms(OGLShaderKey(descriptor, meshType));
 
 	glBindVertexArray(m_vao);
 	glEnable(GL_DEPTH_TEST);

@@ -196,6 +196,7 @@
     <ClInclude Include="include\types\scene-lighting-descriptor.h" />
     <ClInclude Include="include\types\transform-2d.h" />
     <ClInclude Include="include\types\vertex-2d.h" />
+    <ClInclude Include="src\rendering\ogl-attribute-location-constants.h" />
     <ClInclude Include="src\rendering\ogl-renderer-user.h" />
     <ClInclude Include="include\rendering\parameters\i-camera-3d-parameter.h" />
     <ClInclude Include="include\rendering\i-renderer-parameter-manager.h" />

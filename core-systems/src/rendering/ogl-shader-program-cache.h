@@ -12,7 +12,7 @@ public:
 	OGLShaderProgramCache(OGLRenderer& renderer);
 	~OGLShaderProgramCache();
 	void BindOrCreate(const OGLRenderingRule& renderingRule, MeshType meshType);
-	void SetUniforms(const OGLRenderingRule& renderingRule);
+	void SetUniforms(const OGLShaderKey& key);
 private:
 	OGLShaderProgram* m_currentProgram;
 	std::unordered_map<OGLShaderKey, OGLShaderProgram*, OGLShaderKey::Hash> m_cache;

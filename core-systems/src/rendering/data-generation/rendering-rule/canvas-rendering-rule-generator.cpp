@@ -2,10 +2,12 @@
 
 RenderingRuleDescriptor CanvasRenderingRuleGenerator::GenerateDescriptor() const
 {
-    return {
-        .useProjection2D = true,
-        .useProjectionView3D = false,
-        .useModel2D = true,
-        .useModel3D = false,
-    };
+    RenderingRuleDescriptor result{};
+
+    result.sceneLighting = nullptr;
+    result.useProjection = true;
+    result.useViewCamera = false;
+    result.useModelTransform = true;
+
+    return result;
 }
