@@ -103,6 +103,16 @@ public:
 		return m_reference != other.m_reference;
 	}
 
+	T* Get()
+	{
+		return m_reference;
+	}
+
+	const T* Get() const
+	{
+		return m_reference;
+	}
+
 	void Reset()
 	{
 		DecrementAndRelease();
