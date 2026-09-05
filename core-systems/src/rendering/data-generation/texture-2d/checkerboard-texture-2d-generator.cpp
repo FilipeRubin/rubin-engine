@@ -9,7 +9,7 @@ TextureData CheckerboardTexture2DGenerator::GenerateTextureData() const
     TextureData result;
 
     size_t size = m_dimensions.width * m_dimensions.height;
-    Shared<FixedArray<Color8>> textureData = Shared<FixedArray<Color8>>(new FixedArray<Color8>(size));
+    Shared<FixedArray<Color8>> textureData = MakeShared<FixedArray<Color8>>(size);
 
     Color8 c1 = (Color8)m_color1;
     Color8 c2 = (Color8)m_color2;

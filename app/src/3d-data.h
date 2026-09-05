@@ -129,7 +129,7 @@ static unsigned char ComputeMiddleGradient(unsigned int stride, unsigned int val
 
 static Shared<FixedArray<Color8>> GeneratePatternTexture(IRendererResourceManager* rm, int width, int height)
 {
-	Shared<FixedArray<Color8>> pixels = Shared<FixedArray<Color8>>(new FixedArray<Color8>(width * height));
+	Shared<FixedArray<Color8>> pixels = MakeShared<FixedArray<Color8>>(width * height);
 
 	for (int i = 0; i < width; i++)
 	{
@@ -146,7 +146,7 @@ static Shared<FixedArray<Color8>> GeneratePatternTexture(IRendererResourceManage
 
 static Shared<FixedArray<Color8>> GeneratePatternTexture2(IRendererResourceManager* rm, int width, int height)
 {
-	Shared<FixedArray<Color8>> pixels = Shared<FixedArray<Color8>>(new FixedArray<Color8>(width * height));
+	Shared<FixedArray<Color8>> pixels = MakeShared<FixedArray<Color8>>(width * height);
 
 	for (int i = 0; i < width; i++)
 	{

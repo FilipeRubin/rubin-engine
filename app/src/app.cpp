@@ -37,6 +37,8 @@ void App::Init(GraphicsWindow& graphicsWindow)
 	lastTime = window->GetTime();
 }
 
+#include <memory>
+
 void App::Start()
 {
 	const int terrainX = 30;
@@ -44,7 +46,7 @@ void App::Start()
 
 	Dimensions terrainGrid = { terrainX, terrainY };
 	size_t terrainDataSize = terrainGrid.width * terrainGrid.height;
-	Shared<FixedArray<float>> terrainData = Shared<FixedArray<float>>(new FixedArray<float>(terrainDataSize));
+	Shared<FixedArray<float>> terrainData = MakeShared<FixedArray<float>>(terrainDataSize);
 
 	for (int i = 0; i < terrainY; i++)
 	{

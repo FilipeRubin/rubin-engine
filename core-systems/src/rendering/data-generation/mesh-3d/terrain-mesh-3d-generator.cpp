@@ -18,7 +18,7 @@ MeshData3D TerrainMesh3DGenerator::GenerateMeshData() const
         return {};
     }
 
-    Shared<FixedArray<Vertex3D>> vertices = Shared<FixedArray<Vertex3D>>(new FixedArray<Vertex3D>(vertexCount));
+    Shared<FixedArray<Vertex3D>> vertices = MakeShared<FixedArray<Vertex3D>>(vertexCount);
     for (size_t i = 0ULL; i < vertexCount; i++)
     {
         int x = i % m_gridSize.width;
@@ -35,7 +35,7 @@ MeshData3D TerrainMesh3DGenerator::GenerateMeshData() const
     }
 
     size_t indicesCount = 6ULL * size_t(m_gridSize.width - 1) * size_t(m_gridSize.height - 1);
-    Shared<FixedArray<unsigned int>> indices = Shared<FixedArray<unsigned int>>(new FixedArray<unsigned int>(indicesCount));
+    Shared<FixedArray<unsigned int>> indices = MakeShared<FixedArray<unsigned int>>(indicesCount);
     {
         for (int y = 0; y < m_gridSize.height - 1; y++)
         {

@@ -20,8 +20,8 @@ MeshData2D QuadMesh2DGenerator::GenerateMeshData() const
         2U, 3U, 0U
     };
 
-    Shared<FixedArray<Vertex2D>> vertices = Shared<FixedArray<Vertex2D>>(new FixedArray<Vertex2D>(4ULL));
-    Shared<FixedArray<unsigned int>> indices = Shared<FixedArray<unsigned int>>(new FixedArray<unsigned int>(6ULL));
+    Shared<FixedArray<Vertex2D>> vertices = MakeShared<FixedArray<Vertex2D>>(4ULL);
+    Shared<FixedArray<unsigned int>> indices = MakeShared<FixedArray<unsigned int>>(6ULL);
 
     std::copy(rawVertices, rawVertices + 4ULL, vertices->GetData());
     std::copy(rawIndices, rawIndices + 6ULL, indices->GetData());

@@ -9,7 +9,7 @@ RenderingRuleDescriptor LambertRenderingRuleGenerator::GenerateDescriptor() cons
 {
     RenderingRuleDescriptor result{};
 
-    result.sceneLighting = Shared<SceneLightingDescriptor>(new SceneLightingDescriptor(m_lightingDescriptor));
+    result.sceneLighting = MakeShared<SceneLightingDescriptor>(m_lightingDescriptor);
     result.useProjection = true;
     result.useViewCamera = true;
     result.useModelTransform = true;

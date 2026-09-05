@@ -73,8 +73,8 @@ MeshData3D CubeMesh3DGenerator::GenerateMeshData() const
 		18, 19, 16
 	};
 
-	Shared<FixedArray<Vertex3D>> vertices = Shared<FixedArray<Vertex3D>>(new FixedArray<Vertex3D>(24ULL));
-	Shared<FixedArray<unsigned int>> indices = Shared<FixedArray<unsigned int>>(new FixedArray<unsigned int>(36ULL));
+	Shared<FixedArray<Vertex3D>> vertices = MakeShared<FixedArray<Vertex3D>>(24ULL);
+	Shared<FixedArray<unsigned int>> indices = MakeShared<FixedArray<unsigned int>>(36ULL);
 	
 	std::copy(rawVertices, rawVertices + 24ULL, vertices->GetData());
 	std::copy(rawIndices, rawIndices + 36ULL, indices->GetData());

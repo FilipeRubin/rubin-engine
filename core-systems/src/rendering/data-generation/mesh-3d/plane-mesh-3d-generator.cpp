@@ -21,8 +21,8 @@ MeshData3D PlaneMesh3DGenerator::GenerateMeshData() const
 		0U, 2U, 3U
 	};
 
-	Shared<FixedArray<Vertex3D>> vertices = Shared<FixedArray<Vertex3D>>(new FixedArray<Vertex3D>(24ULL));
-	Shared<FixedArray<unsigned int>> indices = Shared<FixedArray<unsigned int>>(new FixedArray<unsigned int>(36ULL));
+	Shared<FixedArray<Vertex3D>> vertices = MakeShared<FixedArray<Vertex3D>>(24ULL);
+	Shared<FixedArray<unsigned int>> indices = MakeShared<FixedArray<unsigned int>>(36ULL);
 
 	std::copy(rawVertices, rawVertices + 4ULL, vertices->GetData());
 	std::copy(rawIndices, rawIndices + 6ULL, indices->GetData());

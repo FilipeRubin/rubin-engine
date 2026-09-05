@@ -136,3 +136,9 @@ private:
 		}
 	}
 };
+
+template<typename T, typename... Args>
+Shared<T> MakeShared(Args&&... args)
+{
+	return Shared(new T(static_cast<Args&&>(args)...));
+}
