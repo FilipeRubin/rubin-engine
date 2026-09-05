@@ -294,6 +294,7 @@
     <ClCompile Include="src\rendering\ogl-renderer.cpp" />
     <ClCompile Include="src\ogl.cpp" />
     <ClCompile Include="src\rendering\resources\ogl-texture-2d.cpp" />
+    <ClCompile Include="src\types\rendering-rule-descriptor.cpp" />
     <ClCompile Include="src\win32-window-class.cpp" />
     <ClCompile Include="src\win32-window.cpp" />
   </ItemGroup>

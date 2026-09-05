@@ -11,13 +11,7 @@ public:
 	bool operator==(const OGLShaderKey& other) const = default;
 	struct Hash
 	{
-		size_t operator()(const OGLShaderKey& key) const noexcept
-		{
-			size_t h1 = RenderingRuleDescriptor::Hash{}(key.GetDescriptor());
-			size_t h2 = std::hash<MeshType>{}(key.GetMeshType());
-
-			return h1 ^ (h2 << 1);
-		}
+		size_t operator()(const OGLShaderKey& key) const noexcept;
 	};
 private:
 	RenderingRuleDescriptor m_descriptor;

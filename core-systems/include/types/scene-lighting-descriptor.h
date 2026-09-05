@@ -11,7 +11,7 @@ struct SceneLightingDescriptor
 	{
 		std::size_t operator()(const SceneLightingDescriptor& desc) const noexcept
 		{
-			return std::hash<size_t>{}(desc.directionalLightCount + 1U);
+			return std::hash<size_t>{}(desc.directionalLightCount);
 		}
 	};
 };

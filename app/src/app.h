@@ -13,8 +13,7 @@ private:
 	IWindow* window = nullptr;
 	IBasicInput* input = nullptr;
 
-	IRenderingRule* lambertRenderingRule = nullptr;
-	IRenderingRule* unlitRenderingRule = nullptr;
+	IRenderingRule* worldRenderingRule = nullptr;
 	IRenderingRule* canvasRenderingRule = nullptr;
 	IRenderingRule* currentRenderingRule = nullptr;
 	IMesh3D* terrainMesh = nullptr;
@@ -28,8 +27,6 @@ private:
 	ITransform3DParameter* transformParameter = nullptr;
 	ITransform3DParameter* cubeTransformParameter = nullptr;
 	ITransform2DParameter* transform2DParameter = nullptr;
-
-	bool useLambertRenderingRule = true;
 
 	float lightRotation = 0.0f;
 	float cubeHeightOffset = 0.0f;

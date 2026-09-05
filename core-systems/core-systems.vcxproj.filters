@@ -410,5 +410,8 @@
     <ClCompile Include="src\rendering\data-generation\rendering-rule\canvas-rendering-rule-generator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\types\rendering-rule-descriptor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

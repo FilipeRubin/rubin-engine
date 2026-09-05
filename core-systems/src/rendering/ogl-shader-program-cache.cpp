@@ -62,7 +62,8 @@ void OGLShaderProgramCache::SetUniforms(const OGLShaderKey& key)
 	{
 		m_currentProgram->SetUniform(LIGHTING_AMBIENT, s.sceneLighting->AmbientLight());
 		const FixedArray<DirectionalLight>& dl = s.sceneLighting->DirectionalLights();
-		for (size_t i = 0U; i < dl.GetElementCount(); i++)
+		size_t numDirLights = std::min(d.sceneLighting->directionalLightCount, dl.GetElementCount());
+		for (size_t i = 0U; i < numDirLights; i++)
 		{
 			std::string directionUniform = std::format("{}[{}].direction",
 				LIGHTING_DIRECTIONAL_ARRAY, i
