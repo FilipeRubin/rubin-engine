@@ -4,9 +4,9 @@
 
 struct RenderingRuleDescriptor
 {
-	bool useProjection;
-	bool useViewCamera;
-	bool useModelTransform;
+	bool useProjection = false;
+	bool useViewCamera = false;
+	bool useModelTransform = false;
 	Shared<SceneLightingDescriptor> sceneLighting;
 
 	bool operator==(const RenderingRuleDescriptor& other) const;

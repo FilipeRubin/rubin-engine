@@ -16,7 +16,7 @@ class RandomRenderingRuleGenerator : public IRenderingRuleGenerator
 	{
 		static size_t n = 0U;
 		n++;
-		srand(time(NULL) * n);
+		srand(unsigned int(time(NULL) * n));
 		RenderingRuleDescriptor result = RenderingRuleDescriptor();
 		result.sceneLighting = rand() % 2 == 0 ? new SceneLightingDescriptor{ .directionalLightCount = size_t(rand() % 3) } : nullptr;
 		result.useProjection = rand() % 2 == 0;
@@ -36,8 +36,6 @@ void App::Init(GraphicsWindow& graphicsWindow)
 	input = &window->BasicInput();
 	lastTime = window->GetTime();
 }
-
-#include <memory>
 
 void App::Start()
 {
