@@ -3,9 +3,11 @@
 
 static inline constexpr std::string LogLevelAsString(const LogLevel& logLevel);
 static inline constexpr std::string SummarizeFileName(const char* fileName);
+static inline void SetConsoleLevelColor(LogLevel color);
 
 void ConsoleLoggerSink::Write(const LogMessage& logMessage)
 {
+	SetConsoleLevelColor(logMessage.level);
 	std::string level = LogLevelAsString(logMessage.level);
 	std::string fileName = SummarizeFileName(logMessage.fileName);
 	if (logMessage.fileName == nullptr)
@@ -56,4 +58,25 @@ inline constexpr std::string SummarizeFileName(const char* fileName)
 	}
 
 	return fileName;
+}
+
+inline void SetConsoleLevelColor(LogLevel color)
+{
+#ifdef _WIN32
+	switch (color)
+	{
+	case LogLevel::TRACE:
+	case LogLevel::DEBUG:
+	case LogLevel::INFO:
+		std::cout << "\033[0m";
+		break;
+	case LogLevel::WARNING:
+		std::cout << "\033[33m";
+		break;
+	case LogLevel::ERROR:
+	case LogLevel::FATAL:
+		std::cout << "\033[31m";
+		break;
+	}
+#endif
 }
