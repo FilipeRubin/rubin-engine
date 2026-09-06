@@ -134,6 +134,10 @@ void App::Update()
 			dir.y * cosf(rot.y) + dir.x * sinf(rot.y)
 		) * deltaTime * 15.0f;
 	}
+	if (input->IsKeyDown(KeyboardKey::O))
+	{
+		transform2DParameter->Transform().rotation += deltaTime * 3.0f;
+	}
 	cubeTransformParameter->Transform().rotation.z += deltaTime;
 	cubeTransformParameter->Transform().rotation.x += deltaTime * 0.025f;
 	transform2DParameter->Transform().position = { (renderer->GetViewportSize().width - 64) * std::sin(lastTime * 2.0f) / 2.0f + (renderer->GetViewportSize().width - 64) / 2.0f, 0.0f };
