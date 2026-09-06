@@ -4,13 +4,12 @@
 #include <logging/log-macros.h>
 #include <ogl.h>
 
-OGLMesh3D::OGLMesh3D(OGLRenderer& renderer, Shared<FixedArray<Vertex3D>> vertices, Shared<FixedArray<unsigned int>> indices) :
+OGLMesh3D::OGLMesh3D(OGLRenderer& renderer, const Shared<FixedArray<Vertex3D>> vertices, const Shared<FixedArray<unsigned int>> indices) :
 	OGLRendererUser(renderer),
 	m_vbo(0U), m_vao(0U), m_ebo(0U), m_indicesCount(unsigned int(indices->GetElementCount())),
 	m_cachedVertices(vertices),
 	m_cachedIndices(indices)
 {
-	LOG_WARNING("Decide to copy vertices passed by argument or remove this warning");
 }
 
 bool OGLMesh3D::IsValid() const
@@ -66,8 +65,6 @@ void OGLMesh3D::Create()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize, m_cachedIndices->GetData(), GL_STATIC_DRAW);
 
-	m_cachedVertices.Reset();
-	m_cachedIndices.Reset();
 	LOG_DEBUG("OGLMesh3D created.");
 }
 

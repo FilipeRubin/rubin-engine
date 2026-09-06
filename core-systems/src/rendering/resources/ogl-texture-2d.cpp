@@ -2,9 +2,9 @@
 #include <ogl.h>
 #include <logging/log-macros.h>
 
-OGLTexture2D::OGLTexture2D(OGLRenderer& renderer, Shared<FixedArray<Color8>> data, const Dimensions& dimensions) :
+OGLTexture2D::OGLTexture2D(OGLRenderer& renderer, const Shared<FixedArray<Color8>> pixels, const Dimensions& dimensions) :
     OGLRendererUser(renderer),
-    m_data(data),
+    m_pixels(pixels),
     m_dimensions(dimensions),
     m_texture(0U)
 {
@@ -34,9 +34,8 @@ void OGLTexture2D::Create()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_dimensions.width, m_dimensions.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_data->GetData());
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_dimensions.width, m_dimensions.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels->GetData());
     glGenerateMipmap(GL_TEXTURE_2D);
-    m_data.Reset();
 }
 
 void OGLTexture2D::Destroy()

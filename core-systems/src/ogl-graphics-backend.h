@@ -21,5 +21,4 @@ private:
 	void* m_hdc;
 	IRenderer* m_renderer;
 	Dimensions m_cachedStartingViewportSize;
-	void SetDefaultRendererSettings();
 };

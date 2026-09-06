@@ -5,13 +5,12 @@
 #include <logging/log-macros.h>
 #include <ogl.h>
 
-OGLMesh2D::OGLMesh2D(OGLRenderer& renderer, Shared<FixedArray<Vertex2D>> vertices, Shared<FixedArray<unsigned int>> indices) :
+OGLMesh2D::OGLMesh2D(OGLRenderer& renderer, const Shared<FixedArray<Vertex2D>> vertices, const Shared<FixedArray<unsigned int>> indices) :
     OGLRendererUser(renderer),
     m_vbo(0U), m_vao(0U), m_ebo(0U), m_indicesCount(unsigned int(indices->GetElementCount())),
     m_cachedVertices(vertices),
     m_cachedIndices(indices)
 {
-    LOG_WARNING("Decide to copy vertices passed by argument or remove this warning");
 }
 
 bool OGLMesh2D::IsValid() const
@@ -65,8 +64,6 @@ void OGLMesh2D::Create()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize, m_cachedIndices->GetData(), GL_STATIC_DRAW);
 
-    m_cachedVertices.Reset();
-    m_cachedIndices.Reset();
     LOG_DEBUG("OGLMesh2D created.");
 }
 

@@ -9,7 +9,7 @@
 class OGLMesh3D : public IMesh3D, public IRendererManaged, public OGLRendererUser
 {
 public:
-	OGLMesh3D(OGLRenderer& renderer, Shared<FixedArray<Vertex3D>> vertices, Shared<FixedArray<unsigned int>> indices);
+	OGLMesh3D(OGLRenderer& renderer, const Shared<FixedArray<Vertex3D>> vertices, const Shared<FixedArray<unsigned int>> indices);
 	bool IsValid() const override;
 	void Draw() override;
 	MeshType GetMeshType() const override;
@@ -21,6 +21,6 @@ private:
 	unsigned int m_ebo;
 	unsigned int m_indicesCount;
 
-	Shared<FixedArray<Vertex3D>> m_cachedVertices;
-	Shared<FixedArray<unsigned int>> m_cachedIndices;
+	const Shared<FixedArray<Vertex3D>> m_cachedVertices;
+	const Shared<FixedArray<unsigned int>> m_cachedIndices;
 };

@@ -59,7 +59,6 @@ bool OGLGraphicsBackend::TryInitialize(IGraphicsBackend* sharedBackend)
 
 	m_renderer = new OGLRenderer(this, m_cachedStartingViewportSize);
 
-	SetDefaultRendererSettings();
 	LOG_INFO("OpenGL graphics backend initialized.");
 
 	return true;
@@ -122,19 +121,6 @@ void OGLGraphicsBackend::Decrement()
 	{
 		UnloadOGL();
 	}
-}
-
-void OGLGraphicsBackend::SetDefaultRendererSettings()
-{
-	HGLRC previousContext = wglGetCurrentContext();
-	wglMakeCurrent((HDC)m_hdc, (HGLRC)m_oglContext);
-
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-
-	LOG_WARNING("Reconsider the useness of this method and remove this warning.");
-
-	wglMakeCurrent((HDC)m_hdc, previousContext);
 }
 
 #endif // _WIN32

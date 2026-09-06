@@ -10,7 +10,7 @@
 class OGLTexture2D : public ITexture2D, public IRendererManaged, public OGLRendererUser
 {
 public:
-	OGLTexture2D(OGLRenderer& renderer, Shared<FixedArray<Color8>> data, const Dimensions& dimensions);
+	OGLTexture2D(OGLRenderer& renderer, const Shared<FixedArray<Color8>> pixels, const Dimensions& dimensions);
 	OGLTexture2D(const OGLTexture2D& other) = delete;
 	OGLTexture2D(OGLTexture2D&& other) noexcept = delete;
 	OGLTexture2D& operator=(const OGLTexture2D& other) = delete;
@@ -21,7 +21,7 @@ public:
 	void Create() override;
 	void Destroy() override;
 private:
-	Shared<FixedArray<Color8>> m_data;
+	const Shared<FixedArray<Color8>> m_pixels;
 	const Dimensions& m_dimensions;
 	unsigned int m_texture;
 };
