@@ -1,5 +1,6 @@
 #pragma once
 #include <algorithm>
+#include <initializer_list>
 
 template<typename T>
 class FixedArray

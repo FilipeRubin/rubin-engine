@@ -163,6 +163,9 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\containers\byte-map.h" />
+    <ClInclude Include="include\rendering\resources\i-font.h" />
+    <ClInclude Include="include\types\glyph.h" />
     <ClInclude Include="include\containers\mesh-data-2d.h" />
     <ClInclude Include="include\containers\source-collection.h" />
     <ClInclude Include="include\containers\source-container.h" />
@@ -178,6 +181,7 @@
     <ClInclude Include="include\logging\log-level.h" />
     <ClInclude Include="include\logging\log-message.h" />
     <ClInclude Include="include\math\matrix3x3.h" />
+    <ClInclude Include="include\math\vector2i.h" />
     <ClInclude Include="include\rendering\data-generation\mesh-2d\i-mesh-2d-generator.h" />
     <ClInclude Include="include\rendering\data-generation\mesh-2d\quad-mesh-2d-generator.h" />
     <ClInclude Include="include\rendering\data-generation\mesh-3d\terrain-mesh-3d-generator.h" />
@@ -192,6 +196,8 @@
     <ClInclude Include="include\rendering\i-mesh.h" />
     <ClInclude Include="include\rendering\parameters\i-transform-2d-parameter.h" />
     <ClInclude Include="include\rendering\resources\i-mesh-2d.h" />
+    <ClInclude Include="include\types\font-data.h" />
+    <ClInclude Include="include\types\glyph-metrics.h" />
     <ClInclude Include="include\types\rendering-rule-descriptor.h" />
     <ClInclude Include="include\types\scene-lighting-descriptor.h" />
     <ClInclude Include="include\types\transform-2d.h" />
@@ -257,6 +263,7 @@
     <ClInclude Include="src\win32-window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\containers\byte-map.cpp" />
     <ClCompile Include="src\rendering\data-generation\rendering-rule\canvas-rendering-rule-generator.cpp" />
     <ClCompile Include="src\rendering\data-generation\mesh-2d\quad-mesh-2d-generator.cpp" />
     <ClCompile Include="src\containers\mesh-data-2d.cpp" />
