@@ -1,8 +1,7 @@
 #pragma once
-#include "i-renderer-resource.h"
-#include <rendering/i-mesh.h>
+#include "i-mesh.h"
 
-class IMesh2D : public IRendererResource, public IMesh
+class IMesh2D : public IMesh
 {
 public:
 	virtual ~IMesh2D() = default;

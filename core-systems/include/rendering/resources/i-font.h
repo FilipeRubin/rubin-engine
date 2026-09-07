@@ -1,9 +1,8 @@
 #pragma once
-#include "i-renderer-resource.h"
+#include "i-bindable-resource.h"
 
-class IFont : public IRendererResource
+class IFont : public IBindableResource
 {
 public:
 	virtual ~IFont() = default;
-	virtual void Bind() = 0;
 };

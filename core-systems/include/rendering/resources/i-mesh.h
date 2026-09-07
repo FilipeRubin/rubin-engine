@@ -1,8 +1,8 @@
 #pragma once
-#include "i-drawable.h"
+#include "i-drawable-resource.h"
 #include <types/mesh-type.h>
 
-class IMesh : public IDrawable
+class IMesh : public IDrawableResource
 {
 public:
 	virtual	~IMesh() = default;

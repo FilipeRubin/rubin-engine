@@ -164,6 +164,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\containers\byte-map.h" />
+    <ClInclude Include="include\rendering\resources\i-bindable-resource.h" />
     <ClInclude Include="include\rendering\resources\i-font.h" />
     <ClInclude Include="include\types\glyph.h" />
     <ClInclude Include="include\containers\mesh-data-2d.h" />
@@ -192,7 +193,7 @@
     <ClInclude Include="include\rendering\data-generation\texture-2d\checkerboard-texture-2d-generator.h" />
     <ClInclude Include="include\rendering\data-generation\texture-2d\i-texture-2d-generator.h" />
     <ClInclude Include="include\rendering\data-generation\texture-2d\raw-data-texture-2d-generator.h" />
-    <ClInclude Include="include\rendering\i-mesh.h" />
+    <ClInclude Include="include\rendering\resources\i-mesh.h" />
     <ClInclude Include="include\rendering\parameters\i-transform-2d-parameter.h" />
     <ClInclude Include="include\rendering\resources\i-mesh-2d.h" />
     <ClInclude Include="include\types\font-data.h" />
@@ -228,7 +229,7 @@
     <ClInclude Include="include\math\vector3.h" />
     <ClInclude Include="include\math\vector4.h" />
     <ClInclude Include="include\rendering\resources\i-mesh-3d.h" />
-    <ClInclude Include="include\rendering\i-drawable.h" />
+    <ClInclude Include="include\rendering\resources\i-drawable-resource.h" />
     <ClInclude Include="include\utils\shared.h" />
     <ClInclude Include="src\input\win32-basic-input.h" />
     <ClInclude Include="include\rendering\data-generation\mesh-3d\cube-mesh-3d-generator.h" />

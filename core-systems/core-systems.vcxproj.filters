@@ -54,7 +54,7 @@
     <ClInclude Include="src\rendering\ogl-renderer-resource-manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\rendering\i-drawable.h">
+    <ClInclude Include="include\rendering\resources\i-drawable-resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\rendering\i-renderer-managed.h">
@@ -228,7 +228,7 @@
     <ClInclude Include="include\types\mesh-type.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\rendering\i-mesh.h">
+    <ClInclude Include="include\rendering\resources\i-mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\rendering\ogl-renderer-user.h">
@@ -304,6 +304,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\rendering\resources\i-font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rendering\resources\i-bindable-resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
