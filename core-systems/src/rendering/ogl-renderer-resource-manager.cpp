@@ -4,12 +4,7 @@
 #include "resources/ogl-mesh-2d.h"
 #include "resources/ogl-mesh-3d.h"
 #include "resources/ogl-texture-2d.h"
-#include <containers/source-container.h>
 #include <logging/log-macros.h>
-
-#ifdef ERROR
-#undef ERROR
-#endif
 
 using std::unique_ptr;
 using std::list;

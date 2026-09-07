@@ -168,7 +168,6 @@
     <ClInclude Include="include\types\glyph.h" />
     <ClInclude Include="include\containers\mesh-data-2d.h" />
     <ClInclude Include="include\containers\source-collection.h" />
-    <ClInclude Include="include\containers\source-container.h" />
     <ClInclude Include="include\containers\fixed-array.h" />
     <ClInclude Include="include\containers\texture-data.h" />
     <ClInclude Include="include\core-systems.h" />
@@ -274,7 +273,6 @@
     <ClCompile Include="src\rendering\data-generation\texture-2d\raw-data-texture-2d-generator.cpp" />
     <ClCompile Include="src\containers\texture-data.cpp" />
     <ClCompile Include="src\rendering\data-generation\rendering-rule\lambert-rendering-rule-generator.cpp" />
-    <ClCompile Include="src\containers\source-container.cpp" />
     <ClCompile Include="src\rendering\data-generation\rendering-rule\unlit-rendering-rule-generator.cpp" />
     <ClCompile Include="src\rendering\data-generation\mesh-3d\plane-mesh-3d-generator.cpp" />
     <ClCompile Include="src\containers\mesh-data-3d.cpp" />

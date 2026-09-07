@@ -165,9 +165,6 @@
     <ClInclude Include="include\containers\source-collection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\containers\source-container.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\rendering\data-generation\rendering-rule\lambert-rendering-rule-generator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -372,9 +369,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\rendering\data-generation\rendering-rule\unlit-rendering-rule-generator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\containers\source-container.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\rendering\data-generation\rendering-rule\lambert-rendering-rule-generator.cpp">
