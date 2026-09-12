@@ -303,10 +303,19 @@
     <ClInclude Include="include\types\glyph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\rendering\resources\i-font.h">
+    <ClInclude Include="include\rendering\resources\i-static-text-2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\rendering\resources\i-bindable-resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rendering\resources\i-font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rendering\resources\ogl-font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\containers\rasterized-font-data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -429,6 +438,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\containers\byte-map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\resources\ogl-font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\containers\rasterized-font-data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

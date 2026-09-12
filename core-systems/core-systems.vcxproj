@@ -164,8 +164,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\containers\byte-map.h" />
+    <ClInclude Include="include\containers\rasterized-font-data.h" />
     <ClInclude Include="include\rendering\resources\i-bindable-resource.h" />
     <ClInclude Include="include\rendering\resources\i-font.h" />
+    <ClInclude Include="include\rendering\resources\i-static-text-2d.h" />
     <ClInclude Include="include\types\glyph.h" />
     <ClInclude Include="include\containers\mesh-data-2d.h" />
     <ClInclude Include="include\containers\source-collection.h" />
@@ -252,6 +254,7 @@
     <ClInclude Include="src\rendering\parameters\ogl-scene-lighting-parameter.h" />
     <ClInclude Include="src\rendering\parameters\ogl-transform-2d-parameter.h" />
     <ClInclude Include="src\rendering\parameters\ogl-transform-3d-parameter.h" />
+    <ClInclude Include="src\rendering\resources\ogl-font.h" />
     <ClInclude Include="src\rendering\resources\ogl-mesh-2d.h" />
     <ClInclude Include="src\rendering\resources\ogl-mesh-3d.h" />
     <ClInclude Include="src\rendering\resources\ogl-rendering-rule.h" />
@@ -263,6 +266,7 @@
     <ClInclude Include="src\win32-window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\containers\rasterized-font-data.cpp" />
     <ClCompile Include="src\containers\byte-map.cpp" />
     <ClCompile Include="src\rendering\data-generation\rendering-rule\canvas-rendering-rule-generator.cpp" />
     <ClCompile Include="src\rendering\data-generation\mesh-2d\quad-mesh-2d-generator.cpp" />
@@ -284,6 +288,7 @@
     <ClCompile Include="src\rendering\ogl-shader-program.cpp" />
     <ClCompile Include="src\rendering\ogl-shader-source-builder.cpp" />
     <ClCompile Include="src\rendering\parameters\ogl-transform-2d-parameter.cpp" />
+    <ClCompile Include="src\rendering\resources\ogl-font.cpp" />
     <ClCompile Include="src\rendering\resources\ogl-mesh-2d.cpp" />
     <ClCompile Include="src\types\color.cpp" />
     <ClCompile Include="src\types\color8.cpp" />
