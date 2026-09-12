@@ -24,7 +24,6 @@ void OGLFont::Bind()
 void OGLFont::Create()
 {
     LOG_WARNING("Chance texture unit to GL_TEXTURE1 later.");
-    LOG_WARNING("Double-check \"writeIndex\" and remove this warning.");
     LOG_DEBUG("Creating OpenGL font texture atlas.");
     glGenTextures(1, &m_glyphAtlas);
     glBindTexture(GL_TEXTURE_2D, m_glyphAtlas);

@@ -4,6 +4,13 @@ RasterizedFontData DebugFontGenerator::GenerateFontData() const
 {
     FixedArray<Glyph> glyphs = FixedArray<Glyph>(128);
     std::unordered_map<CodePoint, GlyphIndex> glyphMap;
+
+    for (int i = 48; i <= 90; i++)
+    {
+        if (i == 58) i = 65;
+
+        glyphMap[i] = i;
+    }
     
     for (int i = 0; i < glyphs.GetElementCount(); i++)
     {
@@ -369,6 +376,12 @@ RasterizedFontData DebugFontGenerator::GenerateFontData() const
         255,   0,   0,
         255, 255, 255
         }, { 3, 7 });
+
+    for (int i = 0; i < glyphs.GetElementCount(); i++)
+    {
+        glyphs[i].metrics.size = (Vector2i)glyphs[i].byteMap.GetDimensions();
+        glyphs[i].metrics.advance = glyphs[i].byteMap.GetDimensions().width + 1;
+    }
 
     return RasterizedFontData(std::move(glyphs), std::move(glyphMap));
 }
