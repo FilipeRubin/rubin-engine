@@ -12,6 +12,7 @@ class OGLRendererResourceManager final : public IRendererResourceManager, public
 public:
 	OGLRendererResourceManager(OGLGraphicsBackend* backend, OGLRenderer& renderer);
 	~OGLRendererResourceManager();
+	IFont* CreateFont(const IFontGenerator& generator) override;
 	IRenderingRule* CreateRenderingRule(const IRenderingRuleGenerator& generator) override;
 	IMesh2D* CreateMesh2D(const IMesh2DGenerator& generator) override;
 	IMesh3D* CreateMesh3D(const IMesh3DGenerator& generator) override;

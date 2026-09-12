@@ -26,6 +26,8 @@ typedef char GLchar;
 #define GL_TRIANGLES              0x0004
 #define GL_TRIANGLE_STRIP         0x0005
 #define GL_TRIANGLE_FAN           0x0006
+#define GL_ZERO                   0
+#define GL_ONE                    1
 #define GL_FRONT                  0x0404
 #define GL_BACK                   0x0405
 #define GL_LEFT                   0x0406
@@ -198,6 +200,13 @@ typedef char GLchar;
 
 // GL_VERSION_3_2
 #define GL_GEOMETRY_SHADER 0x8DD9
+
+// GL_VERSION_3_3
+#define GL_TEXTURE_SWIZZLE_R    0x8E42
+#define GL_TEXTURE_SWIZZLE_G    0x8E43
+#define GL_TEXTURE_SWIZZLE_B    0x8E44
+#define GL_TEXTURE_SWIZZLE_A    0x8E45
+#define GL_TEXTURE_SWIZZLE_RGBA 0x8E46
 
 bool TryLoadOGL();
 const void* CreateContext(const void* windowHandle, const void* sharedContext = nullptr);

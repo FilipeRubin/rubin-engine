@@ -1,5 +1,6 @@
 #include "ogl-renderer-resource-manager.h"
 #include "ogl-renderer.h"
+#include "resources/ogl-font.h"
 #include "resources/ogl-rendering-rule.h"
 #include "resources/ogl-mesh-2d.h"
 #include "resources/ogl-mesh-3d.h"
@@ -41,6 +42,11 @@ OGLRendererResourceManager::~OGLRendererResourceManager()
 
     if (currentBackend != m_backend)
         currentBackend->MakeCurrent();
+}
+
+IFont* OGLRendererResourceManager::CreateFont(const IFontGenerator& generator)
+{
+    return CreateResource<OGLFont>(generator.GenerateFontData());
 }
 
 IRenderingRule* OGLRendererResourceManager::CreateRenderingRule(const IRenderingRuleGenerator& generator)

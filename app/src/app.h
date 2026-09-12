@@ -20,6 +20,7 @@ private:
 	IMesh3D* cubeMesh = nullptr;
 	IMesh2D* quadMesh2D = nullptr;
 	ITexture2D* terrainTexture = nullptr;
+	IFont* font = nullptr;
 	ITexture2D* cubeTexture = nullptr;
 
 	ICamera3DParameter* cameraParameter = nullptr;

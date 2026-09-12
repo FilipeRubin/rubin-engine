@@ -1,5 +1,6 @@
 #include "app.h"
 #include "3d-data.h"
+#include <rendering/data-generation/font/debug-font-generator.h>
 #include <rendering/data-generation/mesh-2d/quad-mesh-2d-generator.h>
 #include <rendering/data-generation/mesh-3d/plane-mesh-3d-generator.h>
 #include <rendering/data-generation/mesh-3d/cube-mesh-3d-generator.h>
@@ -68,6 +69,7 @@ void App::Start()
 	terrainMesh = resourceManager->CreateMesh3D(TerrainMesh3DGenerator(terrainGrid, terrainData));
 	terrainTexture = resourceManager->CreateTexture2D(CheckerboardTexture2DGenerator({ 2, 2 }, Color(0.85f, 0.85f, 0.80f), Color(0.15f, 0.15f, 0.2f)));
 	cubeTexture = resourceManager->CreateTexture2D(RawDataTexture2DGenerator(patTexture, { 16, 16 }));
+	font = resourceManager->CreateFont(DebugFontGenerator());
 	cubeMesh = resourceManager->CreateMesh3D(CubeMesh3DGenerator(Vector3(3.0f, 3.0f, 3.0f)));
 	quadMesh2D = resourceManager->CreateMesh2D(QuadMesh2DGenerator({ 64.0f, 64.0f }));
 	
@@ -102,6 +104,7 @@ void App::Start()
 	cubeTransformParameter->Transform().scale = {3.0f, 5.0f, 8.0f};
 
 	transform2DParameter->Transform().position = { 0.0f, 0.0f };
+	transform2DParameter->Transform().scale = { 10.0f, 10.0f };
 }
 
 void App::Update()
@@ -140,7 +143,6 @@ void App::Update()
 	}
 	cubeTransformParameter->Transform().rotation.z += deltaTime;
 	cubeTransformParameter->Transform().rotation.x += deltaTime * 0.025f;
-	transform2DParameter->Transform().position = { (renderer->GetViewportSize().width - 64) * std::sin(lastTime * 2.0f) / 2.0f + (renderer->GetViewportSize().width - 64) / 2.0f, 0.0f };
 
 	// State updating
 	renderer->SetClearColor({ 0.05f, 0.1f, 0.2f });
@@ -162,6 +164,7 @@ void App::Update()
 	// Drawing 2D
 	canvasRenderingRule->Bind();
 	transform2DParameter->Bind();
+	font->Bind();
 	quadMesh2D->Draw();
 }
 

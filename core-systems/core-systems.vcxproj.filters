@@ -318,6 +318,12 @@
     <ClInclude Include="include\containers\rasterized-font-data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\rendering\data-generation\font\i-font-generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rendering\data-generation\font\debug-font-generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core-systems.cpp">
@@ -444,6 +450,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\containers\rasterized-font-data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\data-generation\font\debug-font-generator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

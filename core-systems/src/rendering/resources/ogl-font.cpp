@@ -23,7 +23,8 @@ void OGLFont::Bind()
 
 void OGLFont::Create()
 {
-    LOG_WARNING("Put GL_TEXTURE1 later.");
+    LOG_WARNING("Chance texture unit to GL_TEXTURE1 later.");
+    LOG_WARNING("Double-check \"writeIndex\" and remove this warning.");
     LOG_DEBUG("Creating OpenGL font texture atlas.");
     glGenTextures(1, &m_glyphAtlas);
     glBindTexture(GL_TEXTURE_2D, m_glyphAtlas);
@@ -34,7 +35,7 @@ void OGLFont::Create()
     Dimensions d;
     FixedArray<uint8_t> pixels = GenerateTextureAtlasPixels(d);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, d.width, d.height, 0, GL_RED, GL_UNSIGNED_BYTE, pixels.GetData());
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, d.width, d.height, 0, GL_RED, GL_UNSIGNED_BYTE, pixels.GetData());
     glGenerateMipmap(GL_TEXTURE_2D);
 }
 
@@ -53,6 +54,8 @@ FixedArray<uint8_t> OGLFont::GenerateTextureAtlasPixels(Dimensions& out_resoluti
 
     FixedArray<uint8_t> result = FixedArray<uint8_t>(out_resolution.width * out_resolution.height);
 
+    std::memset(result.GetData(), 0, result.GetElementCount());
+
     for (int y = 0; y < gridSize.height; y++)
     {
         for (int x = 0; x < gridSize.width; x++)
@@ -60,12 +63,19 @@ FixedArray<uint8_t> OGLFont::GenerateTextureAtlasPixels(Dimensions& out_resoluti
             size_t glyphIndex = x + y * gridSize.width;
             if (glyphIndex >= glyphs.GetElementCount())
                 continue; // Probably should break instead, but nevermind for now
-            const ByteMap& gBytes = *glyphs[glyphIndex].byteMap.Get();
+            const ByteMap& gBytes = glyphs[glyphIndex].byteMap;
             for (int gY = 0; gY < gBytes.GetDimensions().height; gY++)
             {
                 for (int gX = 0; gX < gBytes.GetDimensions().width; gX++)
                 {
-                    size_t writeIndex = (x + gX) * cellResolution.width + (y + gY) * out_resolution.width;
+                    size_t writeIndex =
+                        (x * cellResolution.width + gX) +
+                        ((gridSize.height - 1 - y) * cellResolution.height +
+                            (gBytes.GetDimensions().height - 1 - gY)) * out_resolution.width;
+                    if (writeIndex >= result.GetElementCount())
+                    {
+                        continue;
+                    }
                     result[writeIndex] = gBytes.Byte({ gX, gY });
                 }
             }
@@ -94,8 +104,8 @@ Dimensions OGLFont::CalculateUnpackedAtlasDimensions(Dimensions& out_gridSize, D
 
     for (int i = 0; i < numGlyphs; i++)
     {
-        cellWidth = std::max(cellWidth, glyphs[i].metrics.size.x);
-        cellHeight = std::max(cellHeight, glyphs[i].metrics.size.y);
+        cellWidth = std::max(cellWidth, glyphs[i].byteMap.GetDimensions().width);
+        cellHeight = std::max(cellHeight, glyphs[i].byteMap.GetDimensions().height);
     }
 
     return {

@@ -165,6 +165,8 @@
   <ItemGroup>
     <ClInclude Include="include\containers\byte-map.h" />
     <ClInclude Include="include\containers\rasterized-font-data.h" />
+    <ClInclude Include="include\rendering\data-generation\font\debug-font-generator.h" />
+    <ClInclude Include="include\rendering\data-generation\font\i-font-generator.h" />
     <ClInclude Include="include\rendering\resources\i-bindable-resource.h" />
     <ClInclude Include="include\rendering\resources\i-font.h" />
     <ClInclude Include="include\rendering\resources\i-static-text-2d.h" />
@@ -266,6 +268,7 @@
     <ClInclude Include="src\win32-window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\rendering\data-generation\font\debug-font-generator.cpp" />
     <ClCompile Include="src\containers\rasterized-font-data.cpp" />
     <ClCompile Include="src\containers\byte-map.cpp" />
     <ClCompile Include="src\rendering\data-generation\rendering-rule\canvas-rendering-rule-generator.cpp" />

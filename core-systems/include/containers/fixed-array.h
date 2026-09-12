@@ -12,6 +12,13 @@ public:
 	{
 	}
 
+	FixedArray(std::initializer_list<T> values) :
+		m_data(new T[values.size()]),
+		m_elementCount(values.size())
+	{
+		std::copy(values.begin(), values.end(), m_data);
+	}
+
 	FixedArray(const FixedArray& other) :
 		m_data(new T[other.m_elementCount]),
 		m_elementCount(other.m_elementCount)

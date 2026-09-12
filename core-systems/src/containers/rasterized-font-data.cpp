@@ -4,8 +4,8 @@ RasterizedFontData::RasterizedFontData(
 	FixedArray<Glyph>&& glyphs,
 	std::unordered_map<CodePoint, GlyphIndex>&& glyphMap
 ) :
-	m_glyphs(glyphs),
-	m_glyphMap(glyphMap)
+	m_glyphs(std::move(glyphs)),
+	m_glyphMap(std::move(glyphMap))
 {}
 
 RasterizedFontData::RasterizedFontData(RasterizedFontData&& other) noexcept :
