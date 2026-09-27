@@ -53,17 +53,21 @@ int main()
 {
 	IWindow* window = CoreSystems::CreateWindow();
 
-	if (not window->TryInitialize())
+	if (not window->TryInitialize()) // Try initialize window
+	{
 		return 1;
+	}
 
 	IGraphicsBackend* graphics = CoreSystems::CreateGraphicsBackend(window);
 
-	if (not graphics->TryInitialize())
+	if (not graphics->TryInitialize()) // Try initialize graphics
 	{
+		window->Finalize();
+		delete window;
 		return 2;
 	}
 
-	while (not window->ShouldClose())
+	while (not window->ShouldClose()) // Window loop
 	{
 		graphics->MakeCurrent();
 		// Rendering will be done here
@@ -71,11 +75,14 @@ int main()
 		window->Process();
 	}
 
+	// Free resources
 	graphics->Finalize();
 	window->Finalize();
 
 	delete graphics;
 	delete window;
+
+	return 0;
 }
 ```
 
