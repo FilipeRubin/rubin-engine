@@ -84,27 +84,7 @@ ITexture2D* OGLRendererResourceManager::CreateTexture2D(const ITexture2DGenerato
     );
 }
 
-void OGLRendererResourceManager::Update()
-{
-	if (not m_waitingToCreate.empty() or not m_waitingToDestroy.empty())
-		LOG_DEBUG("Applying queued OpenGL resource changes: " + std::to_string(m_waitingToCreate.size()) + " creation(s), " + std::to_string(m_waitingToDestroy.size()) + " destruction(s).");
-
-    for (unique_ptr<IRendererManaged>& managed : m_waitingToCreate)
-    {
-        managed->CreateResource();
-        m_resources.push_back(std::move(managed));
-    }
-
-    for (unique_ptr<IRendererManaged>& managed : m_waitingToDestroy)
-    {
-        managed->DestroyResource();
-    }
-
-    m_waitingToCreate.clear();
-    m_waitingToDestroy.clear();
-}
-
-void OGLRendererResourceManager::DestroyImpl(IRendererResource* resource)
+void OGLRendererResourceManager::Destroy(IRendererResource* resource)
 {
     list<unique_ptr<IRendererManaged>>::iterator managedIt = std::find_if(m_resources.begin(), m_resources.end(),
         [&resource](unique_ptr<IRendererManaged>& managed)
@@ -129,8 +109,28 @@ void OGLRendererResourceManager::DestroyImpl(IRendererResource* resource)
 
         resource = nullptr;
     }
-	else
-	{
-		LOG_WARNING("Attempted to destroy a renderer resource that is not managed by this resource manager.");
-	}
+    else
+    {
+        LOG_WARNING("Attempted to destroy a renderer resource that is not managed by this resource manager.");
+    }
+}
+
+void OGLRendererResourceManager::Update()
+{
+	if (not m_waitingToCreate.empty() or not m_waitingToDestroy.empty())
+		LOG_DEBUG("Applying queued OpenGL resource changes: " + std::to_string(m_waitingToCreate.size()) + " creation(s), " + std::to_string(m_waitingToDestroy.size()) + " destruction(s).");
+
+    for (unique_ptr<IRendererManaged>& managed : m_waitingToCreate)
+    {
+        managed->CreateResource();
+        m_resources.push_back(std::move(managed));
+    }
+
+    for (unique_ptr<IRendererManaged>& managed : m_waitingToDestroy)
+    {
+        managed->DestroyResource();
+    }
+
+    m_waitingToCreate.clear();
+    m_waitingToDestroy.clear();
 }
