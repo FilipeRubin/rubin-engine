@@ -4,7 +4,7 @@
 
 struct DirectionalLight
 {
-	Color diffuse;
+	Color color;
 	Vector3 direction = Vector3(0.0f, -1.0f, 0.0f);
 	float intensity = 1.0f;
 };

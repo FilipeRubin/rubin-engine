@@ -1,9 +1,11 @@
 #pragma once
-#include <types/rendering-rule-descriptor.h>
+#include "descriptor/rendering-rule-descriptor.h"
+
+class IRenderer;
 
 class IRenderingRuleGenerator
 {
 public:
 	virtual ~IRenderingRuleGenerator() = default;
-	virtual RenderingRuleDescriptor GenerateDescriptor() const = 0;
+	virtual RenderingRuleDescriptor GenerateDescriptor(IRenderer& renderer) const = 0;
 };

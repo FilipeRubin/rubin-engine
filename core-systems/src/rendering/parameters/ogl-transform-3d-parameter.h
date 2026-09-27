@@ -6,8 +6,12 @@ class OGLTransform3DParameter final : public ITransform3DParameter, public OGLRe
 {
 public:
 	OGLTransform3DParameter(OGLRenderer& renderer);
+	~OGLTransform3DParameter();
 	void Bind() override;
 	Transform3D& Transform() override;
+protected:
+	IRenderParameterImplementation* GetImplementation() override;
 private:
 	Transform3D m_transform;
+	IRenderParameterImplementation* m_impl;
 };

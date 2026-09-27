@@ -51,7 +51,7 @@ IFont* OGLRendererResourceManager::CreateFont(const IFontGenerator& generator)
 
 IRenderingRule* OGLRendererResourceManager::CreateRenderingRule(const IRenderingRuleGenerator& generator)
 {
-    return CreateResource<OGLRenderingRule>(generator.GenerateDescriptor());
+    return CreateResource<OGLRenderingRule>(generator.GenerateDescriptor(Renderer()));
 }
 
 IMesh2D* OGLRendererResourceManager::CreateMesh2D(const IMesh2DGenerator& generator)

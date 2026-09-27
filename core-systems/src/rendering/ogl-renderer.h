@@ -1,7 +1,8 @@
 #pragma once
 #include "ogl-render-parameters-state.h"
-#include "ogl-shader-program-cache.h"
+#include "ogl-shader-program.h"
 #include <rendering/i-renderer.h>
+#include <rendering/resources/ogl-rendering-rule.h>
 #include <ogl-graphics-backend.h>
 
 class OGLRenderer final : public IRenderer
@@ -18,11 +19,9 @@ public:
 	OGLRenderingRule* GetCurrentRenderingRule() const;
 	void SetCurrentRenderingRule(OGLRenderingRule* renderingRule);
 	OGLRenderParametersState& RenderParametersState();
-	OGLShaderProgramCache& ShaderCache();
 private:
-	OGLRenderingRule* m_currentRenderingRule;
 	OGLRenderParametersState m_parametersState;
-	OGLShaderProgramCache m_shaderCache;
+	OGLRenderingRule* m_currentRenderingRule;
 	IRendererParameterManager* m_parameterManager;
 	IRendererResourceManager* m_resourceManager;
 	Dimensions m_cachedViewportSize;

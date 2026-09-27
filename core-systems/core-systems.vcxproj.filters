@@ -222,9 +222,6 @@
     <ClInclude Include="src\rendering\ogl-render-parameters-state.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\rendering\ogl-shader-program-cache.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\types\mesh-type.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -234,19 +231,10 @@
     <ClInclude Include="src\rendering\ogl-renderer-user.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\types\rendering-rule-descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\rendering\ogl-shader-key.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\rendering\ogl-shader-program.h">
+    <ClInclude Include="include\rendering\data-generation\rendering-rule\descriptor\rendering-rule-descriptor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\rendering\ogl-shader-constants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\rendering\ogl-shader-source-builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\types\scene-lighting-descriptor.h">
@@ -285,9 +273,6 @@
     <ClInclude Include="include\rendering\data-generation\rendering-rule\canvas-rendering-rule-generator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\rendering\ogl-attribute-location-constants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\types\glyph-metrics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -322,6 +307,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\rendering\data-generation\font\debug-font-generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rendering\parameters\implementation\i-render-parameter-implementation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rendering\parameters\implementation\ogl-render-parameter-implementation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rendering\ogl-shader-program.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rendering\data-generation\rendering-rule\descriptor\implementation\i-rendering-rule-descriptor-implementation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rendering\data-generation\rendering-rule\descriptor\implementation\ogl-rendering-rule-descriptor-implementation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -413,18 +413,6 @@
     <ClCompile Include="src\rendering\ogl-renderer-user.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\ogl-shader-program-cache.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rendering\ogl-shader-key.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rendering\ogl-shader-program.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rendering\ogl-shader-source-builder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\rendering\resources\ogl-mesh-2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -440,9 +428,6 @@
     <ClCompile Include="src\rendering\data-generation\rendering-rule\canvas-rendering-rule-generator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\types\rendering-rule-descriptor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\containers\byte-map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -453,6 +438,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\rendering\data-generation\font\debug-font-generator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\parameters\implementation\ogl-render-parameter-implementation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\ogl-shader-program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\data-generation\rendering-rule\descriptor\rendering-rule-descriptor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\data-generation\rendering-rule\descriptor\implementation\ogl-rendering-rule-descriptor-implementation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

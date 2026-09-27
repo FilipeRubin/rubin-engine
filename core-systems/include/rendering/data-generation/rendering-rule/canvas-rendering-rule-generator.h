@@ -4,5 +4,5 @@
 class CanvasRenderingRuleGenerator : public IRenderingRuleGenerator
 {
 public:
-	RenderingRuleDescriptor GenerateDescriptor() const override;
+	RenderingRuleDescriptor GenerateDescriptor(IRenderer& renderer) const override;
 };

@@ -5,9 +5,8 @@
 #include <logging/log-macros.h>
 
 OGLRenderer::OGLRenderer(OGLGraphicsBackend* backend, Dimensions viewportSize) :
-	m_currentRenderingRule(nullptr),
 	m_parametersState(OGLRenderParametersState()),
-	m_shaderCache(*this),
+	m_currentRenderingRule(nullptr),
 	m_parameterManager(new OGLRendererParameterManager(*this)),
 	m_resourceManager(new OGLRendererResourceManager(backend, *this)),
 	m_cachedViewportSize(viewportSize)
@@ -67,9 +66,4 @@ void OGLRenderer::SetCurrentRenderingRule(OGLRenderingRule* renderingRule)
 OGLRenderParametersState& OGLRenderer::RenderParametersState()
 {
 	return m_parametersState;
-}
-
-OGLShaderProgramCache& OGLRenderer::ShaderCache()
-{
-	return m_shaderCache;
 }

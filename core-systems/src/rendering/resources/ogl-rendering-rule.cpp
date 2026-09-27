@@ -1,6 +1,6 @@
 #include "ogl-rendering-rule.h"
 #include <rendering/ogl-renderer.h>
-#include <logging/log-macros.h>
+#include <rendering/data-generation/rendering-rule/descriptor/implementation/ogl-rendering-rule-descriptor-implementation.h>
 
 OGLRenderingRule::OGLRenderingRule(OGLRenderer& renderer, RenderingRuleDescriptor descriptor) :
 	OGLRendererUser(renderer),
@@ -11,23 +11,33 @@ OGLRenderingRule::OGLRenderingRule(OGLRenderer& renderer, RenderingRuleDescripto
 void OGLRenderingRule::Bind()
 {
 	Renderer().SetCurrentRenderingRule(this);
-}
-
-const RenderingRuleDescriptor& OGLRenderingRule::GetDescriptor() const
-{
-	return m_descriptor;
+	m_shaderProgram.Use();
+	auto& desc = *static_cast<OGLRenderingRuleDescriptorImplementation*>(m_descriptor.GetImplementation());
+	FixedArray<IRenderParameter**>& params = desc.Parameters();
+	for (size_t i = 0; i < params.GetElementCount(); i++)
+	{
+		if (*params[i] != nullptr)
+			(*params[i])->Bind();
+	}
 }
 
 bool OGLRenderingRule::IsValid() const
 {
-	return true;
+	return m_shaderProgram.GetProgram() != 0U;
 }
 
 void OGLRenderingRule::Create()
 {
-	// Renderer rule is a logical resource, even though it doesn`t allocate anything on the GPU directly
+	auto& desc = *static_cast<OGLRenderingRuleDescriptorImplementation*>(m_descriptor.GetImplementation());
+	m_shaderProgram.TryCompile(desc.VertexSource().c_str(), desc.FragmentSource().c_str());
 }
 
 void OGLRenderingRule::Destroy()
 {
+	m_shaderProgram.Delete();
+}
+
+OGLShaderProgram& OGLRenderingRule::ShaderProgram()
+{
+	return m_shaderProgram;
 }
