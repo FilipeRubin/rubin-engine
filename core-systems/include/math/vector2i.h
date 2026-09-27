@@ -1,5 +1,6 @@
 #pragma once
 #include <types/dimensions.h>
+#include <cmath>
 
 struct Vector2i
 {
@@ -18,62 +19,106 @@ struct Vector2i
 		x(dimensions.width), y(dimensions.height)
 	{}
 
-	inline constexpr Vector2i operator+(const Vector2i& other) const noexcept
+	constexpr bool operator==(const Vector2i& other) const noexcept = default;
+
+	inline constexpr Vector2i operator+(Vector2i other) const noexcept
 	{
 		return Vector2i(x + other.x, y + other.y);
 	}
 
-	inline constexpr Vector2i operator+(const int32_t& value) const noexcept
+	inline constexpr Vector2i operator+(int32_t value) const noexcept
 	{
 		return Vector2i(x + value, y + value);
 	}
 
-	inline constexpr Vector2i operator-(const Vector2i& other) const noexcept
+	inline constexpr Vector2i operator-(Vector2i other) const noexcept
 	{
 		return Vector2i(x - other.x, y - other.y);
 	}
 
-	inline constexpr Vector2i operator-(const int32_t& value) const noexcept
+	inline constexpr Vector2i operator-(int32_t value) const noexcept
 	{
 		return Vector2i(x - value, y - value);
 	}
 
-	inline constexpr Vector2i operator*(const Vector2i& other) const noexcept
+	inline constexpr Vector2i operator*(Vector2i other) const noexcept
 	{
 		return Vector2i(x * other.x, y * other.y);
 	}
 
-	inline constexpr Vector2i operator*(const int32_t& value) const noexcept
+	inline constexpr Vector2i operator*(int32_t value) const noexcept
 	{
 		return Vector2i(x * value, y * value);
 	}
 
-	inline constexpr Vector2i operator/(const Vector2i& other) const noexcept
+	inline constexpr Vector2i operator/(Vector2i other) const noexcept
 	{
 		return Vector2i(x / other.x, y / other.y);
 	}
 
-	inline constexpr Vector2i operator/(const int32_t& value) const noexcept
+	inline constexpr Vector2i operator/(int32_t value) const noexcept
 	{
 		return Vector2i(x / value, y / value);
 	}
 
-	inline constexpr Vector2i& operator+=(const Vector2i& other) noexcept
+	inline constexpr Vector2i operator-() const noexcept
+	{
+		return Vector2i(-x, -y);
+	}
+
+	inline constexpr Vector2i& operator+=(Vector2i other) noexcept
 	{
 		x += other.x;
 		y += other.y;
 		return *this;
 	}
 
-	inline constexpr Vector2i& operator-=(const Vector2i& other) noexcept
+	inline constexpr Vector2i& operator+=(int32_t value) noexcept
+	{
+		x += value;
+		y += value;
+		return *this;
+	}
+
+	inline constexpr Vector2i& operator-=(Vector2i other) noexcept
 	{
 		x -= other.x;
 		y -= other.y;
 		return *this;
 	}
 
-	inline constexpr Vector2i operator-() const noexcept
+	inline constexpr Vector2i& operator-=(int32_t value) noexcept
 	{
-		return Vector2i(-x, -y);
+		x -= value;
+		y -= value;
+		return *this;
+	}
+
+	inline constexpr Vector2i& operator*=(Vector2i other) noexcept
+	{
+		x *= other.x;
+		y *= other.y;
+		return *this;
+	}
+
+	inline constexpr Vector2i& operator*=(int32_t value) noexcept
+	{
+		x *= value;
+		y *= value;
+		return *this;
+	}
+
+	inline constexpr Vector2i& operator/=(Vector2i other) noexcept
+	{
+		x /= other.x;
+		y /= other.y;
+		return *this;
+	}
+
+	inline constexpr Vector2i& operator/=(int32_t value) noexcept
+	{
+		x /= value;
+		y /= value;
+		return *this;
 	}
 };

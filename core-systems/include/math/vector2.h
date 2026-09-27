@@ -1,5 +1,6 @@
 #pragma once
 #include <types/dimensions.h>
+#include <cmath>
 
 struct Vector2
 {
@@ -19,62 +20,135 @@ struct Vector2
 	{
 	}
 
-	inline constexpr Vector2 operator+(const Vector2& other) const noexcept
+	inline constexpr float Cross(Vector2 other) const noexcept
+	{
+		return x * other.y - y * other.x;
+	}
+
+	inline constexpr float Dot(Vector2 other) const noexcept
+	{
+		return x * other.x + y * other.y;
+	}
+
+	inline float Length() const noexcept
+	{
+		return std::sqrtf(LengthSquared());
+	}
+
+	inline constexpr float LengthSquared() const noexcept
+	{
+		return x * x + y * y;
+	}
+
+	inline Vector2 Normalized() const noexcept
+	{
+		const float l = Length();
+		return l == 0.0f ? Vector2() : Vector2(
+			x / l,
+			y / l
+		);
+	}
+
+	constexpr bool operator==(const Vector2& other) const noexcept = default;
+
+	inline constexpr Vector2 operator+(Vector2 other) const noexcept
 	{
 		return Vector2(x + other.x, y + other.y);
 	}
 
-	inline constexpr Vector2 operator+(const float& value) const noexcept
+	inline constexpr Vector2 operator+(float value) const noexcept
 	{
 		return Vector2(x + value, y + value);
 	}
 
-	inline constexpr Vector2 operator-(const Vector2& other) const noexcept
+	inline constexpr Vector2 operator-(Vector2 other) const noexcept
 	{
 		return Vector2(x - other.x, y - other.y);
 	}
 
-	inline constexpr Vector2 operator-(const float& value) const noexcept
+	inline constexpr Vector2 operator-(float value) const noexcept
 	{
 		return Vector2(x - value, y - value);
 	}
 
-	inline constexpr Vector2 operator*(const Vector2& other) const noexcept
+	inline constexpr Vector2 operator*(Vector2 other) const noexcept
 	{
 		return Vector2(x * other.x, y * other.y);
 	}
 
-	inline constexpr Vector2 operator*(const float& value) const noexcept
+	inline constexpr Vector2 operator*(float value) const noexcept
 	{
 		return Vector2(x * value, y * value);
 	}
 
-	inline constexpr Vector2 operator/(const Vector2& other) const noexcept
+	inline constexpr Vector2 operator/(Vector2 other) const noexcept
 	{
 		return Vector2(x / other.x, y / other.y);
 	}
 
-	inline constexpr Vector2 operator/(const float& value) const noexcept
+	inline constexpr Vector2 operator/(float value) const noexcept
 	{
 		return Vector2(x / value, y / value);
 	}
+	
+	inline constexpr Vector2 operator-() const noexcept
+	{
+		return Vector2(-x, -y);
+	}
 
-	inline constexpr Vector2& operator+=(const Vector2& other) noexcept
+	inline constexpr Vector2& operator+=(Vector2 other) noexcept
 	{
 		x += other.x;
 		y += other.y;
 		return *this;
 	}
 
-	inline constexpr Vector2& operator-=(const Vector2& other) noexcept
+	inline constexpr Vector2& operator+=(float value) noexcept
+	{
+		x += value;
+		y += value;
+		return *this;
+	}
+
+	inline constexpr Vector2& operator-=(Vector2 other) noexcept
 	{
 		x -= other.x;
 		y -= other.y;
 		return *this;
 	}
 
-	inline constexpr Vector2 operator-() const noexcept
+	inline constexpr Vector2& operator-=(float value) noexcept
 	{
-		return Vector2(-x, -y);
+		x -= value;
+		y -= value;
+		return *this;
+	}
+
+	inline constexpr Vector2& operator*=(Vector2 other) noexcept
+	{
+		x *= other.x;
+		y *= other.y;
+		return *this;
+	}
+
+	inline constexpr Vector2& operator*=(float value) noexcept
+	{
+		x *= value;
+		y *= value;
+		return *this;
+	}
+
+	inline constexpr Vector2& operator/=(Vector2 other) noexcept
+	{
+		x /= other.x;
+		y /= other.y;
+		return *this;
+	}
+
+	inline constexpr Vector2& operator/=(float value) noexcept
+	{
+		x /= value;
+		y /= value;
+		return *this;
 	}
 };

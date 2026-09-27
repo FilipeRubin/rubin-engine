@@ -17,75 +17,28 @@ struct Vector3
 	{
 	}
 
-	inline constexpr float& operator[](size_t index) noexcept
+	inline constexpr Vector3 Cross(Vector3 other) const noexcept
 	{
-		return static_cast<float*>(&x)[index];
+		return Vector3(
+			y * other.z - z * other.y,
+			z * other.x - x * other.z,
+			x * other.y - y * other.x
+		);
 	}
 
-	inline constexpr const float& operator[](size_t index) const noexcept
+	inline constexpr float Dot(Vector3 other) const noexcept
 	{
-		return static_cast<const float*>(&x)[index];
+		return x * other.x + y * other.y + z * other.z;
 	}
 
-	inline constexpr Vector3 operator+(const Vector3& other) const noexcept
+	inline float Length() const noexcept
 	{
-		return Vector3(x + other.x, y + other.y, z + other.z);
+		return std::sqrtf(LengthSquared());
 	}
 
-	inline constexpr Vector3 operator+(const float& value) const noexcept
+	inline constexpr float LengthSquared() const noexcept
 	{
-		return Vector3(x + value, y + value, z + value);
-	}
-
-	inline constexpr Vector3 operator-(const Vector3& other) const noexcept
-	{
-		return Vector3(x - other.x, y - other.y, z - other.z);
-	}
-
-	inline constexpr Vector3 operator-(const float& value) const noexcept
-	{
-		return Vector3(x - value, y - value, z - value);
-	}
-
-	inline constexpr Vector3 operator*(const Vector3& other) const noexcept
-	{
-		return Vector3(x * other.x, y * other.y, z * other.z);
-	}
-
-	inline constexpr Vector3 operator*(const float& value) const noexcept
-	{
-		return Vector3(x * value, y * value, z * value);
-	}
-
-	inline constexpr Vector3 operator/(const Vector3& other) const noexcept
-	{
-		return Vector3(x / other.x, y / other.y, z / other.z);
-	}
-
-	inline constexpr Vector3 operator/(const float& value) const noexcept
-	{
-		return Vector3(x / value, y / value, z / value);
-	}
-
-	inline constexpr Vector3 operator-() const noexcept
-	{
-		return Vector3(-x, -y, -z);
-	}
-
-	inline constexpr Vector3& operator+=(const Vector3& other) noexcept
-	{
-		x += other.x;
-		y += other.y;
-		z += other.z;
-		return *this;
-	}
-
-	inline constexpr Vector3& operator-=(const Vector3& other) noexcept
-	{
-		x -= other.x;
-		y -= other.y;
-		z -= other.z;
-		return *this;
+		return x * x + y * y + z * z;
 	}
 
 	inline Vector3 Normalized() const noexcept
@@ -98,13 +51,124 @@ struct Vector3
 		);
 	}
 
-	inline float Length() const noexcept
+	inline constexpr float& operator[](size_t index) noexcept
 	{
-		return std::sqrtf(LengthSquared());
+		return static_cast<float*>(&x)[index];
 	}
 
-	inline constexpr float LengthSquared() const noexcept
+	inline constexpr float operator[](size_t index) const noexcept
 	{
-		return x * x + y * y + z * z;
+		return static_cast<const float*>(&x)[index];
+	}
+
+	constexpr bool operator==(const Vector3& other) const noexcept = default;
+
+	inline constexpr Vector3 operator+(Vector3 other) const noexcept
+	{
+		return Vector3(x + other.x, y + other.y, z + other.z);
+	}
+
+	inline constexpr Vector3 operator+(const float value) const noexcept
+	{
+		return Vector3(x + value, y + value, z + value);
+	}
+
+	inline constexpr Vector3 operator-(Vector3 other) const noexcept
+	{
+		return Vector3(x - other.x, y - other.y, z - other.z);
+	}
+
+	inline constexpr Vector3 operator-(float value) const noexcept
+	{
+		return Vector3(x - value, y - value, z - value);
+	}
+
+	inline constexpr Vector3 operator*(Vector3 other) const noexcept
+	{
+		return Vector3(x * other.x, y * other.y, z * other.z);
+	}
+
+	inline constexpr Vector3 operator*(float value) const noexcept
+	{
+		return Vector3(x * value, y * value, z * value);
+	}
+
+	inline constexpr Vector3 operator/(Vector3 other) const noexcept
+	{
+		return Vector3(x / other.x, y / other.y, z / other.z);
+	}
+
+	inline constexpr Vector3 operator/(float value) const noexcept
+	{
+		return Vector3(x / value, y / value, z / value);
+	}
+
+	inline constexpr Vector3 operator-() const noexcept
+	{
+		return Vector3(-x, -y, -z);
+	}
+
+	inline constexpr Vector3& operator+=(Vector3 other) noexcept
+	{
+		x += other.x;
+		y += other.y;
+		z += other.z;
+		return *this;
+	}
+
+	inline constexpr Vector3& operator+=(float value) noexcept
+	{
+		x += value;
+		y += value;
+		z += value;
+		return *this;
+	}
+
+	inline constexpr Vector3& operator-=(Vector3 other) noexcept
+	{
+		x -= other.x;
+		y -= other.y;
+		z -= other.z;
+		return *this;
+	}
+
+	inline constexpr Vector3& operator-=(float value) noexcept
+	{
+		x -= value;
+		y -= value;
+		z -= value;
+		return *this;
+	}
+
+	inline constexpr Vector3& operator*=(Vector3 other) noexcept
+	{
+		x *= other.x;
+		y *= other.y;
+		z *= other.z;
+		return *this;
+	}
+
+	inline constexpr Vector3& operator*=(float value) noexcept
+	{
+		x *= value;
+		y *= value;
+		z *= value;
+		return *this;
+	}
+
+	inline constexpr Vector3& operator/=(Vector3 other) noexcept
+	{
+		x /= other.x;
+		y /= other.y;
+		z /= other.z;
+		return *this;
+	}
+
+	inline constexpr Vector3& operator/=(float value) noexcept
+	{
+		x /= value;
+		y /= value;
+		z /= value;
+		return *this;
 	}
 };
