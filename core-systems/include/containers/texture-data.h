@@ -12,10 +12,11 @@ public:
 	TextureData(TextureData&& other) noexcept;
 	TextureData& operator=(const TextureData& other) = delete;
 	TextureData& operator=(TextureData&& other) noexcept;
+
 	Shared<FixedArray<Color8>> GetData() const;
-	const Dimensions& GetDimensions() const;
-	void SetData(Shared<FixedArray<Color8>> data, const Dimensions& dimensions);
-	Color8& Pixel(const Dimensions& index);
+	Dimensions GetDimensions() const;
+	void SetData(Shared<FixedArray<Color8>> data, Dimensions dimensions);
+	Color8& Pixel(Dimensions index);
 private:
 	Shared<FixedArray<Color8>> m_data;
 	Dimensions m_dimensions;

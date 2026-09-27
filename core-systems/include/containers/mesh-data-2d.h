@@ -11,6 +11,7 @@ public:
 	MeshData2D(MeshData2D&& other) noexcept;
 	MeshData2D& operator=(const MeshData2D& other) = delete;
 	MeshData2D& operator=(MeshData2D&& other) noexcept;
+
 	void SetVertices(Shared<FixedArray<Vertex2D>> vertices);
 	void SetIndices(Shared<FixedArray<unsigned int>> indices);
 	Shared<FixedArray<Vertex2D>> GetVertices() const;

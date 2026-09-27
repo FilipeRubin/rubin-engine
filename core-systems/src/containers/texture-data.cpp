@@ -33,18 +33,18 @@ Shared<FixedArray<Color8>> TextureData::GetData() const
 	return m_data;
 }
 
-const Dimensions& TextureData::GetDimensions() const
+Dimensions TextureData::GetDimensions() const
 {
 	return m_dimensions;
 }
 
-void TextureData::SetData(Shared<FixedArray<Color8>> data, const Dimensions& dimensions)
+void TextureData::SetData(Shared<FixedArray<Color8>> data, Dimensions dimensions)
 {
 	m_data = data;
 	m_dimensions = dimensions;
 }
 
-Color8& TextureData::Pixel(const Dimensions& index)
+Color8& TextureData::Pixel(Dimensions index)
 {
 	return m_data->GetData()[index.height * m_dimensions.width + index.width];
 }

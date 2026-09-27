@@ -11,6 +11,7 @@ public:
 	MeshData3D(MeshData3D&& other) noexcept;
 	MeshData3D& operator=(const MeshData3D& other) = delete;
 	MeshData3D& operator=(MeshData3D&& other) noexcept;
+
 	void SetVertices(Shared<FixedArray<Vertex3D>> vertices);
 	void SetIndices(Shared<FixedArray<unsigned int>> indices);
 	Shared<FixedArray<Vertex3D>> GetVertices() const;
