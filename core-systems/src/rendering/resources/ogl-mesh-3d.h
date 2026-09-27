@@ -12,7 +12,6 @@ public:
 	OGLMesh3D(OGLRenderer& renderer, const Shared<FixedArray<Vertex3D>> vertices, const Shared<FixedArray<unsigned int>> indices);
 	bool IsValid() const override;
 	void Draw() override;
-	MeshType GetMeshType() const override;
 	void Create() override;
 	void Destroy() override;
 private:

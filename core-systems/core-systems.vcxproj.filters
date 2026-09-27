@@ -222,9 +222,6 @@
     <ClInclude Include="src\rendering\ogl-render-parameters-state.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\types\mesh-type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\rendering\resources\i-mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>

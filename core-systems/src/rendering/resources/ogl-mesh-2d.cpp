@@ -28,11 +28,6 @@ void OGLMesh2D::Draw()
     glDrawElements(GL_TRIANGLES, m_indicesCount, GL_UNSIGNED_INT, NULL);
 }
 
-MeshType OGLMesh2D::GetMeshType() const
-{
-    return MeshType::STATIC_2D;
-}
-
 void OGLMesh2D::Create()
 {
     LOG_DEBUG("Creating OGLMesh2D.");

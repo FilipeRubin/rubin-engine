@@ -27,11 +27,6 @@ void OGLMesh3D::Draw()
 	glDrawElements(GL_TRIANGLES, m_indicesCount, GL_UNSIGNED_INT, NULL);
 }
 
-MeshType OGLMesh3D::GetMeshType() const
-{
-	return MeshType::STATIC_3D;
-}
-
 void OGLMesh3D::Create()
 {
 	LOG_DEBUG("Creating OGLMesh3D.");

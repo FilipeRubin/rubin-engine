@@ -224,7 +224,6 @@
     <ClInclude Include="include\rendering\resources\i-texture-2d.h" />
     <ClInclude Include="include\types\directional-light.h" />
     <ClInclude Include="include\containers\mesh-data-3d.h" />
-    <ClInclude Include="include\types\mesh-type.h" />
     <ClInclude Include="include\types\point-2d.h" />
     <ClInclude Include="include\types\transform-3d.h" />
     <ClInclude Include="include\types\vertex-3d.h" />
