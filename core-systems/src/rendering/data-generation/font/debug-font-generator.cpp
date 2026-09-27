@@ -12,7 +12,7 @@ RasterizedFontData DebugFontGenerator::GenerateFontData() const
         glyphMap[i] = i;
     }
     
-    for (int i = 0; i < glyphs.GetElementCount(); i++)
+    for (int i = 0; i < glyphs.GetSize(); i++)
     {
         glyphs[i].byteMap.SetBytes({ 0, 0, 0, 0 }, { 2, 2 });
     }
@@ -377,7 +377,7 @@ RasterizedFontData DebugFontGenerator::GenerateFontData() const
         255, 255, 255
         }, { 3, 7 });
 
-    for (int i = 0; i < glyphs.GetElementCount(); i++)
+    for (int i = 0; i < glyphs.GetSize(); i++)
     {
         glyphs[i].metrics.size = (Vector2i)glyphs[i].byteMap.GetDimensions();
         glyphs[i].metrics.advance = glyphs[i].byteMap.GetDimensions().width + 1;

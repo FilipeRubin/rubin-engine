@@ -5,7 +5,7 @@
 
 OGLMesh3D::OGLMesh3D(OGLRenderer& renderer, const Shared<FixedArray<Vertex3D>> vertices, const Shared<FixedArray<unsigned int>> indices) :
 	OGLRendererUser(renderer),
-	m_vbo(0U), m_vao(0U), m_ebo(0U), m_indicesCount(unsigned int(indices->GetElementCount())),
+	m_vbo(0U), m_vao(0U), m_ebo(0U), m_indicesCount(unsigned int(indices->GetSize())),
 	m_cachedVertices(vertices),
 	m_cachedIndices(indices)
 {
@@ -33,7 +33,7 @@ void OGLMesh3D::Create()
 	glGenVertexArrays(1, &m_vao);
 	glBindVertexArray(m_vao);
 
-	GLsizeiptr verticesSize = m_cachedVertices->GetElementCount() * sizeof(Vertex3D);
+	GLsizeiptr verticesSize = m_cachedVertices->GetSize() * sizeof(Vertex3D);
 	glGenBuffers(1, &m_vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 	glBufferData(GL_ARRAY_BUFFER, verticesSize, m_cachedVertices->GetData(), GL_STATIC_DRAW);
@@ -45,7 +45,7 @@ void OGLMesh3D::Create()
 	glEnableVertexAttribArray(1U);
 	glEnableVertexAttribArray(2U);
 
-	GLsizeiptr indicesSize = m_cachedIndices->GetElementCount() * sizeof(unsigned int);
+	GLsizeiptr indicesSize = m_cachedIndices->GetSize() * sizeof(unsigned int);
 	glGenBuffers(1, &m_ebo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize, m_cachedIndices->GetData(), GL_STATIC_DRAW);

@@ -13,7 +13,7 @@ OGLSceneLightingParameter::OGLSceneLightingParameter(OGLRenderer& renderer, cons
         auto& d = static_cast<OGLSceneLightingParameter*>(param)->DirectionalLights();
         using namespace OGLShaderConstants;
         program.SetUniform(LIGHTING_AMBIENT, a);
-        for (size_t i = 0; i < d.GetElementCount(); i++)
+        for (size_t i = 0; i < d.GetSize(); i++)
         {
             std::string arrayName = std::format("{0}[{1}]", LIGHTING_DIRECTIONAL_ARRAY, std::to_string(i));
             std::string color = arrayName + '.' + LIGHTING_DIRECTIONAL_STRUCT_COLOR;

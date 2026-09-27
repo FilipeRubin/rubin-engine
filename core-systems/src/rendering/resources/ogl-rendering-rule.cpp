@@ -14,7 +14,7 @@ void OGLRenderingRule::Bind()
 	m_shaderProgram.Use();
 	auto& desc = *static_cast<OGLRenderingRuleDescriptorImplementation*>(m_descriptor.GetImplementation());
 	FixedArray<IRenderParameter**>& params = desc.Parameters();
-	for (size_t i = 0; i < params.GetElementCount(); i++)
+	for (size_t i = 0; i < params.GetSize(); i++)
 	{
 		if (*params[i] != nullptr)
 			(*params[i])->Bind();

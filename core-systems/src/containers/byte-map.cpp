@@ -10,7 +10,7 @@ ByteMap::ByteMap(const FixedArray<uint8_t>& bytes, Dimensions dimensions) :
     m_bytes(bytes),
     m_dimensions(dimensions)
 {
-    if (dimensions.width * dimensions.height != m_bytes.GetElementCount())
+    if (dimensions.width * dimensions.height != m_bytes.GetSize())
     {
         LOG_ERROR("Byte array is inconsistent with dimensions.");
     }
@@ -20,7 +20,7 @@ ByteMap::ByteMap(FixedArray<uint8_t>&& bytes, Dimensions dimensions) :
     m_bytes(std::move(bytes)),
     m_dimensions(dimensions)
 {
-    if (dimensions.width * dimensions.height != m_bytes.GetElementCount())
+    if (dimensions.width * dimensions.height != m_bytes.GetSize())
     {
         LOG_ERROR("Byte array is inconsistent with dimensions.");
     }
@@ -53,7 +53,7 @@ const Dimensions& ByteMap::GetDimensions() const
 
 void ByteMap::SetBytes(const FixedArray<uint8_t>& bytes, Dimensions dimensions)
 {
-    if (dimensions.width * dimensions.height != bytes.GetElementCount())
+    if (dimensions.width * dimensions.height != bytes.GetSize())
     {
         LOG_ERROR("Byte array is inconsistent with dimensions.");
     }
@@ -64,7 +64,7 @@ void ByteMap::SetBytes(const FixedArray<uint8_t>& bytes, Dimensions dimensions)
 
 void ByteMap::SetBytes(FixedArray<uint8_t>&& bytes, Dimensions dimensions)
 {
-    if (dimensions.width * dimensions.height != bytes.GetElementCount())
+    if (dimensions.width * dimensions.height != bytes.GetSize())
     {
         LOG_ERROR("Byte array is inconsistent with dimensions.");
     }
