@@ -26,6 +26,21 @@ struct alignas(4) Matrix3x3
 		);
 	}
 
+	static inline Matrix3x3 View(const Vector2 position, float rotation) noexcept
+	{
+		const float c = std::cos(rotation);
+		const float s = std::sin(rotation);
+		const float& pX = position.x;
+		const float& pY = position.y;
+
+		return Matrix3x3
+		{
+			{               c,                s, 0.0f},
+			{              -s,                c, 0.0f},
+			{-pX * c + pY * s, -pX * s - pY * c, 1.0f}
+		};
+	}
+
 	static inline constexpr Matrix3x3 ScreenToNDC(const Vector2& size) noexcept
 	{
 		return Matrix3x3

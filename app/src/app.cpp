@@ -102,12 +102,9 @@ void App::Update()
 	if (input->IsKeyJustPressed(KeyboardKey::SPACE))
 	{
 		renderer->ResourceManager().Destroy(worldRenderingRule);
-		IRenderingRuleGenerator* generator;
 		lit = not lit;
-		if (lit) generator = new LambertRenderingRuleGenerator({ .directionalLightCount = 2U });
-		else generator = new UnlitRenderingRuleGenerator();
-		worldRenderingRule = renderer->ResourceManager().CreateRenderingRule(*generator);
-		delete generator;
+		if (lit) renderer->ResourceManager().CreateRenderingRule(LambertRenderingRuleGenerator({ .directionalLightCount = 2U }));
+		else renderer->ResourceManager().CreateRenderingRule(UnlitRenderingRuleGenerator());
 	}
 	if (input->IsMouseButtonDown(MouseButton::LEFT))
 	{
