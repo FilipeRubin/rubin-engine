@@ -26,13 +26,18 @@ bool OGLRenderingRule::IsValid() const
 	return m_shaderProgram.GetProgram() != 0U;
 }
 
-void OGLRenderingRule::Create()
+void OGLRenderingRule::Destroy()
+{
+	Renderer().ResourceManager().Destroy(this);
+}
+
+void OGLRenderingRule::CreateResource()
 {
 	auto& desc = *static_cast<OGLRenderingRuleDescriptorImplementation*>(m_descriptor.GetImplementation());
 	m_shaderProgram.TryCompile(desc.VertexSource().c_str(), desc.FragmentSource().c_str());
 }
 
-void OGLRenderingRule::Destroy()
+void OGLRenderingRule::DestroyResource()
 {
 	m_shaderProgram.Delete();
 }

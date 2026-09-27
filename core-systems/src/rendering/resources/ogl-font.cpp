@@ -1,5 +1,6 @@
 #include "ogl-font.h"
 #include <logging/log-macros.h>
+#include <rendering/ogl-renderer.h>
 #include <ogl.h>
 #include <algorithm>
 #include <bit>
@@ -15,13 +16,18 @@ bool OGLFont::IsValid() const
     return m_glyphAtlas != 0U;
 }
 
+void OGLFont::Destroy()
+{
+    Renderer().ResourceManager().Destroy(this);
+}
+
 void OGLFont::Bind()
 {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_glyphAtlas);
 }
 
-void OGLFont::Create()
+void OGLFont::CreateResource()
 {
     LOG_WARNING("Chance texture unit to GL_TEXTURE1 later.");
     LOG_DEBUG("Creating OpenGL font texture atlas.");
@@ -38,10 +44,11 @@ void OGLFont::Create()
     glGenerateMipmap(GL_TEXTURE_2D);
 }
 
-void OGLFont::Destroy()
+void OGLFont::DestroyResource()
 {
     LOG_DEBUG("Destroying OpenGL font texture atlas.");
     glDeleteTextures(1, &m_glyphAtlas);
+    m_glyphAtlas = 0U;
 }
 
 FixedArray<uint8_t> OGLFont::GenerateTextureAtlasPixels(Dimensions& out_resolution)

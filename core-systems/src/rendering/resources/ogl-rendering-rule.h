@@ -11,8 +11,9 @@ public:
 	OGLRenderingRule(OGLRenderer& renderer, RenderingRuleDescriptor descriptor);
 	void Bind() override;
 	bool IsValid() const override;
-	void Create() override;
 	void Destroy() override;
+	void CreateResource() override;
+	void DestroyResource() override;
 	OGLShaderProgram& ShaderProgram();
 private:
 	RenderingRuleDescriptor m_descriptor;

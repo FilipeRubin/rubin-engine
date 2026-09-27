@@ -1,4 +1,5 @@
 #include "ogl-texture-2d.h"
+#include <rendering/ogl-renderer.h>
 #include <ogl.h>
 #include <logging/log-macros.h>
 
@@ -26,7 +27,12 @@ bool OGLTexture2D::IsValid() const
     return m_texture != 0U;
 }
 
-void OGLTexture2D::Create()
+void OGLTexture2D::Destroy()
+{
+    Renderer().ResourceManager().Destroy(this);
+}
+
+void OGLTexture2D::CreateResource()
 {
 	LOG_DEBUG("Creating OpenGL texture with size " + std::to_string(m_dimensions.width) + "x" + std::to_string(m_dimensions.height) + ".");
     glGenTextures(1, &m_texture);
@@ -38,8 +44,9 @@ void OGLTexture2D::Create()
     glGenerateMipmap(GL_TEXTURE_2D);
 }
 
-void OGLTexture2D::Destroy()
+void OGLTexture2D::DestroyResource()
 {
 	LOG_DEBUG("Destroying OpenGL texture.");
     glDeleteTextures(1, &m_texture);
+    m_texture = 0U;
 }

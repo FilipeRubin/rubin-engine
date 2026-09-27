@@ -20,6 +20,11 @@ bool OGLMesh2D::IsValid() const
         m_ebo != 0U;
 }
 
+void OGLMesh2D::Destroy()
+{
+    Renderer().ResourceManager().Destroy(this);
+}
+
 void OGLMesh2D::Draw()
 {
     glBindVertexArray(m_vao);
@@ -28,7 +33,7 @@ void OGLMesh2D::Draw()
     glDrawElements(GL_TRIANGLES, m_indicesCount, GL_UNSIGNED_INT, NULL);
 }
 
-void OGLMesh2D::Create()
+void OGLMesh2D::CreateResource()
 {
     LOG_DEBUG("Creating OGLMesh2D.");
     glGenVertexArrays(1, &m_vao);
@@ -52,12 +57,15 @@ void OGLMesh2D::Create()
     LOG_DEBUG("OGLMesh2D created.");
 }
 
-void OGLMesh2D::Destroy()
+void OGLMesh2D::DestroyResource()
 {
     LOG_DEBUG("Destroying OGLMesh2D.");
     glDeleteBuffers(1, &m_vbo);
     glDeleteVertexArrays(1, &m_vao);
     glDeleteBuffers(1, &m_ebo);
 
+    m_vbo = 0U;
+    m_vao = 0U;
+    m_ebo = 0U;
     m_indicesCount = 0U;
 }

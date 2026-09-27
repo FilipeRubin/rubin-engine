@@ -19,6 +19,11 @@ bool OGLMesh3D::IsValid() const
 		m_ebo != 0U;
 }
 
+void OGLMesh3D::Destroy()
+{
+	Renderer().ResourceManager().Destroy(this);
+}
+
 void OGLMesh3D::Draw()
 {
 	glBindVertexArray(m_vao);
@@ -27,7 +32,7 @@ void OGLMesh3D::Draw()
 	glDrawElements(GL_TRIANGLES, m_indicesCount, GL_UNSIGNED_INT, NULL);
 }
 
-void OGLMesh3D::Create()
+void OGLMesh3D::CreateResource()
 {
 	LOG_DEBUG("Creating OGLMesh3D.");
 	glGenVertexArrays(1, &m_vao);
@@ -53,7 +58,7 @@ void OGLMesh3D::Create()
 	LOG_DEBUG("OGLMesh3D created.");
 }
 
-void OGLMesh3D::Destroy()
+void OGLMesh3D::DestroyResource()
 {
 	LOG_DEBUG("Destroying OGLMesh3D.");
 	glDeleteBuffers(1, &m_vbo);
@@ -61,4 +66,7 @@ void OGLMesh3D::Destroy()
 	glDeleteBuffers(1, &m_ebo);
 
 	m_indicesCount = 0U;
+	m_vbo = 0U;
+	m_vao = 0U;
+	m_ebo = 0U;
 }

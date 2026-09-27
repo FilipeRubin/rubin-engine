@@ -4,9 +4,9 @@ This file is meant to keep track of things that needs to be added or refactored 
 ## Todos
 * Maybe make IFont not an `IBindableResource`. Explanation: it might lead to an exquisite pattern if you need to bind a font since each text still needs to know what font is bound in order to be properly rendered, and as of now bound resources aren't easily "gettable" (except for `IRenderingRule`) and their only purpose is to set global states. Maybe this can change in the future but who knows. For now, I think making texts (whenever they're fully implemented) use a specific font directly might be a more organized alternative.
 * Add fullscreen support.
-* Consider adding a `IRendererResource::Destroy()` method on each resource instead of solely relying on `IRendererResourceManager::Destroy()` method which can make code more verbose.
-* Maybe refactor OGLRendererUser to not require a renderer to be passed through the constructor.
+* Refactor `OGLRendererUser` to not require a renderer to be passed through the constructor.
 * Maybe create an internal /ogl subfolder to organize implementations
+* Replace templated method `IRendererResourceManager::Destroy<T>()` for a non-templated one that accepts `IRendererResource*&` as argument
 
 ## Ideas
 * The engine could feature its own hashing method and map struct instead of relying on `std::hash` and `std::unordered_map`.

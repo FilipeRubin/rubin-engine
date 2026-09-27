@@ -9,9 +9,10 @@ class OGLFont : public IFont, public IRendererManaged, public OGLRendererUser
 public:
 	OGLFont(OGLRenderer& renderer, RasterizedFontData&& fontData);
 	bool IsValid() const override;
-	void Bind() override;
-	void Create() override;
 	void Destroy() override;
+	void Bind() override;
+	void CreateResource() override;
+	void DestroyResource() override;
 private:
 	unsigned int m_glyphAtlas;
 

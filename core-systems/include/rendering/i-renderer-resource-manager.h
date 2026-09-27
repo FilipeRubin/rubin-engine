@@ -22,7 +22,7 @@ public:
 	virtual IMesh3D* CreateMesh3D(const IMesh3DGenerator& generator) = 0;
 	virtual ITexture2D* CreateTexture2D(const ITexture2DGenerator& generator) = 0;
 	template<typename T>
-	void Destroy(T*& resource)
+	void Destroy(T* resource)
 	{
 		DestroyImpl(resource);
 		resource = nullptr;

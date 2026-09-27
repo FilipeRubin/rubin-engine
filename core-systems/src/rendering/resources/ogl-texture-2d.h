@@ -11,15 +11,12 @@ class OGLTexture2D : public ITexture2D, public IRendererManaged, public OGLRende
 {
 public:
 	OGLTexture2D(OGLRenderer& renderer, const Shared<FixedArray<Color8>> pixels, const Dimensions& dimensions);
-	OGLTexture2D(const OGLTexture2D& other) = delete;
-	OGLTexture2D(OGLTexture2D&& other) noexcept = delete;
-	OGLTexture2D& operator=(const OGLTexture2D& other) = delete;
-	OGLTexture2D& operator=(OGLTexture2D&& other) noexcept = delete;
 	void Bind() override;
 	const Dimensions& GetDimensions() const override;
 	bool IsValid() const override;
-	void Create() override;
 	void Destroy() override;
+	void CreateResource() override;
+	void DestroyResource() override;
 private:
 	const Shared<FixedArray<Color8>> m_pixels;
 	const Dimensions& m_dimensions;

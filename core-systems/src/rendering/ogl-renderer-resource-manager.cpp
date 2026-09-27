@@ -29,15 +29,15 @@ OGLRendererResourceManager::~OGLRendererResourceManager()
         m_backend->MakeCurrent();
 
     for (unique_ptr<IRendererManaged>& managed : m_waitingToDestroy)
-        managed->Destroy();
+        managed->DestroyResource();
     m_waitingToDestroy.clear();
 
     for (unique_ptr<IRendererManaged>& managed : m_waitingToCreate)
-        managed->Destroy();
+        managed->DestroyResource();
     m_waitingToCreate.clear();
 
     for (unique_ptr<IRendererManaged>& managed : m_resources)
-        managed->Destroy();
+        managed->DestroyResource();
     m_resources.clear();
 
     if (currentBackend != m_backend)
@@ -91,13 +91,13 @@ void OGLRendererResourceManager::Update()
 
     for (unique_ptr<IRendererManaged>& managed : m_waitingToCreate)
     {
-        managed->Create();
+        managed->CreateResource();
         m_resources.push_back(std::move(managed));
     }
 
     for (unique_ptr<IRendererManaged>& managed : m_waitingToDestroy)
     {
-        managed->Destroy();
+        managed->DestroyResource();
     }
 
     m_waitingToCreate.clear();
@@ -120,7 +120,7 @@ void OGLRendererResourceManager::DestroyImpl(IRendererResource* resource)
         bool isCurrentBackend = OGLGraphicsBackend::GetCurrent() == m_backend;
         if (isCurrentBackend)
         {
-            managed->Destroy();
+            managed->DestroyResource();
         }
         else
         {

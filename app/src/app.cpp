@@ -99,12 +99,17 @@ void App::Update()
 	static bool lit = true;
 	
 	// Input, camera and movement
+	if (input->IsKeyJustPressed(KeyboardKey::P) and cubeMesh)
+	{
+		cubeMesh->Destroy();
+		cubeMesh = nullptr;
+	}
 	if (input->IsKeyJustPressed(KeyboardKey::SPACE))
 	{
 		renderer->ResourceManager().Destroy(worldRenderingRule);
 		lit = not lit;
-		if (lit) renderer->ResourceManager().CreateRenderingRule(LambertRenderingRuleGenerator({ .directionalLightCount = 2U }));
-		else renderer->ResourceManager().CreateRenderingRule(UnlitRenderingRuleGenerator());
+		if (lit) worldRenderingRule = renderer->ResourceManager().CreateRenderingRule(LambertRenderingRuleGenerator({ .directionalLightCount = 2U }));
+		else worldRenderingRule = renderer->ResourceManager().CreateRenderingRule(UnlitRenderingRuleGenerator());
 	}
 	if (input->IsMouseButtonDown(MouseButton::LEFT))
 	{
@@ -145,9 +150,12 @@ void App::Update()
 	transformParameter->Bind();
 	terrainTexture->Bind();
 	terrainMesh->Draw();
-	cubeTransformParameter->Bind();
-	cubeTexture->Bind();
-	cubeMesh->Draw();
+	if (cubeMesh)
+	{
+		cubeTransformParameter->Bind();
+		cubeTexture->Bind();
+		cubeMesh->Draw();
+	}
 
 	// Drawing 2D
 	canvasRenderingRule->Bind();

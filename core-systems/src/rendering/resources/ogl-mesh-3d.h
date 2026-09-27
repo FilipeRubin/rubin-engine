@@ -11,9 +11,10 @@ class OGLMesh3D : public IMesh3D, public IRendererManaged, public OGLRendererUse
 public:
 	OGLMesh3D(OGLRenderer& renderer, const Shared<FixedArray<Vertex3D>> vertices, const Shared<FixedArray<unsigned int>> indices);
 	bool IsValid() const override;
-	void Draw() override;
-	void Create() override;
 	void Destroy() override;
+	void Draw() override;
+	void CreateResource() override;
+	void DestroyResource() override;
 private:
 	unsigned int m_vbo;
 	unsigned int m_vao;

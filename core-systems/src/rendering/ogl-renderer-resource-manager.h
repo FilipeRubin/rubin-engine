@@ -32,7 +32,7 @@ private:
 		std::unique_ptr<T> resource = std::make_unique<T>(Renderer(), std::forward<Args>(args)...);
 		if (isCurrentBackend)
 		{
-			resource->Create();
+			resource->CreateResource();
 		}
 		T* result = static_cast<T*>(resource.get());
 		container.emplace_back(std::move(resource));
