@@ -10,6 +10,7 @@ class OGLRendererParameterManager final : public IRendererParameterManager, publ
 {
 public:
 	OGLRendererParameterManager(OGLRenderer& renderer);
+	ICamera2DParameter* CreateCamera2D() override;
 	ICamera3DParameter* CreateCamera3D() override;
 	ISceneLightingParameter* CreateSceneLighting(const SceneLightingDescriptor& lightingDescriptor) override;
 	ITransform2DParameter* CreateTransform2D() override;

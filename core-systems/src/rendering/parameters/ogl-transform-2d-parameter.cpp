@@ -10,7 +10,6 @@ OGLTransform2DParameter::OGLTransform2DParameter(OGLRenderer& renderer) :
 		using namespace OGLShaderConstants;
 		Matrix3x3 model = Matrix3x3::Model(t.position, t.rotation, t.scale);
 		program.SetUniform(MODEL, model);
-		program.SetUniform(PROJECTION_VIEW, Matrix3x3::ScreenToNDC((Vector2)renderer.GetViewportSize())); // Temporary
 	}, renderer))
 {}
 

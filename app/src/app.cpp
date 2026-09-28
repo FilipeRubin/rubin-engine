@@ -57,11 +57,15 @@ void App::Start()
 	cubeMesh = resourceManager->CreateMesh3D(CubeMesh3DGenerator(Vector3(3.0f, 3.0f, 3.0f)));
 	quadMesh2D = resourceManager->CreateMesh2D(QuadMesh2DGenerator({ 64.0f, 64.0f }));
 	
+	camera2DParameter = renderer->ParameterManager().CreateCamera2D();
 	cameraParameter = renderer->ParameterManager().CreateCamera3D();
 	lightParameter = renderer->ParameterManager().CreateSceneLighting(sceneLightingDescriptor);
 	transformParameter = renderer->ParameterManager().CreateTransform3D();
 	cubeTransformParameter = renderer->ParameterManager().CreateTransform3D();
 	transform2DParameter = renderer->ParameterManager().CreateTransform2D();
+
+	camera2DParameter->Camera().position = {32.0f, 32.0f};
+	camera2DParameter->Camera().rotation = 0.11f;
 
 	cameraParameter->Camera().aspectRatio = window->GetAspectRatio();
 	cameraParameter->Camera().vFOV = 3.1415f / 2.0f;
@@ -159,6 +163,7 @@ void App::Update()
 
 	// Drawing 2D
 	canvasRenderingRule->Bind();
+	camera2DParameter->Bind();
 	transform2DParameter->Bind();
 	font->Bind();
 	quadMesh2D->Draw();

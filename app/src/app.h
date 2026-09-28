@@ -23,6 +23,7 @@ private:
 	IFont* font = nullptr;
 	ITexture2D* cubeTexture = nullptr;
 
+	ICamera2DParameter* camera2DParameter = nullptr;
 	ICamera3DParameter* cameraParameter = nullptr;
 	ISceneLightingParameter* lightParameter = nullptr;
 	ITransform3DParameter* transformParameter = nullptr;

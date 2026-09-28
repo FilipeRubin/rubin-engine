@@ -1,4 +1,5 @@
 #pragma once
+#include "parameters/i-camera-2d-parameter.h"
 #include "parameters/i-camera-3d-parameter.h"
 #include "parameters/i-scene-lighting-parameter.h"
 #include "parameters/i-transform-2d-parameter.h"
@@ -9,6 +10,7 @@ class IRendererParameterManager
 {
 public:
 	virtual ~IRendererParameterManager() = default;
+	virtual ICamera2DParameter* CreateCamera2D() = 0;
 	virtual ICamera3DParameter* CreateCamera3D() = 0;
 	virtual ISceneLightingParameter* CreateSceneLighting(const SceneLightingDescriptor& lightingDescriptor) = 0;
 	virtual ITransform2DParameter* CreateTransform2D() = 0;

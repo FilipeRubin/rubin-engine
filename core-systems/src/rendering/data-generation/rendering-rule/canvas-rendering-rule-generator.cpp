@@ -47,6 +47,7 @@ void main()
     
     OGLRenderParametersState& params = static_cast<OGLRenderer&>(renderer).RenderParametersState();
     impl.Parameters() = {
+        (IRenderParameter**)&params.camera2D,
         (IRenderParameter**)&params.transform2D
     };
 

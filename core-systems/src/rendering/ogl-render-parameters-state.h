@@ -1,4 +1,5 @@
 #pragma once
+#include <rendering/parameters/ogl-camera-2d-parameter.h>
 #include <rendering/parameters/ogl-camera-3d-parameter.h>
 #include <rendering/parameters/ogl-scene-lighting-parameter.h>
 #include <rendering/parameters/ogl-transform-2d-parameter.h>
@@ -6,6 +7,7 @@
 
 struct OGLRenderParametersState
 {
+	OGLCamera2DParameter* camera2D = nullptr;
 	OGLCamera3DParameter* camera3D = nullptr;
 	OGLSceneLightingParameter* sceneLighting = nullptr;
 	OGLTransform2DParameter* transform2D = nullptr;

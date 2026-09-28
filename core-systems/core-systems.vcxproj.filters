@@ -321,6 +321,15 @@
     <ClInclude Include="src\rendering\data-generation\rendering-rule\descriptor\implementation\ogl-rendering-rule-descriptor-implementation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\rendering\parameters\i-camera-2d-parameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\types\camera-2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rendering\parameters\ogl-camera-2d-parameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core-systems.cpp">
@@ -447,6 +456,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\rendering\data-generation\rendering-rule\descriptor\implementation\ogl-rendering-rule-descriptor-implementation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\parameters\ogl-camera-2d-parameter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

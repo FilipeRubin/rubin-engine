@@ -1,4 +1,5 @@
 #include "ogl-renderer-parameter-manager.h"
+#include "parameters/ogl-camera-2d-parameter.h"
 #include "parameters/ogl-camera-3d-parameter.h"
 #include "parameters/ogl-scene-lighting-parameter.h"
 #include "parameters/ogl-transform-2d-parameter.h"
@@ -7,6 +8,11 @@
 OGLRendererParameterManager::OGLRendererParameterManager(OGLRenderer& renderer) :
     OGLRendererUser(renderer)
 {
+}
+
+ICamera2DParameter* OGLRendererParameterManager::CreateCamera2D()
+{
+    return CreateParameter<OGLCamera2DParameter>();
 }
 
 ICamera3DParameter* OGLRendererParameterManager::CreateCamera3D()

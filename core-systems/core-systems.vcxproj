@@ -167,10 +167,12 @@
     <ClInclude Include="include\containers\rasterized-font-data.h" />
     <ClInclude Include="include\rendering\data-generation\font\debug-font-generator.h" />
     <ClInclude Include="include\rendering\data-generation\font\i-font-generator.h" />
+    <ClInclude Include="include\rendering\parameters\i-camera-2d-parameter.h" />
     <ClInclude Include="include\rendering\parameters\implementation\i-render-parameter-implementation.h" />
     <ClInclude Include="include\rendering\resources\i-bindable-resource.h" />
     <ClInclude Include="include\rendering\resources\i-font.h" />
     <ClInclude Include="include\rendering\resources\i-static-text-2d.h" />
+    <ClInclude Include="include\types\camera-2d.h" />
     <ClInclude Include="include\types\glyph.h" />
     <ClInclude Include="include\containers\mesh-data-2d.h" />
     <ClInclude Include="include\containers\source-collection.h" />
@@ -250,6 +252,7 @@
     <ClInclude Include="src\rendering\ogl-renderer-parameter-manager.h" />
     <ClInclude Include="src\rendering\ogl-shader-constants.h" />
     <ClInclude Include="src\rendering\ogl-shader-program.h" />
+    <ClInclude Include="src\rendering\parameters\ogl-camera-2d-parameter.h" />
     <ClInclude Include="src\rendering\parameters\ogl-camera-3d-parameter.h" />
     <ClInclude Include="src\rendering\parameters\implementation\ogl-render-parameter-implementation.h" />
     <ClInclude Include="src\rendering\parameters\ogl-scene-lighting-parameter.h" />
@@ -288,6 +291,7 @@
     <ClCompile Include="src\rendering\data-generation\mesh-3d\cube-mesh-3d-generator.cpp" />
     <ClCompile Include="src\rendering\ogl-renderer-user.cpp" />
     <ClCompile Include="src\rendering\ogl-shader-program.cpp" />
+    <ClCompile Include="src\rendering\parameters\ogl-camera-2d-parameter.cpp" />
     <ClCompile Include="src\rendering\parameters\implementation\ogl-render-parameter-implementation.cpp" />
     <ClCompile Include="src\rendering\parameters\ogl-transform-2d-parameter.cpp" />
     <ClCompile Include="src\rendering\resources\ogl-font.cpp" />
